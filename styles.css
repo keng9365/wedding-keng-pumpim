@@ -621,6 +621,7 @@ body {
     text-align: center;
     padding: var(--space-md) 0 var(--space-sm);
     border-top: 1px solid var(--border-light);
+    padding-bottom: 0px;
 }
 
 .footer-ornament {
@@ -633,14 +634,14 @@ body {
 
 .footer-text {
     font-family: var(--font-body);
-    font-size: 0.85rem;
+    font-size: 1rem;
     color: var(--text-light);
     margin-bottom: var(--space-xs);
 }
 
 .footer-names {
     font-family: var(--font-script);
-    font-size: 1.6rem;
+    font-size: 2.6rem;
     color: var(--primary);
 }
 
