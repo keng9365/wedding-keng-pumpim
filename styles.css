@@ -131,10 +131,10 @@ body {
 
 .invitation-label {
     font-family: var(--font-thai);
-    font-size: 1.1rem;
+    font-size: 1.2rem;
     color: var(--text-medium);
     letter-spacing: 3px;
-    font-weight: 400;
+    font-weight: 550;
 }
 
 .ornament {
@@ -460,7 +460,7 @@ body {
     font-family: var(--font-body);
     font-size: 0.9rem;
     color: var(--text-light);
-    margin-bottom: var(--space-md);
+    margin-bottom: 5px;
     line-height: 1.8;
 }
 
@@ -468,13 +468,13 @@ body {
     background: var(--white);
     padding: var(--space-sm);
     display: inline-block;
-    border: 1px solid var(--border-light);
-    margin-bottom: var(--space-sm);
+    /* border: 1px solid var(--border-light); */
+    /* margin-bottom: var(--space-sm); */
 }
 
 .qr-image {
-    width: 140px;
-    height: 140px;
+    width: 160px;
+    height: 160px;
 }
 
 .bank-info {
