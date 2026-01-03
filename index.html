@@ -59,7 +59,7 @@
 
                 <div class="name-block">
                     <h1 class="script-name">Keng</h1>
-                    <p class="thai-name">รตนพล สงฆ์ธรรม</p>
+                    <p class="thai-name">รตนพล สงฆ์ธรรม (เก่ง)</p>
                 </div>
 
                 <div class="rings-container">
@@ -68,7 +68,7 @@
 
                 <div class="name-block">
                     <h1 class="script-name">Pumpim</h1>
-                    <p class="thai-name">ชนิษฐา เสาวนา</p>
+                    <p class="thai-name">ชนิษฐา เสาวนา (ปุ๋มปิ๋ม)</p>
                 </div>
 
             </div>
@@ -80,7 +80,7 @@
             <div class="ornament">❧ ❦ ❧</div>
             <div class="date-container">
                 <div class="date-hearts">💕</div>
-                <div class="wedding-date">27 มิถุนายน 2569</div>
+                <div class="wedding-date">วันเสาร์ 27 มิถุนายน 2569</div>
                 <div class="date-hearts">💕</div>
             </div>
         </section>
@@ -112,7 +112,7 @@
 
         <!-- RSVP Section -->
         <section class="rsvp-section">
-            <h2 class="section-title">📨 ตอบกลับการเข้าร่วม</h2>
+            <h2 class="section-title">📨<br>ตอบกลับการเข้าร่วม</h2>
             <div class="rsvp-container">
                 <p class="rsvp-text">เพื่อความสะดวกในการจัดเตรียมงาน<br>กรุณาแจ้งการเข้าร่วมงานผ่านลิงก์ด้านล่าง</p>
                 <a href="https://forms.gle/9TRQoZ3XQSCAvQBe8" target="_blank" class="rsvp-link-btn">
@@ -176,24 +176,34 @@
                     width="100%" height="200" style="border:0; border-radius: 0px;" allowfullscreen="" loading="lazy">
                 </iframe>
             </div>
-            <a href="https://www.google.com/maps/search/?api=1&query=อาคารหอประชุมอำเภอแปรงยาว" target="_blank"
+            <a href="https://www.google.com/maps/dir/?api=1&destination=อาคารหอประชุม+อำเภอแปลงยาว" target="_blank"
                 class="directions-btn">
-                กดดูเส้นทาง
+                กดรับเส้นทาง
             </a>
         </section>
 
         <!-- Gift Section -->
         <section class="gift-section">
-            <h2 class="section-title">🎁 ร่วมแสดงความยินดี</h2>
+            <h2 class="section-title">🎁<br>ร่วมแสดงความยินดี</h2>
             <p class="gift-text">หากท่านประสงค์จะมอบของขวัญ<br>สามารถโอนเงินผ่าน QR Code ด้านล่าง</p>
             <div class="qr-container">
                 <img src="qrcode.png" alt="QR Code" class="qr-image">
             </div>
             <div class="bank-info">
                 <p class="bank-name">ธนาคารกสิกรไทย</p>
-                <p class="timeline-time">123-4-56789-0</p>
+                <p class="timeline-time" id="accountNumber">130-8-42268-9</p>
                 <p class="account-holder">นายรตนพล สงฆ์ธรรม</p>
             </div>
+            <div class="gift-actions">
+                <button class="gift-btn copy-btn" id="copyBankBtn">
+                    <span class="btn-icon">📋</span> คัดลอกเลขบัญชี
+                </button>
+                <a href="https://forms.gle/NzTPGYsiUcc2JmW7A" target="_blank" class="gift-btn bank-app-btn"
+                    id="uploadSlipBtn">
+                    <span class="btn-icon">🧾</span> แจ้งโอนเงิน (ส่งสลิป)
+                </a>
+            </div>
+            <div id="copyToast" class="copy-toast">คัดลอกสำเร็จ!</div>
         </section>
 
         <!-- Footer -->

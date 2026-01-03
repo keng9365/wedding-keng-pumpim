@@ -427,7 +427,7 @@ body {
 
 .time-number {
     display: block;
-    font-family: var(--font-serif);
+    font-family: var(--font-body);
     font-size: 1.6rem;
     font-weight: 600;
     color: var(--primary);
@@ -499,6 +499,71 @@ body {
     font-family: var(--font-body);
     font-size: 0.85rem;
     color: var(--text-light);
+    margin-bottom: var(--space-sm);
+}
+
+.gift-actions {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    padding: 0 var(--space-md);
+    margin-top: var(--space-sm);
+}
+
+.gift-btn {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    padding: 12px;
+    border: 1px solid var(--border-light);
+    background: var(--white);
+    color: var(--text-medium);
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.gift-btn:hover {
+    background: var(--cream);
+    border-color: var(--accent);
+}
+
+.bank-app-btn {
+    background: var(--primary);
+    color: var(--white);
+    border: none;
+}
+
+.bank-app-btn:hover {
+    background: var(--primary-light);
+    color: var(--white);
+}
+
+/* Toast Notification */
+.copy-toast {
+    position: fixed;
+    bottom: 30px;
+    left: 50%;
+    transform: translateX(-50%) translateY(20px);
+    background: rgba(45, 41, 38, 0.9);
+    color: white;
+    padding: 10px 24px;
+    border-radius: 4px;
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.3s ease;
+    z-index: 2000;
+}
+
+.copy-toast.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
 }
 
 /* RSVP Section */
@@ -554,6 +619,7 @@ body {
 .footer {
     text-align: center;
     padding: var(--space-md) 0 var(--space-sm);
+    border-top: 1px solid var(--border-light);
 }
 
 .footer-ornament {

@@ -28,16 +28,37 @@ document.addEventListener('DOMContentLoaded', () => {
     const countdownInterval = setInterval(updateCountdown, 1000);
     updateCountdown(); // Initial call
 
-    // Add to Calendar
-    document.getElementById('addToCalendar').addEventListener('click', () => {
-        const title = "Keng & Pumpim Wedding";
-        const location = "อาคารหอประชุม อำเภอแปลงยาว";
-        const details = "ขอเชิญร่วมงานมงคลสมรส รตนพล สงฆ์ธรรม และ ชนิษฐา เสาวนา";
-        const startDate = "20260627T070000";
-        const endDate = "20260627T140000";
+    // Copy Bank Account
+    const copyBankBtn = document.getElementById('copyBankBtn');
+    const accountNumber = document.getElementById('accountNumber');
+    const copyToast = document.getElementById('copyToast');
 
-        const googleCalendarUrl = `https://www.google.com/calendar/render?action=TEMPLATE&text=${encodeURIComponent(title)}&dates=${startDate}/${endDate}&details=${encodeURIComponent(details)}&location=${encodeURIComponent(location)}&sf=true&output=xml`;
+    if (copyBankBtn && accountNumber) {
+        copyBankBtn.addEventListener('click', () => {
+            const textToCopy = accountNumber.innerText.replace(/-/g, '');
+            navigator.clipboard.writeText(textToCopy).then(() => {
+                // Show toast
+                copyToast.classList.add('show');
+                setTimeout(() => {
+                    copyToast.classList.remove('show');
+                }, 2000);
+            }).catch(err => {
+                console.error('Failed to copy: ', err);
+            });
+        });
+    }
 
-        window.open(googleCalendarUrl, '_blank');
-    });
+    // Open Bank App (K-Plus for K-Bank)
+    const openBankAppBtn = document.getElementById('openBankAppBtn');
+    if (openBankAppBtn) {
+        openBankAppBtn.addEventListener('click', (e) => {
+            // For K-Bank, we try to open K PLUS app
+            // Note: This works on mobile devices that have K PLUS installed
+            // Fallback is just the default link if it fails, but here we use a button
+            window.location.href = 'kplus://';
+            
+            // If it doesn't open in 2 seconds, maybe we can show a message or redirect to store
+            // but for now, simple redirection to scheme is what was asked.
+        });
+    }
 });
