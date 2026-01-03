@@ -291,12 +291,14 @@ body {
     margin-bottom: var(--space-md);
     font-weight: 700;
     letter-spacing: 1px;
+    margin-bottom: 15px;
 }
 
 /* Timeline Section */
 .timeline-section {
     padding: var(--space-lg) 0;
     border-top: 1px solid var(--border-light);
+    padding-bottom: 40px;
 }
 
 .timeline-container {
@@ -353,6 +355,7 @@ body {
     padding: var(--space-lg) 0;
     text-align: center;
     border-top: 1px solid var(--border-light);
+    padding-bottom: 40px;
 }
 
 .venue-icon {
@@ -409,6 +412,7 @@ body {
     padding: var(--space-lg) 0;
     text-align: center;
     padding-top: 0px;
+    padding-bottom: 40px;
 }
 
 .countdown-timer {
@@ -455,6 +459,7 @@ body {
     padding: var(--space-lg) 0;
     text-align: center;
     border-top: 1px solid var(--border-light);
+    padding-bottom: 40px;
 }
 
 .gift-text {
@@ -572,6 +577,7 @@ body {
     padding: var(--space-lg) 0;
     border-top: 1px solid var(--border-light);
     border-bottom: 1px solid var(--border-light);
+    padding-bottom: 50px;
 }
 
 .rsvp-container {
