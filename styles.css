@@ -297,7 +297,7 @@ body {
 /* Timeline Section */
 .timeline-section {
     padding: var(--space-lg) 0;
-    border-top: 1px solid var(--border-light);
+    /* border-top: 1px solid var(--border-light); */
     padding-bottom: 40px;
 }
 
@@ -620,6 +620,292 @@ body {
 
 .btn-icon {
     font-size: 1rem;
+}
+
+/* Dress Code Section */
+.dress-code-section {
+    padding: var(--space-lg) 0;
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: 50px;
+}
+
+.dress-code-container {
+    text-align: center;
+}
+
+.dress-code-text {
+    font-family: var(--font-body);
+    font-size: 0.7rem;
+    color: var(--text-light);
+    margin-bottom: var(--space-md);
+    line-height: 1.8;
+}
+
+.color-palette {
+    display: flex;
+    justify-content: center;
+    gap: 20px;
+    margin-top: 20px;
+    margin-bottom: 20px;
+}
+
+.color-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 8px;
+}
+
+.color-circle {
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease;
+}
+
+.color-circle:hover {
+    transform: scale(1.1);
+}
+
+.color-label {
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--text-light);
+}
+
+/* Seating Chart Section */
+.seating-section {
+    padding: var(--space-lg) 0;
+    border-top: 1px solid var(--border-light);
+    border-bottom: 1px solid var(--border-light);
+    padding-bottom: 40px;
+}
+
+.seating-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    margin-top: 10px;
+}
+
+.seating-row {
+    display: flex;
+    align-items: center;
+    gap: 0px;
+    justify-content: center;
+}
+
+.table-group {
+    display: flex;
+    gap: 10px;
+}
+
+.aisle {
+    width: 25px;
+    height: 45px;
+    background: var(--border-light);
+    border-radius: 15px;
+    opacity: 0.6;
+    margin: 0 20px;
+}
+
+.table-circle {
+    width: 35px;
+    height: 35px;
+    border-radius: 50%;
+    background: var(--cream);
+    border: 1px solid var(--border-light);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-family: var(--font-body);
+    font-size: 0.8rem;
+    color: var(--text-medium);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.table-circle:hover {
+    background: var(--accent-light);
+    border-color: var(--accent);
+    transform: scale(1.15);
+}
+
+.table-circle.is-highlighted {
+    background: var(--accent) !important;
+    border-color: var(--accent) !important;
+    color: var(--white) !important;
+    transform: scale(1.3);
+    z-index: 5;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+}
+
+.stage-label {
+    width: 100%;
+    max-width: 290px;
+    margin-bottom: 10px;
+    padding: 12px 0;
+    /* background: var(--primary-light); */
+    background: var(--cream);
+    color: var(--white);
+    /* font-family: var(--font-thai); */
+    font-size: 1.1rem;
+    letter-spacing: 1px;
+    border-radius: 30px;
+    text-align: center;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    color: var(--text-medium);
+}
+
+/* Seating Search */
+.search-container {
+    width: 100%;
+    max-width: 320px;
+    margin: 0 auto 30px;
+    position: relative;
+    z-index: 100;
+}
+
+.search-box {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+#seatingSearch {
+    width: 100%;
+    padding: 12px 40px 12px 20px;
+    border: 1px solid var(--border-light);
+    border-radius: 30px;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    color: var(--text-dark);
+    background: var(--white);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    transition: all 0.3s ease;
+}
+
+#seatingSearch:focus {
+    outline: none;
+    border-color: var(--accent);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.1);
+}
+
+.clear-btn {
+    position: absolute;
+    right: 15px;
+    background: none;
+    border: none;
+    font-size: 1.4rem;
+    color: var(--text-light);
+    cursor: pointer;
+    display: none;
+}
+
+.search-results {
+    position: absolute;
+    top: calc(100% + 8px);
+    left: 0;
+    right: 0;
+    max-height: 250px;
+    overflow-y: auto;
+    background: var(--white);
+    border: 1px solid var(--border-light);
+    border-radius: 12px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
+    display: none;
+    z-index: 100;
+}
+
+.selected-guest-info {
+    margin-top: 15px;
+    padding: 18px;
+    /* background: var(--primary-light); */
+    border-radius: 15px;
+    color: var(--primary);
+    text-align: center;
+    display: none;
+    /* Hidden by default */
+    animation: infoFadeIn 0.4s ease-out forwards;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+}
+
+.selected-guest-info .info-name {
+    /* font-family: var(--font-thai); */
+    font-size: 1.15rem;
+    font-weight: 600;
+    display: block;
+    margin-bottom: 5px;
+}
+
+.selected-guest-info .info-details {
+    font-size: 0.95rem;
+    opacity: 0.9;
+    display: block;
+}
+
+.selected-guest-info .info-table {
+    display: inline-block;
+    margin-top: 10px;
+    padding: 5px 15px;
+    background: var(--accent);
+    color: var(--white);
+    border-radius: 20px;
+    font-size: 0.9rem;
+    font-weight: 600;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+@keyframes infoFadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-5px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.search-result-item {
+    padding: 15px 20px;
+    border-bottom: 1px solid var(--border-light);
+    cursor: pointer;
+    text-align: left;
+    transition: background 0.2s ease;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.search-result-item:last-child {
+    border-bottom: none;
+}
+
+.search-result-item:hover {
+    background: var(--cream);
+}
+
+.result-name {
+    font-family: var(--font-body);
+    font-size: 1rem;
+    color: var(--text-dark);
+}
+
+.result-nickname {
+    font-size: 0.85rem;
+    color: var(--accent);
+    margin-left: 8px;
+    font-weight: 500;
+}
+
+.highlight {
+    color: var(--blush);
+    font-weight: 700;
 }
 
 /* Footer */

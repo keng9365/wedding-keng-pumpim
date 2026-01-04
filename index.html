@@ -4,13 +4,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Pumpim & Keng - Wedding Invitation</title>
+    <title>Keng & Pumpim - Wedding Invitation</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Charm:wght@400;700&family=Itim&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 </head>
 
 <body>
@@ -122,12 +123,38 @@
             </div>
         </section>
 
+        <!-- Dress Code Section -->
+        <section class="dress-code-section">
+            <h2 class="section-title">🎨<br>การแต่งกาย</h2>
+            <div class="dress-code-container">
+                <div class="color-palette">
+                    <div class="color-item">
+                        <div class="color-circle" style="background-color: #FFFFFF; border: 1px solid #e8e4df;"></div>
+                        <span class="color-label">ขาว</span>
+                    </div>
+                    <div class="color-item">
+                        <div class="color-circle" style="background-color: #F8C8DC;"></div>
+                        <span class="color-label">ชมพู</span>
+                    </div>
+                    <div class="color-item">
+                        <div class="color-circle" style="background-color: #D22B2B;"></div>
+                        <span class="color-label">แดง</span>
+                    </div>
+                    <div class="color-item">
+                        <div class="color-circle" style="background-color: #800020;"></div>
+                        <span class="color-label">เลือดหมู</span>
+                    </div>
+                </div>
+                <p class="dress-code-text">แขกผู้มีเกียรติแต่งกายสีที่สุภาพตามความสะดวก</p>
+            </div>
+        </section>
+
         <!-- Timeline Section -->
         <section class="timeline-section">
             <h2 class="section-title">กำหนดการ</h2>
             <div class="timeline-container">
                 <div class="timeline-item">
-                    <div class="timeline-icon">🙏</div>
+                    <div class="timeline-icon">🟠</div>
                     <div class="timeline-content">
                         <span class="timeline-time">07:00</span>
                         <span class="timeline-event">พิธีสงฆ์</span>
@@ -141,16 +168,23 @@
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="timeline-icon">💑</div>
+                    <div class="timeline-icon">🙏🏻</div>
                     <div class="timeline-content">
                         <span class="timeline-time">09:00</span>
                         <span class="timeline-event">พิธีรับไหว้</span>
                     </div>
                 </div>
                 <div class="timeline-item">
-                    <div class="timeline-icon">💰</div>
+                    <div class="timeline-icon">👩🏻‍❤️‍👨🏻</div>
                     <div class="timeline-content">
                         <span class="timeline-time">10:00</span>
+                        <span class="timeline-event">พิธีรดน้ำสังข์</span>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <div class="timeline-icon">💰</div>
+                    <div class="timeline-content">
+                        <span class="timeline-time">11:00</span>
                         <span class="timeline-event">พิธีนับสินสอด</span>
                     </div>
                 </div>
@@ -204,6 +238,115 @@
                 </a>
             </div>
             <div id="copyToast" class="copy-toast">คัดลอกสำเร็จ!</div>
+        </section>
+
+        <!-- Seating Chart Section -->
+        <section class="seating-section">
+            <h2 class="section-title">🪑<br>ค้นหาเลขที่นั่ง</h2>
+
+            <!-- Search System -->
+            <div class="search-container">
+                <div class="search-box">
+                    <input type="text" id="seatingSearch" placeholder="ค้นหาชื่อ, นามสกุล หรือชื่อเล่น..."
+                        autocomplete="off">
+                    <button id="clearSearch" class="clear-btn">&times;</button>
+                </div>
+                <div id="searchResults" class="search-results"></div>
+                <div id="selectedGuestInfo" class="selected-guest-info"></div>
+            </div>
+
+            <div class="seating-container">
+                <div class="stage-label">เวที</div>
+                <div class="seating-row">
+                    <div class="table-group">
+                        <div class="table-circle" data-table="1">1</div>
+                        <div class="table-circle" data-table="2">2</div>
+                        <div class="table-circle" data-table="3">3</div>
+                    </div>
+                    <div class="aisle"></div>
+                    <div class="table-group">
+                        <div class="table-circle" data-table="4">4</div>
+                        <div class="table-circle" data-table="5">5</div>
+                        <div class="table-circle" data-table="6">6</div>
+                    </div>
+                </div>
+                <div class="seating-row">
+                    <div class="table-group">
+                        <div class="table-circle" data-table="7">7</div>
+                        <div class="table-circle" data-table="8">8</div>
+                        <div class="table-circle" data-table="9">9</div>
+                    </div>
+                    <div class="aisle"></div>
+                    <div class="table-group">
+                        <div class="table-circle" data-table="10">10</div>
+                        <div class="table-circle" data-table="11">11</div>
+                        <div class="table-circle" data-table="12">12</div>
+                    </div>
+                </div>
+                <div class="seating-row">
+                    <div class="table-group">
+                        <div class="table-circle" data-table="13">13</div>
+                        <div class="table-circle" data-table="14">14</div>
+                        <div class="table-circle" data-table="15">15</div>
+                    </div>
+                    <div class="aisle"></div>
+                    <div class="table-group">
+                        <div class="table-circle" data-table="16">16</div>
+                        <div class="table-circle" data-table="17">17</div>
+                        <div class="table-circle" data-table="18">18</div>
+                    </div>
+                </div>
+                <div class="seating-row">
+                    <div class="table-group">
+                        <div class="table-circle" data-table="19">19</div>
+                        <div class="table-circle" data-table="20">20</div>
+                        <div class="table-circle" data-table="21">21</div>
+                    </div>
+                    <div class="aisle"></div>
+                    <div class="table-group">
+                        <div class="table-circle" data-table="22">22</div>
+                        <div class="table-circle" data-table="23">23</div>
+                        <div class="table-circle" data-table="24">24</div>
+                    </div>
+                </div>
+                <div class="seating-row">
+                    <div class="table-group">
+                        <div class="table-circle" data-table="25">25</div>
+                        <div class="table-circle" data-table="26">26</div>
+                        <div class="table-circle" data-table="27">27</div>
+                    </div>
+                    <div class="aisle"></div>
+                    <div class="table-group">
+                        <div class="table-circle" data-table="28">28</div>
+                        <div class="table-circle" data-table="29">29</div>
+                        <div class="table-circle" data-table="30">30</div>
+                    </div>
+                </div>
+                <div class="seating-row">
+                    <div class="table-group">
+                        <div class="table-circle" data-table="31">31</div>
+                        <div class="table-circle" data-table="32">32</div>
+                        <div class="table-circle" data-table="33">33</div>
+                    </div>
+                    <div class="aisle"></div>
+                    <div class="table-group">
+                        <div class="table-circle" data-table="34">34</div>
+                        <div class="table-circle" data-table="35">35</div>
+                        <div class="table-circle" data-table="36">36</div>
+                    </div>
+                </div>
+                <div class="seating-row">
+                    <div class="table-group">
+                        <div class="table-circle" data-table="37">37</div>
+                        <div class="table-circle" data-table="38">38</div>
+                    </div>
+                    <div class="aisle"></div>
+                    <div class="table-group">
+                        <div class="table-circle" data-table="39">39</div>
+                        <div class="table-circle" data-table="40">40</div>
+                    </div>
+                </div>
+            </div>
         </section>
 
         <!-- Footer -->
