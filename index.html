@@ -8,7 +8,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Great+Vibes&family=Cormorant+Garamond:ital,wght@0,400;0,600;1,400&family=Charm:wght@400;700&family=Itim&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Prata&family=Prompt:wght@300;400;600&family=Great+Vibes&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
@@ -129,20 +129,24 @@
             <div class="dress-code-container">
                 <div class="color-palette">
                     <div class="color-item">
-                        <div class="color-circle" style="background-color: #FFFFFF; border: 1px solid #e8e4df;"></div>
-                        <span class="color-label">ขาว</span>
+                        <div class="color-circle" style="background-color: #96a084;"></div>
+                        <span class="color-label">Sage</span>
                     </div>
                     <div class="color-item">
-                        <div class="color-circle" style="background-color: #F8C8DC;"></div>
-                        <span class="color-label">ชมพู</span>
+                        <div class="color-circle" style="background-color: #b56950;"></div>
+                        <span class="color-label">Terra cotta</span>
                     </div>
                     <div class="color-item">
-                        <div class="color-circle" style="background-color: #D22B2B;"></div>
-                        <span class="color-label">แดง</span>
+                        <div class="color-circle" style="background-color: #e8d0b5;"></div>
+                        <span class="color-label">Sand</span>
                     </div>
                     <div class="color-item">
-                        <div class="color-circle" style="background-color: #800020;"></div>
-                        <span class="color-label">เลือดหมู</span>
+                        <div class="color-circle" style="background-color: #d19a85;"></div>
+                        <span class="color-label">Peach</span>
+                    </div>
+                    <div class="color-item">
+                        <div class="color-circle" style="background-color: #fdf9f4; border: 1px solid #eaddd0;"></div>
+                        <span class="color-label">Cream</span>
                     </div>
                 </div>
                 <p class="dress-code-text">แขกผู้มีเกียรติแต่งกายสีที่สุภาพตามความสะดวก</p>
@@ -202,15 +206,15 @@
         <section class="venue-section">
             <div class="venue-icon">📍</div>
             <h3 class="venue-title">สถานที่จัดงาน</h3>
-            <p class="venue-name">อาคารหอประชุม อำเภอแปลงยาว</p>
-            <p class="venue-address">จังหวัดฉะเชิงเทรา</p>
+            <p class="venue-name">SC รีสอร์ท</p>
+            <p class="venue-address">อำเภอพนมสารคาม จังหวัดฉะเชิงเทรา</p>
             <div class="map-wrapper">
                 <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3878.2005478682963!2d101.2835776!3d13.584556099999999!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311d21001253a157%3A0x90246c2f8e63fa01!2z4Lit4Liy4LiE4Liy4Lij4Lir4Lit4Lib4Lij4Liw4LiK4Li44LihIOC4reC4s-C5gOC4oOC4reC5geC4m-C4peC4h-C4ouC4suC4pw!5e0!3m2!1sth!2sth!4v1767429503480!5m2!1sth!2sth"
-                    width="100%" height="200" style="border:0; border-radius: 0px;" allowfullscreen="" loading="lazy">
+                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.397781423472!2d101.34797951076011!3d13.754869086581621!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311ce30d3cb972cf%3A0xa71c67788ebdc39c!2zU0Mg4Lij4Li14Liq4Lit4Lij4LmM4LiX!5e0!3m2!1sen!2sth!4v1767799303893!5m2!1sen!2sth"
+                    width="100%" height="250" style="border:0; border-radius: 0px;" allowfullscreen="" loading="lazy">
                 </iframe>
             </div>
-            <a href="https://www.google.com/maps/dir/?api=1&destination=อาคารหอประชุม+อำเภอแปลงยาว" target="_blank"
+            <a href="https://www.google.com/maps/dir/?api=1&destination=SC+รีสอร์ท+173+หมู่+6+Nong+Yao" target="_blank"
                 class="directions-btn">
                 กดรับเส้นทาง
             </a>
@@ -221,7 +225,12 @@
             <h2 class="section-title">🎁<br>ร่วมแสดงความยินดี</h2>
             <p class="gift-text">หากท่านประสงค์จะมอบของขวัญ<br>สามารถโอนเงินผ่าน QR Code ด้านล่าง</p>
             <div class="qr-container">
-                <img src="qrcode.png" alt="QR Code" class="qr-image">
+                <img src="payment_img.png" alt="QR Code" class="qr-image">
+                <p class="bank-name">E-Wallet No.</p>
+                <p class="timeline-time" id="accountNumber">004-600-0-000831-7</p>
+            </div>
+            <div class="bank-info">
+                <p class="account-holder">หรือ</p>
             </div>
             <div class="bank-info">
                 <p class="bank-name">ธนาคารกสิกรไทย</p>
@@ -255,7 +264,7 @@
                 <div id="selectedGuestInfo" class="selected-guest-info"></div>
             </div>
 
-            <div class="seating-container">
+            <div class="seating-container" style="display: none;">
                 <div class="stage-label">เวที</div>
                 <div class="seating-row">
                     <div class="table-group">

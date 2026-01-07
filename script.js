@@ -134,7 +134,7 @@ document.addEventListener('DOMContentLoaded', () => {
             clearAllHighlights();
             hideSelectedInfo();
 
-            if (query.length >= 3) {
+            if (query.length >= 1) {
                 clearSearch.style.display = 'block';
                 const filtered = allGuests.map(guest => {
                     const fullName = (guest.firstName + ' ' + guest.lastName).toLowerCase();
