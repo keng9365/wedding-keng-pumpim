@@ -1,390 +1,294 @@
 <!DOCTYPE html>
-<html lang="th">
+<html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keng & Pumpim - Wedding Invitation</title>
+    <title>Keng & Pumpim | Wedding Celebration</title>
+    <meta name="description" content="Join us to celebrate the wedding of Keng and Pumpim on June 27, 2026.">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Prata&family=Prompt:wght@300;400;600&family=Great+Vibes&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Itim&family=Mali:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="styles.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/PapaParse/5.4.1/papaparse.min.js"></script>
 </head>
 
 <body>
-    <!-- Floral Decorations -->
-    <div class="floral-corner top-left"></div>
-    <div class="floral-corner top-right"></div>
-    <div class="floral-corner bottom-left"></div>
-    <div class="floral-corner bottom-right"></div>
 
-    <div class="invitation-card">
-        <!-- Top Decorative Border -->
-        <div class="decorative-border top-border">
-            <span class="border-flower">✿</span>
-            <span class="border-line"></span>
-            <span class="border-heart">♥</span>
-            <span class="border-line"></span>
-            <span class="border-flower">✿</span>
+    <!-- ========================================
+         HERO SECTION
+         ======================================== -->
+    <header class="section hero" id="hero">
+        <!-- Decorative CSS Elements -->
+        <div class="hero__decoration hero__decoration--top"></div>
+        <div class="hero__decoration hero__decoration--bottom"></div>
+        <div class="hero__glow"></div>
+
+        <div class="container hero__content" data-animate>
+            <p class="hero__pretitle">💍 Save the Date</p>
+            <h1 class="hero__names">
+                <span class="hero__name">KENG</span>
+                <span class="hero__ampersand">&</span>
+                <span class="hero__name">PUMPIM</span>
+            </h1>
+            <p class="hero__date">27 June 2026</p>
+            <p class="hero__tagline">Two hearts, one love, forever together.</p>
+
+            <!-- Countdown Timer -->
+            <div class="countdown" id="countdown">
+                <div class="countdown__item">
+                    <span class="countdown__number" id="days">00</span>
+                    <span class="countdown__label">Days</span>
+                </div>
+                <div class="countdown__separator">:</div>
+                <div class="countdown__item">
+                    <span class="countdown__number" id="hours">00</span>
+                    <span class="countdown__label">Hours</span>
+                </div>
+                <div class="countdown__separator">:</div>
+                <div class="countdown__item">
+                    <span class="countdown__number" id="minutes">00</span>
+                    <span class="countdown__label">Mins</span>
+                </div>
+                <div class="countdown__separator">:</div>
+                <div class="countdown__item">
+                    <span class="countdown__number" id="seconds">00</span>
+                    <span class="countdown__label">Secs</span>
+                </div>
+            </div>
         </div>
 
-        <!-- Header Section -->
-        <section class="header-section">
-            <p class="invitation-label">ขอเชิญร่วมงานมงคลสมรส</p>
-            <div class="ornament">❧ ❦ ❧</div>
-        </section>
+    </header>
 
-        <!-- Parents Section -->
-        <section class="parents-section">
-            <div class="parents-row">
-                <div class="parent-group">
-                    <p class="parent-name">นายทศพร สงฆ์ธรรม</p>
-                    <p class="parent-name">นางกฤษณา สงฆ์ธรรม</p>
-                </div>
-                <div class="and-symbol">และ</div>
-                <div class="parent-group">
-                    <p class="parent-name">นายชนะ เสาวนา</p>
-                    <p class="parent-name">นางจุฑารัตน์ เสาวนา</p>
-                </div>
+    <!-- ========================================
+         PHOTO GALLERY - Auto-Scrolling Banner
+         ======================================== -->
+    <section class="gallery-section">
+        <div class="gallery-track gallery-track--left">
+            <div class="gallery-slide">
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Wedding"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Rings"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Flowers"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Couple"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Venue"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Dance"></div>
             </div>
-            <p class="invitation-text">มีความยินดีขอเรียนเชิญท่านและครอบครัว<br>ร่วมเป็นเกียรติในงานเลี้ยงฉลองมงคลสมรส
-            </p>
-        </section>
-
-        <!-- Couple Names Section -->
-        <section class="couple-section">
-            <div class="couple-names">
-
-                <div class="name-block">
-                    <h1 class="script-name">Keng</h1>
-                    <p class="thai-name">รตนพล สงฆ์ธรรม (เก่ง)</p>
-                </div>
-
-                <div class="rings-container">
-                    <div class="rings">💍</div>
-                </div>
-
-                <div class="name-block">
-                    <h1 class="script-name">Pumpim</h1>
-                    <p class="thai-name">ชนิษฐา เสาวนา (ปุ๋มปิ๋ม)</p>
-                </div>
-
+            <div class="gallery-slide" aria-hidden="true">
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Wedding"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Rings"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Flowers"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Couple"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Venue"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Dance"></div>
             </div>
-        </section>
-
-        <!-- Date Section -->
-        <section class="date-section">
-            <!-- <div class="date-ornament">✦</div> -->
-            <div class="ornament">❧ ❦ ❧</div>
-            <div class="date-container">
-                <div class="date-hearts">💕</div>
-                <div class="wedding-date">วันเสาร์ 27 มิถุนายน 2569</div>
-                <div class="date-hearts">💕</div>
+        </div>
+        <div class="gallery-track gallery-track--right">
+            <div class="gallery-slide">
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Cake"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Bouquet"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Celebration"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Ceremony"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Love"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Party"></div>
             </div>
-        </section>
-
-        <!-- Countdown Section -->
-        <section class="countdown-section">
-            <div class="countdown-timer" id="countdown">
-                <div class="time-unit">
-                    <span class="timeline-time" id="days">00</span>
-                    <span class="time-label">วัน</span>
-                </div>
-                <div class="time-separator">:</div>
-                <div class="time-unit">
-                    <span class="timeline-time" id="hours">00</span>
-                    <span class="time-label">ชั่วโมง</span>
-                </div>
-                <div class="time-separator">:</div>
-                <div class="time-unit">
-                    <span class="timeline-time" id="minutes">00</span>
-                    <span class="time-label">นาที</span>
-                </div>
-                <div class="time-separator">:</div>
-                <div class="time-unit">
-                    <span class="timeline-time" id="seconds">00</span>
-                    <span class="time-label">วินาที</span>
-                </div>
+            <div class="gallery-slide" aria-hidden="true">
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Cake"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Bouquet"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Celebration"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Ceremony"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Love"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Party"></div>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- RSVP Section -->
-        <section class="rsvp-section">
-            <h2 class="section-title">✉️<br>ตอบกลับการเข้าร่วม</h2>
-            <div class="rsvp-container">
-                <p class="rsvp-text">เพื่อความสะดวกในการจัดเตรียมงาน<br>กรุณาแจ้งการเข้าร่วมงานผ่านลิงก์ด้านล่าง</p>
-                <a href="https://forms.gle/9TRQoZ3XQSCAvQBe8" target="_blank" class="directions-btn">
-                    <span>ลงทะเบียนเข้าร่วมงาน</span>
-                    <span class="btn-icon">💌</span>
+    <!-- ========================================
+         EVENT DETAILS SECTION
+         ======================================== -->
+    <section class="section event-details" id="details">
+        <div class="container">
+            <div class="event-banner" data-animate>
+                <h2 class="event-banner__title">The Celebration</h2>
+                <div class="event-banner__info">
+                    <div class="event-banner__item">
+                        <span class="event-banner__icon">📍</span>
+                        <span class="event-banner__text"><strong>SC
+                                Resort</strong><br><small>Phanomsarakham, Chachoengsao</small></span>
+                    </div>
+                </div>
+                <div class="event-banner__map">
+                    <iframe
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.3977814234727!2d101.34797951076007!3d13.75486908658158!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311ce30d3cb972cf%3A0xa71c67788ebdc39c!2zU0Mg4Lij4Li14Liq4Lit4Lij4LmM4LiX!5e0!3m2!1sen!2sth!4v1767809795637!5m2!1sen!2sth"
+                        width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"
+                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+                </div>
+                <a href="https://www.google.com/maps/dir/?api=1&destination=SC+Resort+Phanomsarakham" target="_blank"
+                    rel="noopener" class="btn btn--outline btn--small">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
+                        <circle cx="12" cy="10" r="3" />
+                    </svg>
+                    Get Directions
                 </a>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Dress Code Section -->
-        <section class="dress-code-section">
-            <h2 class="section-title">🎨<br>การแต่งกาย</h2>
-            <div class="dress-code-container">
-                <div class="color-palette">
-                    <div class="color-item">
-                        <div class="color-circle" style="background-color: #96a084;"></div>
-                        <span class="color-label">Sage</span>
-                    </div>
-                    <div class="color-item">
-                        <div class="color-circle" style="background-color: #b56950;"></div>
-                        <span class="color-label">Terra cotta</span>
-                    </div>
-                    <div class="color-item">
-                        <div class="color-circle" style="background-color: #e8d0b5;"></div>
-                        <span class="color-label">Sand</span>
-                    </div>
-                    <div class="color-item">
-                        <div class="color-circle" style="background-color: #d19a85;"></div>
-                        <span class="color-label">Peach</span>
-                    </div>
-                    <div class="color-item">
-                        <div class="color-circle" style="background-color: #fdf9f4; border: 1px solid #eaddd0;"></div>
-                        <span class="color-label">Cream</span>
-                    </div>
-                </div>
-                <p class="dress-code-text">แขกผู้มีเกียรติแต่งกายสีที่สุภาพตามความสะดวก</p>
+    <!-- ========================================
+         RSVP SECTION (Primary CTA)
+         ======================================== -->
+    <section class="section rsvp" id="rsvp">
+        <div class="container">
+            <div class="rsvp__card" data-animate>
+                <div class="rsvp__sparkle"></div>
+                <h2 class="section-title section-title--light">Will You Join Us?</h2>
+                <p class="rsvp__text">Kindly confirm your attendance by June 27, 2026.<br>Your presence would mean the
+                    world to us.</p>
+                <a href="https://forms.gle/9TRQoZ3XQSCAvQBe8" target="_blank" rel="noopener"
+                    class="btn btn--primary btn--large btn--glow">
+                    RSVP Now
+                </a>
             </div>
-        </section>
+        </div>
+    </section>
 
-        <!-- Timeline Section -->
-        <section class="timeline-section">
-            <h2 class="section-title">กำหนดการ</h2>
-            <div class="timeline-container">
-                <div class="timeline-item">
-                    <div class="timeline-icon">🟠</div>
-                    <div class="timeline-content">
-                        <span class="timeline-time">07:00</span>
-                        <span class="timeline-event">พิธีสงฆ์</span>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-icon">🍚</div>
-                    <div class="timeline-content">
-                        <span class="timeline-time">07:30</span>
-                        <span class="timeline-event">พิธีตักบาตร</span>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-icon">🙏🏻</div>
-                    <div class="timeline-content">
-                        <span class="timeline-time">09:00</span>
-                        <span class="timeline-event">พิธีรับไหว้</span>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-icon">👩🏻‍❤️‍👨🏻</div>
-                    <div class="timeline-content">
-                        <span class="timeline-time">10:00</span>
-                        <span class="timeline-event">พิธีรดน้ำสังข์</span>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-icon">💰</div>
-                    <div class="timeline-content">
-                        <span class="timeline-time">11:00</span>
-                        <span class="timeline-event">พิธีนับสินสอด</span>
-                    </div>
-                </div>
-                <div class="timeline-item">
-                    <div class="timeline-icon">🍽️</div>
-                    <div class="timeline-content">
-                        <span class="timeline-time">12:00</span>
-                        <span class="timeline-event">งานเลี้ยง</span>
-                    </div>
-                </div>
-            </div>
-        </section>
+    <!-- ========================================
+         SCHEDULE SECTION
+         ======================================== -->
+    <section class="section schedule" id="schedule">
+        <div class="container">
+            <h2 class="section-title" data-animate>Schedule</h2>
 
-        <!-- Venue Section -->
-        <section class="venue-section">
-            <div class="venue-icon">📍</div>
-            <h3 class="venue-title">สถานที่จัดงาน</h3>
-            <p class="venue-name">SC รีสอร์ท</p>
-            <p class="venue-address">อำเภอพนมสารคาม จังหวัดฉะเชิงเทรา</p>
-            <div class="map-wrapper">
-                <iframe
-                    src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.397781423472!2d101.34797951076011!3d13.754869086581621!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311ce30d3cb972cf%3A0xa71c67788ebdc39c!2zU0Mg4Lij4Li14Liq4Lit4Lij4LmM4LiX!5e0!3m2!1sen!2sth!4v1767799303893!5m2!1sen!2sth"
-                    width="100%" height="250" style="border:0; border-radius: 0px;" allowfullscreen="" loading="lazy">
-                </iframe>
+            <ul class="timeline" data-animate>
+                <li class="timeline__item">
+                    <span class="timeline__time">07:00</span>
+                    <div class="timeline__content">
+                        <h3 class="timeline__event">Buddhist Ceremony</h3>
+                        <p class="timeline__desc">Morning blessing & alms offering</p>
+                    </div>
+                </li>
+                <li class="timeline__item">
+                    <span class="timeline__time">09:00</span>
+                    <div class="timeline__content">
+                        <h3 class="timeline__event">Thai Water Pouring</h3>
+                        <p class="timeline__desc">Traditional blessing ceremony</p>
+                    </div>
+                </li>
+                <li class="timeline__item">
+                    <span class="timeline__time">12:00</span>
+                    <div class="timeline__content">
+                        <h3 class="timeline__event">Reception & Lunch</h3>
+                        <p class="timeline__desc">Celebration feast together</p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </section>
+
+    <!-- ========================================
+         GIFT SECTION
+         ======================================== -->
+    <section class="section gift" id="gift">
+        <div class="container">
+            <h2 class="section-title" data-animate>Gifts</h2>
+            <p class="gift__message" data-animate>Your presence is our greatest gift.<br>However, if you wish to bless
+                us, a monetary gift is appreciated.</p>
+
+            <div class="bank-card" data-animate>
+                <div class="bank-card__image">
+                    <img src="payment_img.png" alt="Payment Image">
+                </div>
+                <div class="bank-card__header">
+                    <span class="bank-card__icon">🏦</span>
+                    <span class="bank-card__name">Kasikorn Bank</span>
+                </div>
+                <div class="bank-card__number-row">
+                    <p class="bank-card__number" id="accountNumber">130-8-42268-9</p>
+                    <button class="btn-icon" id="copyBtn" aria-label="Copy account number">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <rect x="9" y="9" width="13" height="13" rx="2" />
+                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                        </svg>
+                    </button>
+                    <span class="copy-feedback" id="copyFeedback">Copied!</span>
+                </div>
+                <p class="bank-card__holder">Ratanapon Songtham</p>
             </div>
-            <a href="https://www.google.com/maps/dir/?api=1&destination=SC+รีสอร์ท+173+หมู่+6+Nong+Yao" target="_blank"
-                class="directions-btn">
-                กดรับเส้นทาง
+
+            <a href="https://forms.gle/NzTPGYsiUcc2JmW7A" target="_blank" rel="noopener"
+                class="btn btn--outline btn--small" data-animate>
+                Upload Transfer Slip
             </a>
-        </section>
-
-        <!-- Gift Section -->
-        <section class="gift-section">
-            <h2 class="section-title">🎁<br>ร่วมแสดงความยินดี</h2>
-            <p class="gift-text">หากท่านประสงค์จะมอบของขวัญ<br>สามารถโอนเงินผ่าน QR Code ด้านล่าง</p>
-            <div class="qr-container">
-                <img src="payment_img.png" alt="QR Code" class="qr-image">
-                <p class="bank-name">E-Wallet No.</p>
-                <p class="timeline-time" id="accountNumber">004-600-0-000831-7</p>
-            </div>
-            <div class="bank-info">
-                <p class="account-holder">หรือ</p>
-            </div>
-            <div class="bank-info">
-                <p class="bank-name">ธนาคารกสิกรไทย</p>
-                <p class="timeline-time" id="accountNumber">130-8-42268-9</p>
-                <p class="account-holder">นายรตนพล สงฆ์ธรรม</p>
-            </div>
-            <div class="gift-actions">
-                <button class="gift-btn copy-btn" id="copyBankBtn">
-                    <span class="btn-icon">📋</span> คัดลอกเลขบัญชี
-                </button>
-                <a href="https://forms.gle/NzTPGYsiUcc2JmW7A" target="_blank" class="gift-btn bank-app-btn"
-                    id="uploadSlipBtn">
-                    <span class="btn-icon">🧾</span> แนบสลิปการโอนเงิน
-                </a>
-            </div>
-            <div id="copyToast" class="copy-toast">คัดลอกสำเร็จ!</div>
-        </section>
-
-        <!-- Seating Chart Section -->
-        <section class="seating-section">
-            <h2 class="section-title">🪑<br>ค้นหาเลขที่นั่ง</h2>
-
-            <!-- Search System -->
-            <div class="search-container">
-                <div class="search-box">
-                    <input type="text" id="seatingSearch" placeholder="ค้นหาชื่อ, นามสกุล หรือชื่อเล่น..."
-                        autocomplete="off">
-                    <button id="clearSearch" class="clear-btn">&times;</button>
-                </div>
-                <div id="searchResults" class="search-results"></div>
-                <div id="selectedGuestInfo" class="selected-guest-info"></div>
-            </div>
-
-            <div class="seating-container" style="display: none;">
-                <div class="stage-label">เวที</div>
-                <div class="seating-row">
-                    <div class="table-group">
-                        <div class="table-circle" data-table="1">1</div>
-                        <div class="table-circle" data-table="2">2</div>
-                        <div class="table-circle" data-table="3">3</div>
-                    </div>
-                    <div class="aisle"></div>
-                    <div class="table-group">
-                        <div class="table-circle" data-table="4">4</div>
-                        <div class="table-circle" data-table="5">5</div>
-                        <div class="table-circle" data-table="6">6</div>
-                    </div>
-                </div>
-                <div class="seating-row">
-                    <div class="table-group">
-                        <div class="table-circle" data-table="7">7</div>
-                        <div class="table-circle" data-table="8">8</div>
-                        <div class="table-circle" data-table="9">9</div>
-                    </div>
-                    <div class="aisle"></div>
-                    <div class="table-group">
-                        <div class="table-circle" data-table="10">10</div>
-                        <div class="table-circle" data-table="11">11</div>
-                        <div class="table-circle" data-table="12">12</div>
-                    </div>
-                </div>
-                <div class="seating-row">
-                    <div class="table-group">
-                        <div class="table-circle" data-table="13">13</div>
-                        <div class="table-circle" data-table="14">14</div>
-                        <div class="table-circle" data-table="15">15</div>
-                    </div>
-                    <div class="aisle"></div>
-                    <div class="table-group">
-                        <div class="table-circle" data-table="16">16</div>
-                        <div class="table-circle" data-table="17">17</div>
-                        <div class="table-circle" data-table="18">18</div>
-                    </div>
-                </div>
-                <div class="seating-row">
-                    <div class="table-group">
-                        <div class="table-circle" data-table="19">19</div>
-                        <div class="table-circle" data-table="20">20</div>
-                        <div class="table-circle" data-table="21">21</div>
-                    </div>
-                    <div class="aisle"></div>
-                    <div class="table-group">
-                        <div class="table-circle" data-table="22">22</div>
-                        <div class="table-circle" data-table="23">23</div>
-                        <div class="table-circle" data-table="24">24</div>
-                    </div>
-                </div>
-                <div class="seating-row">
-                    <div class="table-group">
-                        <div class="table-circle" data-table="25">25</div>
-                        <div class="table-circle" data-table="26">26</div>
-                        <div class="table-circle" data-table="27">27</div>
-                    </div>
-                    <div class="aisle"></div>
-                    <div class="table-group">
-                        <div class="table-circle" data-table="28">28</div>
-                        <div class="table-circle" data-table="29">29</div>
-                        <div class="table-circle" data-table="30">30</div>
-                    </div>
-                </div>
-                <div class="seating-row">
-                    <div class="table-group">
-                        <div class="table-circle" data-table="31">31</div>
-                        <div class="table-circle" data-table="32">32</div>
-                        <div class="table-circle" data-table="33">33</div>
-                    </div>
-                    <div class="aisle"></div>
-                    <div class="table-group">
-                        <div class="table-circle" data-table="34">34</div>
-                        <div class="table-circle" data-table="35">35</div>
-                        <div class="table-circle" data-table="36">36</div>
-                    </div>
-                </div>
-                <div class="seating-row">
-                    <div class="table-group">
-                        <div class="table-circle" data-table="37">37</div>
-                        <div class="table-circle" data-table="38">38</div>
-                    </div>
-                    <div class="aisle"></div>
-                    <div class="table-group">
-                        <div class="table-circle" data-table="39">39</div>
-                        <div class="table-circle" data-table="40">40</div>
-                    </div>
-                </div>
-            </div>
-        </section>
-
-        <!-- Footer -->
-        <footer class="footer">
-            <p class="footer-text">ขอบคุณที่ร่วมยินดีกับเรา</p>
-            <p class="footer-names">Keng & Pumpim</p>
-        </footer>
-
-        <!-- Bottom Decorative Border -->
-        <div class="decorative-border bottom-border">
-            <span class="border-flower">✿</span>
-            <span class="border-line"></span>
-            <span class="border-heart">♥</span>
-            <span class="border-line"></span>
-            <span class="border-flower">✿</span>
         </div>
-    </div>
+    </section>
 
-    <!-- Error Popup -->
-    <div class="error-popup" id="errorPopup">
-        <div class="error-popup-content">
-            <div class="error-icon">⚠️</div>
-            <h3 class="error-title">กรุณากรอกข้อมูลให้ครบถ้วน</h3>
-            <p class="error-message" id="errorMessage">กรุณาตรวจสอบข้อมูลที่กรอกอีกครั้ง</p>
-            <button class="error-close-btn" id="errorCloseBtn">ตกลง</button>
+    <!-- ========================================
+         PHOTO GALLERY - Auto-Scrolling Banner
+         ======================================== -->
+    <section class="gallery-section">
+        <div class="gallery-track gallery-track--left">
+            <div class="gallery-slide">
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Wedding"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Rings"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Flowers"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Couple"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Venue"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Dance"></div>
+            </div>
+            <div class="gallery-slide" aria-hidden="true">
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Wedding"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Rings"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Flowers"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Couple"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Venue"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Dance"></div>
+            </div>
         </div>
-    </div>
+        <div class="gallery-track gallery-track--right">
+            <div class="gallery-slide">
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Cake"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Bouquet"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Celebration"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Ceremony"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Love"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Party"></div>
+            </div>
+            <div class="gallery-slide" aria-hidden="true">
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Cake"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Bouquet"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Celebration"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Ceremony"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Love"></div>
+                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Party"></div>
+            </div>
+        </div>
+    </section>
 
-    <script src="script.js"></script>
+    <!-- ========================================
+         CONTACT / FOOTER
+         ======================================== -->
+    <footer class="section footer" id="contact">
+        <div class="container">
+            <h2 class="section-title section-title--light" data-animate>Questions?</h2>
+            <p class="footer__text" data-animate>Feel free to reach out to us.</p>
+            <div class="footer__links" data-animate>
+                <a href="tel:+66812345678" class="footer__link">Call Keng</a>
+                <span class="footer__separator">•</span>
+                <a href="tel:+66898765432" class="footer__link">Call Pumpim</a>
+            </div>
+            <p class="footer__copyright">© 2026 Keng & Pumpim. With love.</p>
+        </div>
+        <!-- Lightbox Popup for Gallery -->
+        <div class="lightbox" id="lightbox">
+            <div class="lightbox__content">
+                <img class="lightbox__image" id="lightboxImage" src="" alt="Gallery Image">
+                <button class="lightbox__close" id="lightboxClose">ปิด ✕</button>
+            </div>
+        </div>
+
+        <script src="script.js"></script>
 </body>
 
 </html>
