@@ -1,41 +1,81 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="th">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Keng & Pumpim | Wedding Celebration</title>
-    <meta name="description" content="Join us to celebrate the wedding of Keng and Pumpim on June 27, 2026.">
+    <title>Chanittha & Ratanapol | Wedding Celebration</title>
+    <meta name="description"
+        content="ขอเรียนเชิญร่วมเป็นเกียรติในงานมงคลสมรส ชนิษฐา และ รตนพล วันเสาร์ที่ 27 มิถุนายน 2569">
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=Fredoka:wght@300;400;500;600;700&family=Itim&family=Mali:wght@300;400;500;600;700&display=swap"
+        href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;0,700;1,400;1,500&family=Great+Vibes&family=Quicksand:wght@300;400;500;600;700&family=Noto+Sans+Thai:wght@300;400;500;600;700&display=swap"
         rel="stylesheet">
+
     <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
+    <!-- ========================================
+         NAVIGATION BAR
+         ======================================== -->
+    <nav class="navbar" id="navbar">
+        <div class="navbar__container">
+            <a href="#hero" class="navbar__logo">
+                <span class="navbar__monogram">
+                    <img class="navbar__monogram-img" src="./assets/logo.png" alt="Logo">
+                </span>
+                <div class="navbar__brand-text">
+                    <span class="navbar__brand-name">Chanittha <br>& Ratanapol</span>
+                </div>
+            </a>
+            <button class="navbar__toggle" id="navToggle" aria-label="Toggle menu">
+                <span class="navbar__toggle-bar"></span>
+                <span class="navbar__toggle-bar"></span>
+                <span class="navbar__toggle-bar"></span>
+            </button>
+            <ul class="navbar__menu" id="navMenu">
+                <li><a href="#hero" class="navbar__link">หน้าแรก</a></li>
+                <li><a href="#schedule" class="navbar__link">พิธีการ</a></li>
+                <li><a href="#theme" class="navbar__link">การแต่งกาย</a></li>
+                <li><a href="#details" class="navbar__link">สถานที่</a></li>
+                <li><a href="#rsvp" class="navbar__link">ตอบรับ</a></li>
+                <li><a href="#gift" class="navbar__link">ของขวัญ</a></li>
+                <li><a href="#contact" class="navbar__link">การติดต่อ</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Scroll Progress Indicator -->
+    <!-- <div class="scroll-progress" id="scrollProgress"></div> -->
 
     <!-- ========================================
          HERO SECTION
          ======================================== -->
     <header class="section hero" id="hero">
-        <!-- Decorative CSS Elements -->
-        <div class="hero__decoration hero__decoration--top"></div>
-        <div class="hero__decoration hero__decoration--bottom"></div>
+        <!-- Subtle Background Glow -->
         <div class="hero__glow"></div>
 
         <div class="container hero__content" data-animate>
-            <p class="hero__pretitle">💍 Save the Date</p>
-            <h1 class="hero__names">
-                <span class="hero__name">KENG</span>
-                <span class="hero__ampersand">&</span>
-                <span class="hero__name">PUMPIM</span>
-            </h1>
-            <p class="hero__date">27 June 2026</p>
-            <p class="hero__tagline">Two hearts, one love, forever together.</p>
+            <!-- Monogram -->
+            <div class="hero__monogram">
+                <img class="hero__monogram-img" src="./assets/logo.png" alt="Logo">
+            </div>
 
-            <!-- Countdown Timer -->
+            <h1 class="hero__names">
+                <span class="hero__name hero__name--english">CHANITTHA</span>
+                <span class="hero__ampersand">and</span>
+                <span class="hero__name hero__name--english">RATANAPOL</span>
+            </h1>
+
+            <p class="hero__invitation-text">Joyfully invite you to our wedding</p>
+
+            <p class="hero__invitation-text" style="font-size: 1rem;">26 JUNE 2026</span>
+
+                <!-- Countdown Timer -->
             <div class="countdown" id="countdown">
                 <div class="countdown__item">
                     <span class="countdown__number" id="days">00</span>
@@ -58,237 +98,292 @@
                 </div>
             </div>
         </div>
-
     </header>
 
     <!-- ========================================
-         PHOTO GALLERY - Auto-Scrolling Banner
+         SCHEDULE / TIMELINE SECTION
          ======================================== -->
-    <section class="gallery-section">
-        <div class="gallery-track gallery-track--left">
-            <div class="gallery-slide">
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Wedding"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Rings"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Flowers"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Couple"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Venue"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Dance"></div>
-            </div>
-            <div class="gallery-slide" aria-hidden="true">
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Wedding"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Rings"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Flowers"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Couple"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Venue"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Dance"></div>
-            </div>
-        </div>
-        <div class="gallery-track gallery-track--right">
-            <div class="gallery-slide">
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Cake"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Bouquet"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Celebration"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Ceremony"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Love"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Party"></div>
-            </div>
-            <div class="gallery-slide" aria-hidden="true">
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Cake"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Bouquet"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Celebration"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Ceremony"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Love"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Party"></div>
-            </div>
-        </div>
-    </section>
+    <section class="card-section" id="schedule">
+        <div class="card-section__card">
+            <div class="container">
+                <h2 class="pad50"></h2>
+                <h2 class="section-title" data-animate>กำหนดการ</h2>
+                <p class="section-subtitle" data-animate>Schedule of Ceremonies</p>
 
-    <!-- ========================================
-         EVENT DETAILS SECTION
-         ======================================== -->
-    <section class="section event-details" id="details">
-        <div class="container">
-            <div class="event-banner" data-animate>
-                <h2 class="event-banner__title">The Celebration</h2>
-                <div class="event-banner__info">
-                    <div class="event-banner__item">
-                        <span class="event-banner__icon">📍</span>
-                        <span class="event-banner__text"><strong>SC
-                                Resort</strong><br><small>Phanomsarakham, Chachoengsao</small></span>
+                <div class="schedule__list" data-animate>
+                    <div class="schedule__row">
+                        <div class="schedule__left">
+                            <span class="schedule__emoji">🙏</span>
+                            <span class="schedule__time">07:19 น.</span>
+                        </div>
+                        <div class="schedule__right">
+                            <h3 class="schedule__event">พิธีสงฆ์</h3>
+                            <p class="schedule__desc">Buddhist Ceremony</p>
+                        </div>
+                    </div>
+
+                    <div class="schedule__row">
+                        <div class="schedule__left">
+                            <span class="schedule__emoji">💍</span>
+                            <span class="schedule__time">08:09 น.</span>
+                        </div>
+                        <div class="schedule__right">
+                            <h3 class="schedule__event">พิธีหมั้น</h3>
+                            <p class="schedule__desc">Engagement Ceremony</p>
+                        </div>
+                    </div>
+
+                    <div class="schedule__row">
+                        <div class="schedule__left">
+                            <span class="schedule__emoji">🐚</span>
+                            <span class="schedule__time">09:19 น.</span>
+                        </div>
+                        <div class="schedule__right">
+                            <h3 class="schedule__event">พิธีรดน้ำสังข์</h3>
+                            <p class="schedule__desc">Water Blessing</p>
+                        </div>
+                    </div>
+
+                    <div class="schedule__row">
+                        <div class="schedule__left">
+                            <span class="schedule__emoji">🍽️</span>
+                            <span class="schedule__time">11:00 น.</span>
+                        </div>
+                        <div class="schedule__right">
+                            <h3 class="schedule__event">รับประทานอาหาร</h3>
+                            <p class="schedule__desc">Reception & Lunch</p>
+                        </div>
                     </div>
                 </div>
-                <div class="event-banner__map">
-                    <iframe
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.3977814234727!2d101.34797951076007!3d13.75486908658158!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311ce30d3cb972cf%3A0xa71c67788ebdc39c!2zU0Mg4Lij4Li14Liq4Lit4Lij4LmM4LiX!5e0!3m2!1sen!2sth!4v1767809795637!5m2!1sen!2sth"
-                        width="100%" height="250" style="border:0;" allowfullscreen="" loading="lazy"
-                        referrerpolicy="no-referrer-when-downgrade"></iframe>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         THEME COLORS SECTION
+         ======================================== -->
+    <section class="card-section" id="theme">
+        <div class="card-section__card">
+            <div class="container">
+                <h2 class="section-title" data-animate>การแต่งกาย</h2>
+                <p class="section-subtitle" data-animate>Dress Code Suggestions</p>
+
+                <div class="theme-colors__card" data-animate>
+                    <div class="theme-color__list" data-animate>
+                        <!-- White -->
+                        <div class="theme-color__row" style="background-color: #FFFFFF; border: 1px solid #e0e0e0;">
+                            <div class="theme-color__right" style="justify-content: center;">
+                                <span class="theme-color__name">White</span>
+                            </div>
+                        </div>
+
+                        <!-- Cream -->
+                        <div class="theme-color__row" style="background-color: #F5F0E8; border: 1px solid #e0e0e0;">
+                            <div class="theme-color__right" style="justify-content: center;">
+                                <span class="theme-color__name">Cream</span>
+                            </div>
+                        </div>
+
+                        <!-- Dusty Rose -->
+                        <div class="theme-color__row" style="background-color: #E8B4B4; border: 1px solid #e0e0e0;">
+                            <div class="theme-color__right" style="justify-content: center;">
+                                <span class="theme-color__name">Dusty Rose</span>
+                            </div>
+                        </div>
+
+                        <!-- Brown -->
+                        <div class="theme-color__row" style="background-color: #8B6F5C; border: 1px solid #e0e0e0;">
+                            <div class="theme-color__right" style="justify-content: center;">
+                                <span class="theme-color__name">Brown</span>
+                            </div>
+                        </div>
+
+                        <!-- Sage -->
+                        <div class="theme-color__row" style="background-color: #9CAF88; border: 1px solid #e0e0e0;">
+                            <div class="theme-color__right" style="justify-content: center;">
+                                <span class="theme-color__name">Sage</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="theme-colors__note">
+                        ✨ เลือกสีเสื้อผ้าตามธีมงานได้ตามใจชอบ ✨
+                    </p>
                 </div>
-                <a href="https://www.google.com/maps/dir/?api=1&destination=SC+Resort+Phanomsarakham" target="_blank"
-                    rel="noopener" class="btn btn--outline btn--small">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z" />
-                        <circle cx="12" cy="10" r="3" />
-                    </svg>
-                    Get Directions
-                </a>
             </div>
         </div>
     </section>
 
     <!-- ========================================
-         RSVP SECTION (Primary CTA)
+         EVENT DETAILS / VENUE SECTION
          ======================================== -->
-    <section class="section rsvp" id="rsvp">
-        <div class="container">
-            <div class="rsvp__card" data-animate>
-                <div class="rsvp__sparkle"></div>
-                <h2 class="section-title section-title--light">Will You Join Us?</h2>
-                <p class="rsvp__text">Kindly confirm your attendance by June 27, 2026.<br>Your presence would mean the
-                    world to us.</p>
-                <a href="https://forms.gle/9TRQoZ3XQSCAvQBe8" target="_blank" rel="noopener"
-                    class="btn btn--primary btn--large btn--glow">
-                    RSVP Now
-                </a>
+    <section class="card-section" id="details">
+        <div class="card-section__card">
+            <div class="container">
+                <h2 class="section-title" data-animate>สถานที่จัดงาน</h2>
+                <p class="section-subtitle" data-animate>Venue Location</p>
+
+                <div class="event-banner" data-animate>
+                    <div class="event-banner__info">
+                        <div class="event-banner__item">
+                            <span class="event-banner__icon">📍</span>
+                            <span class="event-banner__text">
+                                <strong>SC Resort</strong><br>
+                                <small>พนมสารคาม, ฉะเชิงเทรา</small>
+                            </span>
+                        </div>
+                    </div>
+                    <div class="event-banner__map">
+                        <iframe
+                            src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.3977814234727!2d101.34797951076007!3d13.75486908658158!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311ce30d3cb972cf%3A0xa71c67788ebdc39c!2zU0Mg4Lij4Li14Liq4Lit4Lij4LmM4LiX!5e0!3m2!1sen!2sth!4v1767809795637!5m2!1sen!2sth"
+                            width="100%" height="200" style="border:0; border-radius: 12px;" allowfullscreen=""
+                            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
+                    </div>
+                    <a href="https://www.google.com/maps/dir/?api=1&destination=SC+Resort+Phanomsarakham"
+                        target="_blank" rel="noopener" class="btn btn--primary btn--small btn--glow btn--white"
+                        data-animate>
+                        นำทาง / Get Directions
+                    </a>
+                </div>
             </div>
         </div>
     </section>
 
     <!-- ========================================
-         SCHEDULE SECTION
+         RSVP SECTION
          ======================================== -->
-    <section class="section schedule" id="schedule">
-        <div class="container">
-            <h2 class="section-title" data-animate>Schedule</h2>
+    <section class="card-section card-section--accent" id="rsvp">
+        <div class="card-section__card card-section__card--gold">
+            <div class="container">
+                <div class="rsvp__content" data-animate>
+                    <h2 class="section-title section-title--light">ยืนยันการเข้าร่วมงาน</h2>
+                    <p class="rsvp__subtitle">Will You Join Us?</p>
+                    <p class="rsvp__text">
+                        กรุณายืนยันการเข้าร่วมงานภายใน<br>วันที่ 20 มิถุนายน 2569<br>
+                        การมาของท่านมีความหมายอย่างยิ่งสำหรับเรา
+                    </p>
 
-            <ul class="timeline" data-animate>
-                <li class="timeline__item">
-                    <span class="timeline__time">07:00</span>
-                    <div class="timeline__content">
-                        <h3 class="timeline__event">Buddhist Ceremony</h3>
-                        <p class="timeline__desc">Morning blessing & alms offering</p>
+                    <!-- Countdown Timer -->
+                    <div class="countdown countdown--rsvp" id="rsvp-countdown">
+                        <div class="countdown__item">
+                            <span class="countdown__number" id="rsvp-days">00</span>
+                            <span class="countdown__label">Days</span>
+                        </div>
+                        <div class="countdown__separator">:</div>
+                        <div class="countdown__item">
+                            <span class="countdown__number" id="rsvp-hours">00</span>
+                            <span class="countdown__label">Hours</span>
+                        </div>
+                        <div class="countdown__separator">:</div>
+                        <div class="countdown__item">
+                            <span class="countdown__number" id="rsvp-minutes">00</span>
+                            <span class="countdown__label">Mins</span>
+                        </div>
+                        <div class="countdown__separator">:</div>
+                        <div class="countdown__item">
+                            <span class="countdown__number" id="rsvp-seconds">00</span>
+                            <span class="countdown__label">Secs</span>
+                        </div>
                     </div>
-                </li>
-                <li class="timeline__item">
-                    <span class="timeline__time">09:00</span>
-                    <div class="timeline__content">
-                        <h3 class="timeline__event">Thai Water Pouring</h3>
-                        <p class="timeline__desc">Traditional blessing ceremony</p>
-                    </div>
-                </li>
-                <li class="timeline__item">
-                    <span class="timeline__time">12:00</span>
-                    <div class="timeline__content">
-                        <h3 class="timeline__event">Reception & Lunch</h3>
-                        <p class="timeline__desc">Celebration feast together</p>
-                    </div>
-                </li>
-            </ul>
+
+                    <a href="https://forms.gle/9TRQoZ3XQSCAvQBe8" target="_blank" rel="noopener"
+                        class="btn btn--outline btn--primary btn--large btn--glow btn--white">
+                        RSVP ตอบรับ
+                    </a>
+                </div>
+            </div>
         </div>
     </section>
 
     <!-- ========================================
          GIFT SECTION
          ======================================== -->
-    <section class="section gift" id="gift">
-        <div class="container">
-            <h2 class="section-title" data-animate>Gifts</h2>
-            <p class="gift__message" data-animate>Your presence is our greatest gift.<br>However, if you wish to bless
-                us, a monetary gift is appreciated.</p>
+    <section class="card-section" id="gift">
+        <div class="card-section__card">
+            <div class="container gift__content">
+                <h2 class="section-title" data-animate>ร่วมแสดงความยินดี</h2>
+                <p class="section-subtitle" data-animate>Monetary Gift</p>
+                <p class="gift__message" data-animate>
+                    การมาร่วมงานของท่านคือของขวัญที่ล้ำค่าที่สุด<br>
+                    หากท่านประสงค์จะร่วมอวยพร
+                </p>
 
-            <div class="bank-card" data-animate>
-                <div class="bank-card__image">
-                    <img src="payment_img.png" alt="Payment Image">
+                <div class="bank-card" data-animate>
+                    <div class="bank-card__image">
+                        <img src="payment_img.png" alt="Payment QR Code">
+                    </div>
+                    <div class="bank-card__header">
+                        <span class="bank-card__icon">🏦</span>
+                        <span class="bank-card__name">Kasikorn Bank</span>
+                    </div>
+                    <div class="bank-card__number-row">
+                        <p class="bank-card__number" id="accountNumber">130-8-42268-9</p>
+                        <button class="btn-icon" id="copyBtn" aria-label="Copy account number">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                                stroke-width="2">
+                                <rect x="9" y="9" width="13" height="13" rx="2" />
+                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
+                            </svg>
+                        </button>
+                        <span class="copy-feedback" id="copyFeedback">Copied!</span>
+                    </div>
+                    <p class="bank-card__holder">Ratanapol Songthum</p>
                 </div>
-                <div class="bank-card__header">
-                    <span class="bank-card__icon">🏦</span>
-                    <span class="bank-card__name">Kasikorn Bank</span>
-                </div>
-                <div class="bank-card__number-row">
-                    <p class="bank-card__number" id="accountNumber">130-8-42268-9</p>
-                    <button class="btn-icon" id="copyBtn" aria-label="Copy account number">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                            stroke-width="2">
-                            <rect x="9" y="9" width="13" height="13" rx="2" />
-                            <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-                        </svg>
-                    </button>
-                    <span class="copy-feedback" id="copyFeedback">Copied!</span>
-                </div>
-                <p class="bank-card__holder">Ratanapon Songtham</p>
-            </div>
 
-            <a href="https://forms.gle/NzTPGYsiUcc2JmW7A" target="_blank" rel="noopener"
-                class="btn btn--outline btn--small" data-animate>
-                Upload Transfer Slip
-            </a>
-        </div>
-    </section>
-
-    <!-- ========================================
-         PHOTO GALLERY - Auto-Scrolling Banner
-         ======================================== -->
-    <section class="gallery-section">
-        <div class="gallery-track gallery-track--left">
-            <div class="gallery-slide">
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Wedding"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Rings"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Flowers"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Couple"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Venue"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Dance"></div>
-            </div>
-            <div class="gallery-slide" aria-hidden="true">
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Wedding"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Rings"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Flowers"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Couple"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Venue"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Dance"></div>
-            </div>
-        </div>
-        <div class="gallery-track gallery-track--right">
-            <div class="gallery-slide">
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Cake"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Bouquet"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Celebration"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Ceremony"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Love"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Party"></div>
-            </div>
-            <div class="gallery-slide" aria-hidden="true">
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Cake"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Bouquet"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Celebration"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Ceremony"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Love"></div>
-                <div class="gallery-item"><img src="assets/watercolor-flowers.png" alt="Party"></div>
+                <a href="https://forms.gle/NzTPGYsiUcc2JmW7A" target="_blank" rel="noopener"
+                    class="btn btn--primary btn--small btn--glow btn--white" data-animate>
+                    อัพโหลดสลิป / Upload Slip
+                </a>
             </div>
         </div>
     </section>
 
     <!-- ========================================
-         CONTACT / FOOTER
+         FOOTER
          ======================================== -->
-    <footer class="section footer" id="contact">
-        <div class="container">
-            <h2 class="section-title section-title--light" data-animate>Questions?</h2>
-            <p class="footer__text" data-animate>Feel free to reach out to us.</p>
-            <div class="footer__links" data-animate>
-                <a href="tel:+66812345678" class="footer__link">Call Keng</a>
-                <span class="footer__separator">•</span>
-                <a href="tel:+66898765432" class="footer__link">Call Pumpim</a>
-            </div>
-            <p class="footer__copyright">© 2026 Keng & Pumpim. With love.</p>
-        </div>
-        <!-- Lightbox Popup for Gallery -->
-        <div class="lightbox" id="lightbox">
-            <div class="lightbox__content">
-                <img class="lightbox__image" id="lightboxImage" src="" alt="Gallery Image">
-                <button class="lightbox__close" id="lightboxClose">ปิด ✕</button>
-            </div>
-        </div>
+    <footer class="card-section card-section--footer" id="contact">
+        <div class="card-section__card card-section__card--brown">
+            <div class="container footer__content">
+                <div class="footer__monogram">
+                    <img class="footer__logo-img" src="./assets/logo.png" alt="C&R Logo">
+                </div>
 
-        <script src="script.js"></script>
+                <h2 class="section-title section-title--light thankyou" data-animate>Thank You</h2>
+                <p class="footer__subtitle" data-animate>For celebrating with us</p>
+
+                <div class="footer__divider" data-animate></div>
+
+                <div class="footer__contact" data-animate>
+                    <p class="footer__contact-label">ติดต่อสอบถาม (Contact)</p>
+                    <div class="footer__buttons">
+                        <a href="tel:+66885605050"
+                            class="btn btn--primary btn--small btn--glow btn--white btn--outline">
+                            <span class="btn__icon">📞</span>
+                            <span>Keng</span>
+                        </a>
+                        <a href="tel:+66926623455"
+                            class="btn btn--primary btn--small btn--glow btn--white btn--outline">
+                            <span class="btn__icon">📞</span>
+                            <span>Pumpim</span>
+                        </a>
+                    </div>
+                </div>
+
+                <p class="footer__tagline">#KengPumpimWedding</p>
+                <p class="footer__copyright">© 2026 Chanittha & Ratanapol</p>
+            </div>
+        </div>
+    </footer>
+
+    <!-- Lightbox Popup for Gallery -->
+    <div class="lightbox" id="lightbox">
+        <div class="lightbox__content">
+            <img class="lightbox__image" id="lightboxImage" src="" alt="Gallery Image">
+            <button class="lightbox__close" id="lightboxClose">ปิด ✕</button>
+        </div>
+    </div>
+
+    <script src="script.js"></script>
 </body>
 
 </html>

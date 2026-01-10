@@ -1,9 +1,99 @@
 document.addEventListener('DOMContentLoaded', () => {
 
     // ============================================
+    // Navigation Bar - Show on Scroll
+    // ============================================
+    const navbar = document.getElementById('navbar');
+    const navToggle = document.getElementById('navToggle');
+    const navMenu = document.getElementById('navMenu');
+    const navLinks = document.querySelectorAll('.navbar__link');
+    let lastScrollY = window.scrollY;
+    let ticking = false;
+
+    // Show navbar after scrolling past hero
+    function updateNavbar() {
+        const heroHeight = document.getElementById('hero')?.offsetHeight || 500;
+
+        if (window.scrollY > heroHeight * 0.5) {
+            navbar.classList.add('is-visible');
+        } else {
+            navbar.classList.remove('is-visible');
+        }
+
+        ticking = false;
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!ticking) {
+            requestAnimationFrame(updateNavbar);
+            ticking = true;
+        }
+    });
+
+    // Mobile menu toggle
+    if (navToggle && navMenu) {
+        navToggle.addEventListener('click', () => {
+            navToggle.classList.toggle('is-active');
+            navMenu.classList.toggle('is-open');
+            document.body.style.overflow = navMenu.classList.contains('is-open') ? 'hidden' : '';
+        });
+
+        // Close menu when clicking a link
+        navLinks.forEach(link => {
+            link.addEventListener('click', () => {
+                navToggle.classList.remove('is-active');
+                navMenu.classList.remove('is-open');
+                document.body.style.overflow = '';
+            });
+        });
+    }
+
+    // Active link highlighting
+    const sections = document.querySelectorAll('section[id]');
+
+    function highlightActiveLink() {
+        const scrollY = window.scrollY + 100;
+
+        sections.forEach(section => {
+            const sectionTop = section.offsetTop;
+            const sectionHeight = section.offsetHeight;
+            const sectionId = section.getAttribute('id');
+
+            if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
+                navLinks.forEach(link => {
+                    link.classList.remove('is-active');
+                    if (link.getAttribute('href') === `#${sectionId}`) {
+                        link.classList.add('is-active');
+                    }
+                });
+            }
+        });
+    }
+
+    window.addEventListener('scroll', highlightActiveLink);
+
+    // ============================================
+    // Scroll Progress Indicator
+    // ============================================
+    const scrollProgress = document.getElementById('scrollProgress');
+
+    function updateScrollProgress() {
+        const scrollTop = window.scrollY;
+        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
+        const scrollPercent = (scrollTop / docHeight) * 100;
+
+        if (scrollProgress) {
+            scrollProgress.style.width = `${scrollPercent}%`;
+        }
+    }
+
+    window.addEventListener('scroll', updateScrollProgress);
+
+    // ============================================
     // Countdown Timer - Wedding Date: June 27, 2026
     // ============================================
     const weddingDate = new Date('2026-06-27T07:00:00').getTime();
+    const rsvpDate = new Date('2026-06-20T07:00:00').getTime();
 
     function updateCountdown() {
         const now = new Date().getTime();
@@ -15,17 +105,58 @@ document.addEventListener('DOMContentLoaded', () => {
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            document.getElementById('days').textContent = String(days).padStart(2, '0');
-            document.getElementById('hours').textContent = String(hours).padStart(2, '0');
-            document.getElementById('minutes').textContent = String(minutes).padStart(2, '0');
-            document.getElementById('seconds').textContent = String(seconds).padStart(2, '0');
+            const daysEl = document.getElementById('days');
+            const hoursEl = document.getElementById('hours');
+            const minutesEl = document.getElementById('minutes');
+            const secondsEl = document.getElementById('seconds');
+
+            if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
+            if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+            if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
+            if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
         } else {
-            document.getElementById('countdown').innerHTML = '<p style="font-size: 1.2rem; color: var(--color-accent);">🎉 Wedding Day!</p>';
+            const countdownEl = document.getElementById('countdown');
+            if (countdownEl) {
+                countdownEl.innerHTML = '<p style="font-size: 1.2rem; color: var(--color-gold);">🎉 Wedding Day!</p>';
+            }
+        }
+    }
+
+    // RSVP Countdown - June 20, 2026
+    function updateRsvpCountdown() {
+        const now = new Date().getTime();
+        const distance = rsvpDate - now;
+
+        if (distance > 0) {
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            const daysEl = document.getElementById('rsvp-days');
+            const hoursEl = document.getElementById('rsvp-hours');
+            const minutesEl = document.getElementById('rsvp-minutes');
+            const secondsEl = document.getElementById('rsvp-seconds');
+
+            if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
+            if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
+            if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
+            if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
+        } else {
+            // Optional: Message when RSVP closes
+            const countdownEl = document.getElementById('rsvp-countdown');
+            if (countdownEl) {
+                countdownEl.innerHTML = '<p style="font-size: 1.2rem; color: var(--color-gold);">RSVP Closed</p>';
+            }
         }
     }
 
     updateCountdown();
-    setInterval(updateCountdown, 1000);
+    updateRsvpCountdown();
+    setInterval(() => {
+        updateCountdown();
+        updateRsvpCountdown();
+    }, 1000);
 
     // ============================================
     // Scroll Animation with Intersection Observer
@@ -35,7 +166,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const observerOptions = {
         root: null,
         rootMargin: '0px',
-        threshold: 0.15
+        threshold: 0.1
     };
 
     const observerCallback = (entries, observer) => {
@@ -51,6 +182,35 @@ document.addEventListener('DOMContentLoaded', () => {
 
     animatedElements.forEach(el => {
         observer.observe(el);
+    });
+
+    // ============================================
+    // Card Section Slide-Up Animation
+    // ============================================
+    const cardSections = document.querySelectorAll('.card-section__card');
+
+    const cardObserverOptions = {
+        root: null,
+        rootMargin: '0px 0px -10% 0px',
+        threshold: 0.05
+    };
+
+    const cardObserverCallback = (entries, observer) => {
+        entries.forEach((entry, index) => {
+            if (entry.isIntersecting) {
+                // Add staggered delay based on scroll position
+                setTimeout(() => {
+                    entry.target.classList.add('is-visible');
+                }, 100);
+                observer.unobserve(entry.target);
+            }
+        });
+    };
+
+    const cardObserver = new IntersectionObserver(cardObserverCallback, cardObserverOptions);
+
+    cardSections.forEach(card => {
+        cardObserver.observe(card);
     });
 
     // ============================================
@@ -72,6 +232,18 @@ document.addEventListener('DOMContentLoaded', () => {
                 }, 2000);
             }).catch(err => {
                 console.error('Copy failed:', err);
+                // Fallback for older browsers
+                const textArea = document.createElement('textarea');
+                textArea.value = text;
+                document.body.appendChild(textArea);
+                textArea.select();
+                document.execCommand('copy');
+                document.body.removeChild(textArea);
+
+                copyFeedback.classList.add('is-visible');
+                setTimeout(() => {
+                    copyFeedback.classList.remove('is-visible');
+                }, 2000);
             });
         });
     }
@@ -86,10 +258,92 @@ document.addEventListener('DOMContentLoaded', () => {
                 const target = document.querySelector(targetId);
                 if (target) {
                     e.preventDefault();
-                    target.scrollIntoView({ behavior: 'smooth' });
+                    const navbarHeight = navbar?.offsetHeight || 60;
+                    const targetPosition = target.offsetTop - navbarHeight;
+
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
                 }
             }
         });
+    });
+
+    // ============================================
+    // Floating Particles Effect (Hero Section)
+    // ============================================
+    const particlesContainer = document.getElementById('particles');
+
+    if (particlesContainer) {
+        const particleCount = 20;
+
+        for (let i = 0; i < particleCount; i++) {
+            createParticle();
+        }
+    }
+
+    function createParticle() {
+        const particle = document.createElement('div');
+        particle.className = 'particle';
+
+        // Random positioning
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
+        const size = Math.random() * 6 + 2;
+        const delay = Math.random() * 10;
+        const duration = Math.random() * 10 + 10;
+
+        particle.style.cssText = `
+            position: absolute;
+            left: ${x}%;
+            top: ${y}%;
+            width: ${size}px;
+            height: ${size}px;
+            background: radial-gradient(circle, rgba(196, 163, 90, 0.6) 0%, transparent 70%);
+            border-radius: 50%;
+            pointer-events: none;
+            animation: floatParticle ${duration}s ease-in-out ${delay}s infinite;
+        `;
+
+        particlesContainer.appendChild(particle);
+    }
+
+    // Add particle animation keyframes
+    const styleSheet = document.createElement('style');
+    styleSheet.textContent = `
+        @keyframes floatParticle {
+            0%, 100% {
+                transform: translateY(0) translateX(0) scale(1);
+                opacity: 0.3;
+            }
+            25% {
+                transform: translateY(-30px) translateX(10px) scale(1.1);
+                opacity: 0.6;
+            }
+            50% {
+                transform: translateY(-50px) translateX(-5px) scale(0.9);
+                opacity: 0.4;
+            }
+            75% {
+                transform: translateY(-20px) translateX(15px) scale(1.05);
+                opacity: 0.5;
+            }
+        }
+    `;
+    document.head.appendChild(styleSheet);
+
+    // ============================================
+    // Parallax Effect on Hero
+    // ============================================
+    const heroGlow = document.querySelector('.hero__glow');
+
+    window.addEventListener('scroll', () => {
+        const scrolled = window.scrollY;
+
+        if (heroGlow && scrolled < window.innerHeight) {
+            heroGlow.style.transform = `translate(-50%, calc(-50% + ${scrolled * 0.2}px))`;
+        }
     });
 
     // ============================================
@@ -103,11 +357,10 @@ document.addEventListener('DOMContentLoaded', () => {
     // Open lightbox when clicking gallery image
     galleryItems.forEach(img => {
         img.addEventListener('click', () => {
-            // Get higher resolution version of the image
             const highResSrc = img.src.replace('w=200&h=200', 'w=800&h=800');
             lightboxImage.src = highResSrc;
             lightbox.classList.add('is-active');
-            document.body.style.overflow = 'hidden'; // Prevent scrolling
+            document.body.style.overflow = 'hidden';
         });
     });
 
@@ -127,15 +380,60 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // Close with Escape key
     document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && lightbox.classList.contains('is-active')) {
+        if (e.key === 'Escape' && lightbox?.classList.contains('is-active')) {
             closeLightbox();
         }
     });
 
     function closeLightbox() {
         lightbox.classList.remove('is-active');
-        document.body.style.overflow = ''; // Restore scrolling
+        document.body.style.overflow = '';
         lightboxImage.src = '';
+    }
+
+    // ============================================
+    // Theme Color Swatch Hover Effect
+    // ============================================
+    const swatches = document.querySelectorAll('.theme-colors__swatch');
+
+    swatches.forEach(swatch => {
+        swatch.addEventListener('mouseenter', () => {
+            swatches.forEach(s => {
+                if (s !== swatch) {
+                    s.style.opacity = '0.5';
+                    s.style.transform = 'scale(0.9)';
+                }
+            });
+        });
+
+        swatch.addEventListener('mouseleave', () => {
+            swatches.forEach(s => {
+                s.style.opacity = '1';
+                s.style.transform = 'scale(1)';
+            });
+        });
+    });
+
+    // ============================================
+    // Schedule Item Hover Animation
+    // ============================================
+    const scheduleItems = document.querySelectorAll('.schedule__item');
+
+    scheduleItems.forEach((item, index) => {
+        item.style.transitionDelay = `${index * 0.05}s`;
+    });
+
+    // ============================================
+    // Initial Page Load Animation
+    // ============================================
+    document.body.classList.add('is-loaded');
+
+    // Trigger hero content animation
+    const heroContent = document.querySelector('.hero__content');
+    if (heroContent) {
+        setTimeout(() => {
+            heroContent.classList.add('is-visible');
+        }, 300);
     }
 
 });
