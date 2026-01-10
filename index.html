@@ -32,11 +32,19 @@
                     <span class="navbar__brand-name">Chanittha <br>& Ratanapol</span>
                 </div>
             </a>
-            <button class="navbar__toggle" id="navToggle" aria-label="Toggle menu">
-                <span class="navbar__toggle-bar"></span>
-                <span class="navbar__toggle-bar"></span>
-                <span class="navbar__toggle-bar"></span>
-            </button>
+
+            <!-- Right Actions: RSVP Button + Toggle -->
+            <div class="navbar__actions">
+                <a href="https://forms.gle/9TRQoZ3XQSCAvQBe8" target="_blank" rel="noopener"
+                    class="btn btn--outline btn--primary btn--small btn--glow btn--white navbar__rsvp-btn">
+                    RSVP
+                </a>
+                <button class="navbar__toggle" id="navToggle" aria-label="Toggle menu">
+                    <span class="navbar__toggle-bar"></span>
+                    <span class="navbar__toggle-bar"></span>
+                    <span class="navbar__toggle-bar"></span>
+                </button>
+            </div>
             <ul class="navbar__menu" id="navMenu">
                 <li><a href="#hero" class="navbar__link">หน้าแรก</a></li>
                 <li><a href="#schedule" class="navbar__link">พิธีการ</a></li>
@@ -58,6 +66,7 @@
     <header class="section hero" id="hero">
         <!-- Subtle Background Glow -->
         <div class="hero__glow"></div>
+        <div class="hero__particles" id="heroParticles"></div>
 
         <div class="container hero__content" data-animate>
             <!-- Monogram -->
@@ -160,61 +169,6 @@
     </section>
 
     <!-- ========================================
-         THEME COLORS SECTION
-         ======================================== -->
-    <section class="card-section" id="theme">
-        <div class="card-section__card">
-            <div class="container">
-                <h2 class="section-title" data-animate>การแต่งกาย</h2>
-                <p class="section-subtitle" data-animate>Dress Code Suggestions</p>
-
-                <div class="theme-colors__card" data-animate>
-                    <div class="theme-color__list" data-animate>
-                        <!-- White -->
-                        <div class="theme-color__row" style="background-color: #FFFFFF; border: 1px solid #e0e0e0;">
-                            <div class="theme-color__right" style="justify-content: center;">
-                                <span class="theme-color__name">White</span>
-                            </div>
-                        </div>
-
-                        <!-- Cream -->
-                        <div class="theme-color__row" style="background-color: #F5F0E8; border: 1px solid #e0e0e0;">
-                            <div class="theme-color__right" style="justify-content: center;">
-                                <span class="theme-color__name">Cream</span>
-                            </div>
-                        </div>
-
-                        <!-- Dusty Rose -->
-                        <div class="theme-color__row" style="background-color: #E8B4B4; border: 1px solid #e0e0e0;">
-                            <div class="theme-color__right" style="justify-content: center;">
-                                <span class="theme-color__name">Dusty Rose</span>
-                            </div>
-                        </div>
-
-                        <!-- Brown -->
-                        <div class="theme-color__row" style="background-color: #8B6F5C; border: 1px solid #e0e0e0;">
-                            <div class="theme-color__right" style="justify-content: center;">
-                                <span class="theme-color__name">Brown</span>
-                            </div>
-                        </div>
-
-                        <!-- Sage -->
-                        <div class="theme-color__row" style="background-color: #9CAF88; border: 1px solid #e0e0e0;">
-                            <div class="theme-color__right" style="justify-content: center;">
-                                <span class="theme-color__name">Sage</span>
-                            </div>
-                        </div>
-                    </div>
-
-                    <p class="theme-colors__note">
-                        ✨ เลือกสีเสื้อผ้าตามธีมงานได้ตามใจชอบ ✨
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- ========================================
          EVENT DETAILS / VENUE SECTION
          ======================================== -->
     <section class="card-section" id="details">
@@ -290,6 +244,61 @@
                         class="btn btn--outline btn--primary btn--large btn--glow btn--white">
                         RSVP ตอบรับ
                     </a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- ========================================
+         THEME COLORS SECTION
+         ======================================== -->
+    <section class="card-section" id="theme">
+        <div class="card-section__card">
+            <div class="container">
+                <h2 class="section-title" data-animate>การแต่งกาย</h2>
+                <p class="section-subtitle" data-animate>Dress Code Suggestions</p>
+
+                <div class="theme-colors__card" data-animate>
+                    <div class="theme-color__list" data-animate>
+                        <!-- White -->
+                        <div class="theme-color__row" style="background-color: #FFFFFF; border: 1px solid #e0e0e0;">
+                            <div class="theme-color__right" style="justify-content: center;">
+                                <span class="theme-color__name">White</span>
+                            </div>
+                        </div>
+
+                        <!-- Cream -->
+                        <div class="theme-color__row" style="background-color: #F5F0E8; border: 1px solid #e0e0e0;">
+                            <div class="theme-color__right" style="justify-content: center;">
+                                <span class="theme-color__name">Cream</span>
+                            </div>
+                        </div>
+
+                        <!-- Dusty Rose -->
+                        <div class="theme-color__row" style="background-color: #E8B4B4; border: 1px solid #e0e0e0;">
+                            <div class="theme-color__right" style="justify-content: center;">
+                                <span class="theme-color__name">Dusty Rose</span>
+                            </div>
+                        </div>
+
+                        <!-- Brown -->
+                        <div class="theme-color__row" style="background-color: #8B6F5C; border: 1px solid #e0e0e0;">
+                            <div class="theme-color__right" style="justify-content: center;">
+                                <span class="theme-color__name">Brown</span>
+                            </div>
+                        </div>
+
+                        <!-- Sage -->
+                        <div class="theme-color__row" style="background-color: #9CAF88; border: 1px solid #e0e0e0;">
+                            <div class="theme-color__right" style="justify-content: center;">
+                                <span class="theme-color__name">Sage</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <p class="theme-colors__note">
+                        ✨ เลือกสีเสื้อผ้าตามธีมงานได้ตามใจชอบ ✨
+                    </p>
                 </div>
             </div>
         </div>
@@ -380,6 +389,26 @@
         <div class="lightbox__content">
             <img class="lightbox__image" id="lightboxImage" src="" alt="Gallery Image">
             <button class="lightbox__close" id="lightboxClose">ปิด ✕</button>
+        </div>
+    </div>
+
+    <!-- Color Comparison Lightbox -->
+    <div class="lightbox" id="colorLightbox">
+        <div class="lightbox__content lightbox__content--color">
+            <div class="lightbox__color-swatch" id="colorMsgSwatch"></div>
+            <p class="lightbox__color-instruction">แตะหน้าจอเพื่อปิด (Tap to close)</p>
+        </div>
+    </div>
+
+    <!-- Landscape Warning Overlay -->
+    <div class="landscape-warning">
+        <div class="landscape-warning__content">
+            <div class="landscape-warning__icon">📱</div>
+            <h2 class="landscape-warning__title">Please Rotate Your Device</h2>
+            <p class="landscape-warning__text">
+                เว็บไซต์นี้ออกแบบมาสำหรับแนวตั้ง<br>
+                กรุณาหมุนโทรศัพท์ของท่านเพื่อการแสดงผลที่ดีที่สุด
+            </p>
         </div>
     </div>
 

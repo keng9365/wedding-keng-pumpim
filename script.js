@@ -436,4 +436,93 @@ document.addEventListener('DOMContentLoaded', () => {
         }, 300);
     }
 
+    // ============================================
+    // Color Comparison Lightbox
+    // ============================================
+    const colorLightbox = document.getElementById('colorLightbox');
+    const colorMsgSwatch = document.getElementById('colorMsgSwatch');
+    const colorMsgName = document.getElementById('colorMsgName');
+    const colorLightboxClose = document.getElementById('colorLightboxClose');
+    const colorRows = document.querySelectorAll('.theme-color__row');
+
+    // Open color lightbox
+    colorRows.forEach(row => {
+        row.addEventListener('click', () => {
+            const color = row.style.backgroundColor;
+            // const name = row.querySelector('.theme-color__name').textContent;
+
+            colorMsgSwatch.style.backgroundColor = color;
+            // colorMsgName.textContent = name;
+
+            colorLightbox.classList.add('is-active');
+            document.body.style.overflow = 'hidden';
+        });
+    });
+
+    // Close color lightbox
+    if (colorLightboxClose) {
+        colorLightboxClose.addEventListener('click', closeColorLightbox);
+    }
+
+    if (colorLightbox) {
+        colorLightbox.addEventListener('click', (e) => {
+            if (e.target === colorLightbox || e.target.closest('.lightbox__content--color')) {
+                closeColorLightbox();
+            }
+        });
+    }
+
+    function closeColorLightbox() {
+        colorLightbox.classList.remove('is-active');
+        document.body.style.overflow = '';
+    }
+
+});
+
+/* ============================================
+   HERO PARTICLES SYSTEM
+   ============================================ */
+function initHeroParticles() {
+    const container = document.getElementById('heroParticles');
+    if (!container) return;
+
+    const particleCount = 30; // Number of particles
+
+    for (let i = 0; i < particleCount; i++) {
+        createParticle(container);
+    }
+}
+
+function createParticle(container) {
+    const particle = document.createElement('div');
+    particle.classList.add('particle');
+
+    // Randomize size
+    const size = Math.random() * 10 + 8; // 8px to 23px for hearts
+    particle.style.width = `${size}px`;
+    particle.style.height = `${size}px`;
+
+    // Randomize Position
+    const startLeft = Math.random() * 100;
+    particle.style.left = `${startLeft}%`;
+
+    // Randomize Animation Params
+    const duration = Math.random() * 10 + 15; // 15s - 25s duration (slow float)
+    const delay = Math.random() * -20; // Start at random times (negative delay to pre-warm)
+    const opacity = Math.random() * 0.5 + 0.3; // 0.3 to 0.8 opacity
+    const translateX = Math.random() * 100 - 50; // Sway -50px to +50px
+
+    // Set Custom Properties for CSS animation
+    particle.style.setProperty('--opacity', opacity);
+    particle.style.setProperty('--translateX', `${translateX}px`);
+
+    particle.style.animation = `float-up ${duration}s linear ${delay}s infinite`;
+
+    container.appendChild(particle);
+}
+
+// Initialize on load
+document.addEventListener('DOMContentLoaded', () => {
+    // ... existing init ...
+    initHeroParticles();
 });

@@ -177,7 +177,7 @@ h3 {
 }
 
 .navbar__container {
-    max-width: 800px;
+    max-width: 1200px;
     margin: 0 auto;
     padding: 0 var(--space-md);
     display: flex;
@@ -1633,13 +1633,13 @@ h3 {
     flex-direction: column;
     align-items: center;
     gap: var(--space-md);
-    max-width: 90%;
-    max-height: 90%;
+    max-width: 100%;
+    max-height: 100%;
 }
 
 .lightbox__image {
     max-width: 100%;
-    max-height: 70vh;
+    max-height: 100vh;
     border-radius: var(--radius-md);
     box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
     object-fit: contain;
@@ -1776,4 +1776,308 @@ h3 {
     .section {
         page-break-inside: avoid;
     }
+}
+
+/* ============================================
+   Color Comparison Lightbox
+   ============================================ */
+.theme-color__row {
+    cursor: pointer;
+    transition: transform var(--transition-fast), box-shadow var(--transition-fast);
+}
+
+.theme-color__row:hover {
+    transform: scale(1.02);
+    box-shadow: var(--shadow-md);
+    z-index: 10;
+    position: relative;
+}
+
+.theme-color__row:active {
+    transform: scale(0.98);
+}
+
+.lightbox__content--color {
+    background: transparent;
+    box-shadow: none;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    height: 100%;
+}
+
+.lightbox__color-swatch {
+    width: 100%;
+    height: 100%;
+    max-width: 1000px;
+    max-height: 1000px;
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-xl);
+    border: 4px solid var(--color-white);
+    margin-bottom: var(--space-md);
+    transition: transform var(--transition-fast);
+}
+
+.lightbox__color-name {
+    font-family: var(--font-heading);
+    font-size: 2.5rem;
+    color: var(--color-white);
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
+    margin-bottom: var(--space-xs);
+    text-transform: capitalize;
+}
+
+.lightbox__color-instruction {
+    font-family: var(--font-body);
+    font-size: 0.9rem;
+    color: rgba(255, 255, 255, 0.8);
+    margin-bottom: var(--space-md);
+}
+
+@media (max-width: 480px) {
+    .lightbox__color-swatch {
+        width: 90vw;
+        height: 50vh;
+    }
+
+    .lightbox__color-name {
+        font-size: 2rem;
+    }
+}
+
+/* ============================================
+   LANDSCAPE WARNING OVERLAY
+   ============================================ */
+.landscape-warning {
+    display: none;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: var(--color-cream);
+    z-index: 9999;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    padding: 20px;
+}
+
+.landscape-warning__content {
+    background: white;
+    padding: 40px;
+    border-radius: 20px;
+    box-shadow: var(--shadow-xl);
+    max-width: 400px;
+    border: 1px solid var(--color-gold-light);
+    width: 100%;
+    max-width: 480px;
+}
+
+.landscape-warning__icon {
+    font-size: 4rem;
+    margin-bottom: 20px;
+    animation: rotate-phone 2s infinite ease-in-out;
+}
+
+.landscape-warning__title {
+    color: var(--color-gold-dark);
+    font-family: var(--font-heading);
+    margin-bottom: 15px;
+}
+
+.landscape-warning__text {
+    color: var(--color-text);
+    line-height: 1.6;
+}
+
+@keyframes rotate-phone {
+
+    0%,
+    100% {
+        transform: rotate(0deg);
+    }
+
+    25% {
+        transform: rotate(-90deg);
+    }
+
+    50% {
+        transform: rotate(-90deg);
+    }
+
+    75% {
+        transform: rotate(0deg);
+    }
+}
+
+/* Show only on landscape mobile devices */
+@media screen and (orientation: landscape) and (max-height: 500px) {
+    .landscape-warning {
+        display: flex;
+    }
+
+    /* Optional: Hide main content to prevent scrolling issues */
+    body>*:not(.landscape-warning) {
+        display: none !important;
+    }
+}
+
+/* ============================================
+   HERO PARTICLES / SPARKLES
+   ============================================ */
+.hero__particles {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+    pointer-events: none;
+    z-index: 1;
+    /* Behind content (z-index 1 is same as content wrapper, so we might need to adjust content to 2) */
+}
+
+/* Update hero content z-index to be above particles */
+.hero__content {
+    z-index: 5;
+}
+
+.particle {
+    position: absolute;
+    /* Heart Shape Mask */
+    mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z'/%3E%3C/svg%3E");
+    -webkit-mask-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 512 512'%3E%3Cpath d='M462.3 62.6C407.5 15.9 326 24.3 275.7 76.2L256 96.5l-19.7-20.3C186.1 24.3 104.5 15.9 49.7 62.6c-62.8 53.6-66.1 149.8-9.9 207.9l193.5 199.8c12.5 12.9 32.8 12.9 45.3 0l193.5-199.8c56.3-58.1 53-154.3-9.8-207.9z'/%3E%3C/svg%3E");
+    mask-size: contain;
+    -webkit-mask-size: contain;
+    mask-repeat: no-repeat;
+    -webkit-mask-repeat: no-repeat;
+    mask-position: center;
+    -webkit-mask-position: center;
+    background-color: var(--color-dusty-rose-light);
+    pointer-events: none;
+    will-change: transform, opacity;
+}
+
+@keyframes float-up {
+    0% {
+        transform: translateY(100vh) translateX(0);
+        opacity: 0;
+    }
+
+    10% {
+        opacity: var(--opacity);
+    }
+
+    90% {
+        opacity: var(--opacity);
+    }
+
+    100% {
+        transform: translateY(-20vh) translateX(var(--translateX));
+        opacity: 0;
+    }
+}
+
+@keyframes twinkle {
+
+    0%,
+    100% {
+        opacity: 0.3;
+        transform: scale(0.8);
+    }
+
+    50% {
+        opacity: 1;
+        transform: scale(1.2);
+    }
+}
+
+/* ============================================
+   NAVBAR RESPONSIVE UPDATE
+   ============================================ */
+.navbar__container {
+    /* Existing flex properties are good: justify-content: space-between */
+    align-items: center;
+    width: 100%;
+    max-width: 1200px;
+}
+
+.navbar__actions {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    z-index: 1002;
+    /* Above everything */
+}
+
+/* Make RSVP button smaller/compact on mobile if needed */
+.navbar__rsvp-btn {
+    padding: 6px 16px !important;
+    font-size: 0.75rem !important;
+    height: 32px;
+    line-height: 1;
+}
+
+/* Adjust Toggle to be purely icon, no extra margin issues */
+.navbar__toggle {
+    margin-left: 0;
+}
+
+/* Desktop Adjustments */
+@media (min-width: 768px) {
+    .navbar__rsvp-btn {
+        padding: 8px 24px !important;
+        font-size: 0.85rem !important;
+        height: auto;
+    }
+
+    /* Ensure menu is still roughly centered or right-aligned */
+    /* Since we added a right-action container, the structure is:
+       [Logo] [Actions: RSVP + (Hidden Toggle)]
+       Wait, the menu UL is outside this 'actions' div in HTML?
+       Check HTML structure: .navbar__container > Logo, Actions, Menu
+    */
+
+    /* We need to re-order for desktop if we want [Logo] [Menu] [RSVP]
+       Or [Logo] [Center: Menu] [Right: RSVP]
+    */
+
+    .navbar__container {
+        display: grid;
+        grid-template-columns: auto 1fr auto;
+        gap: 20px;
+    }
+
+    .navbar__logo {
+        order: 1;
+    }
+
+    .navbar__menu {
+        justify-self: center;
+        /* Center the menu links */
+        order: 2;
+    }
+
+    .navbar__actions {
+        justify-self: end;
+        /* Push RSVP to far right */
+        order: 3;
+    }
+}
+
+/* Mobile Adjustments (Default or max-width) */
+@media (max-width: 767px) {
+    .navbar__container {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    /* Hide the RSVP link in the slide-out menu if we have the button visible?
+       User didn't strictly say remove it, but it might be cleaner.
+       Let's leave it for now as an alternative.
+    */
 }
