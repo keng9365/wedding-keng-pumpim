@@ -189,7 +189,7 @@ h3 {
 .navbar__logo {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 5px;
     transition: transform var(--transition-fast);
 }
 
@@ -588,7 +588,7 @@ h3 {
 
 /* The Card Visual Style */
 .card-section__card {
-    background: var(--color-white);
+    background: linear-gradient(rgba(255, 255, 255, 0.929), rgba(255, 255, 255, 0.684)), url('/assets/bg_2.png') no-repeat center bottom / 160% auto var(--color-white);
     border-radius: 40px 40px 0 0;
     box-shadow: 0 -10px 40px rgba(0, 0, 0, 0.15);
     width: 100%;
@@ -710,10 +710,11 @@ h3 {
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    background: linear-gradient(180deg,
+    /* background: linear-gradient(180deg,
             var(--color-cream-dark) 0%,
             var(--color-champagne) 40%,
-            var(--color-cream) 100%);
+            var(--color-cream) 100%); */
+    background: linear-gradient(rgba(255, 255, 255, 0.929), rgba(255, 255, 255, 0.417)), url('/assets/bg_1.png') no-repeat center center/ 160% auto var(--color-white);
     text-align: center;
     position: relative;
     overflow: hidden;
@@ -721,11 +722,13 @@ h3 {
     scroll-snap-align: start;
     scroll-snap-stop: always;
     z-index: 5;
+    padding-bottom: 0px;
+    padding-top: 10px;
 }
 
 .hero__monogram-img {
-    width: 100px;
-    height: 100px;
+    width: auto;
+    height: 140px;
 }
 
 .hero__glow {
@@ -811,6 +814,7 @@ h3 {
     text-transform: uppercase;
     color: var(--color-text-light);
     margin-bottom: var(--space-md);
+    font-weight: 500;
 }
 
 .hero__date-venue {
@@ -839,14 +843,14 @@ h3 {
     justify-content: center;
     align-items: center;
     gap: 8px;
-    margin-bottom: var(--space-lg);
+    margin-bottom: var(--space-xs);
 }
 
 .countdown__item {
     text-align: center;
     min-width: 60px;
     padding: var(--space-sm);
-    background: rgba(255, 255, 255, 0.6);
+    background: rgba(249, 249, 249, 0.858);
     backdrop-filter: blur(10px);
     border-radius: var(--radius-md);
     border: 1px solid rgba(196, 163, 90, 0.2);
@@ -1141,7 +1145,7 @@ h3 {
 .schedule__row {
     display: flex;
     align-items: center;
-    background: #FFFCF7;
+    background: #ffffff;
     border: 1px solid rgba(196, 163, 90, 0.15);
     border-radius: var(--radius-md);
     padding: var(--space-sm) var(--space-md);
@@ -1270,10 +1274,10 @@ h3 {
 }
 
 .theme-color__name {
-    font-family: var(--font-heading);
-    font-size: 1.1rem;
+    font-family: var(--font-script);
+    font-size: 1.3rem;
     color: var(--color-text);
-    font-weight: 600;
+    font-weight: 400;
 }
 
 .theme-colors__note {
@@ -1439,7 +1443,7 @@ h3 {
 }
 
 .bank-card {
-    background: linear-gradient(180deg, var(--color-cream) 0%, var(--color-white) 100%);
+    background: var(--color-white);
     padding: var(--space-sm);
     border-radius: var(--radius-xl);
     border: 1px solid rgba(196, 163, 90, 0.2);
@@ -1452,6 +1456,7 @@ h3 {
 }
 
 .bank-card__image {
+    padding-top: var(--space-xs);
     margin-bottom: var(--space-xs);
     border-radius: var(--radius-md);
     overflow: hidden;
