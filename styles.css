@@ -96,6 +96,9 @@ img {
     max-width: 100%;
     height: auto;
     display: block;
+    /* Optimize rendering performance */
+    content-visibility: auto;
+    shape-margin: 0.75rem;
 }
 
 a {
