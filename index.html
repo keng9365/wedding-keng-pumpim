@@ -49,9 +49,9 @@
                 <li><a href="#hero" class="navbar__link">หน้าแรก</a></li>
                 <li><a href="#schedule" class="navbar__link">กำหนดการ</a></li>
                 <li><a href="#details" class="navbar__link">สถานที่จัดงาน</a></li>
-                <li><a href="#rsvp" class="navbar__link">RSVP</a></li>
+                <li><a href="#rsvp" class="navbar__link">ยืนยันการเข้าร่วมงาน</a></li>
                 <li><a href="#theme" class="navbar__link">การแต่งกาย</a></li>
-                <li><a href="#gift" class="navbar__link">ของขวัญ</a></li>
+                <li><a href="#gift" class="navbar__link">ร่วมแสดงความยินดี</a></li>
                 <li><a href="#contact" class="navbar__link">การติดต่อ</a></li>
             </ul>
         </div>
@@ -82,7 +82,7 @@
 
             <p class="hero__invitation-text">Joyfully invite you to our wedding</p>
 
-            <p class="hero__invitation-text" style="font-size: 1rem;">26 JUNE 2026</span>
+            <p class="hero__invitation-text" style="font-size: 1rem;">27 JUNE 2026</span>
 
                 <!-- Countdown Timer -->
             <div class="countdown" id="countdown">
@@ -109,6 +109,36 @@
         </div>
         <p class="footer__tagline" style="font-size: 1.5rem; color: #d6be4a; padding-top: 10px;">Pumpim & Keng</p>
     </header>
+
+    <!-- ========================================
+         Pre-Wedding / Gallery SECTION
+         ======================================== -->
+    <section class="card-section" id="pre-wedding">
+        <div class="card-section__card">
+            <div class="container">
+                <h2 class="pad50"></h2>
+                <h2 class="section-title" data-animate>Pre-Wedding Gallery</h2>
+                <p class="section-subtitle" data-animate>Photo Session</p>
+
+                <div class="gallery-wrapper" id="galleryWrapperPre" data-animate>
+                    <div class="gallery-track" id="galleryTrackPre">
+                        <img class="gallery-item-pre" src="assets/pre-1/1/1.jpg" alt="Gallery Image 1" loading="lazy">
+                        <img class="gallery-item-pre" src="assets/pre-1/1/2.jpg" alt="Gallery Image 2" loading="lazy">
+                    </div>
+                </div>
+
+                <div class="gallery-wrapper" id="galleryWrapperPre2"
+                    style="padding-top: 0px; align-items: start; height: 200px; min-height: 200px;" data-animate>
+                    <div class="gallery-track" id="galleryTrackPre2">
+                        <img class="gallery-item-pre2" src="assets/pre-1/2/1.jpg" alt="Gallery Image 7" loading="lazy">
+                        <img class="gallery-item-pre2" src="assets/pre-1/2/2.jpg" alt="Gallery Image 8" loading="lazy">
+                        <img class="gallery-item-pre2" src="assets/pre-1/2/3.jpg" alt="Gallery Image 9" loading="lazy">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </section>
 
     <!-- ========================================
          SCHEDULE / TIMELINE SECTION
@@ -242,7 +272,7 @@
                     </div>
 
                     <a href="https://forms.gle/9TRQoZ3XQSCAvQBe8" target="_blank" rel="noopener"
-                        class="btn btn--outline btn--primary btn--large btn--glow btn--white">
+                        class="btn btn--outline btn--primary btn--large btn--glow btn--white" style="margin-top: 20px;">
                         RSVP ตอบรับ
                     </a>
                 </div>
@@ -264,35 +294,35 @@
                         <!-- White -->
                         <div class="theme-color__row" style="background-color: #FFFFFF; border: 1px solid #e0e0e0;">
                             <div class="theme-color__right" style="justify-content: center;">
-                                <span class="theme-color__name">White</span>
+                                <span class="theme-color__name">White : ขาว</span>
                             </div>
                         </div>
 
                         <!-- Cream -->
                         <div class="theme-color__row" style="background-color: #F5F0E8; border: 1px solid #e0e0e0;">
                             <div class="theme-color__right" style="justify-content: center;">
-                                <span class="theme-color__name">Cream</span>
+                                <span class="theme-color__name">Cream : ครีม</span>
                             </div>
                         </div>
 
                         <!-- Dusty Rose -->
                         <div class="theme-color__row" style="background-color: #E8B4B4; border: 1px solid #e0e0e0;">
                             <div class="theme-color__right" style="justify-content: center;">
-                                <span class="theme-color__name">Dusty Rose</span>
+                                <span class="theme-color__name">Dusty Rose : ชมพู</span>
                             </div>
                         </div>
 
                         <!-- Brown -->
                         <div class="theme-color__row" style="background-color: #8B6F5C; border: 1px solid #e0e0e0;">
                             <div class="theme-color__right" style="justify-content: center;">
-                                <span class="theme-color__name">Brown</span>
+                                <span class="theme-color__name">Brown : น้ำตาล</span>
                             </div>
                         </div>
 
                         <!-- Sage -->
                         <div class="theme-color__row" style="background-color: #9CAF88; border: 1px solid #e0e0e0;">
                             <div class="theme-color__right" style="justify-content: center;">
-                                <span class="theme-color__name">Sage</span>
+                                <span class="theme-color__name">Sage : เขียว</span>
                             </div>
                         </div>
                     </div>
@@ -314,11 +344,10 @@
                 <h2 class="section-title" data-animate>ร่วมแสดงความยินดี</h2>
                 <p class="section-subtitle" data-animate>Monetary Gift</p>
                 <p class="gift__message" data-animate>
-                    ทุกคำอวยพรมีความหมายเสมอ<br>สำหรับท่านที่ประสงค์ร่วมแสดงความยินดี<br>สามารถสแกน QR Code
-                    ด้านล่างนี้ได้เลย
+                    ทุกคำอวยพรมีความหมายเสมอ<br>สำหรับท่านที่ประสงค์ร่วมแสดงความยินดี<br>สามารถกดที่ด้านล่างนี้ได้เลย
                 </p>
 
-                <div class="bank-card" data-animate>
+                <div class="bank-card" data-animate hidden>
                     <div class="bank-card__image">
                         <img src="payment_img.png" alt="Payment QR Code">
                     </div>
@@ -341,12 +370,34 @@
                 </div>
 
                 <a href="https://forms.gle/NzTPGYsiUcc2JmW7A" target="_blank" rel="noopener"
-                    class="btn btn--primary btn--small btn--glow btn--white" data-animate>
-                    อัพโหลดสลิป / Upload Slip
+                    class="btn btn--primary btn--small btn--glow btn--white" style="margin-bottom: 40px;" data-animate>
+                    Click To QR Code
                 </a>
+
+                <div class="gallery-wrapper" id="galleryWrapper" data-animate>
+                    <div class="gallery-track" id="galleryTrack">
+                        <img class="gallery-item" src="assets/thank/1.jpg" alt="Gallery Image 1" loading="lazy">
+                        <img class="gallery-item" src="assets/thank/2.jpg" alt="Gallery Image 2" loading="lazy">
+                        <img class="gallery-item" src="assets/thank/3.jpg" alt="Gallery Image 3" loading="lazy">
+                    </div>
+                </div>
+
             </div>
         </div>
     </section>
+
+    <!-- Gallery Modal -->
+    <div class="lightbox" id="galleryModal">
+        <div class="lightbox__content">
+            <button class="lightbox__close" id="galleryModalClose">✕</button>
+            <img src="" alt="Preview" class="lightbox__image" id="galleryModalImage"
+                style="max-height: 70vh; max-width: 100%; border-radius: 8px;">
+            <div class="lightbox__actions">
+                <button class="lightbox__nav lightbox__nav--prev" id="galleryPrevBtn">❮</button>
+                <button class="lightbox__nav lightbox__nav--next" id="galleryNextBtn">❯</button>
+            </div>
+        </div>
+    </div>
 
     <!-- ========================================
          FOOTER

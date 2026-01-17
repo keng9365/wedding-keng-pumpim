@@ -214,6 +214,271 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     // ============================================
+    // Universal Infinite Gallery Logic & Lightbox
+    // ============================================
+
+    // 1. Global Lightbox Manager
+    const lightboxManager = {
+        modal: document.getElementById('galleryModal'),
+        img: document.getElementById('galleryModalImage'),
+        closeBtn: document.getElementById('galleryModalClose'),
+        prevBtn: document.getElementById('galleryPrevBtn'),
+        nextBtn: document.getElementById('galleryNextBtn'),
+
+        activeGallery: null, // Instance of AutoScrollGallery
+        currentIndex: 0,
+
+        init() {
+            if (this.closeBtn) this.closeBtn.addEventListener('click', () => this.close());
+            if (this.modal) this.modal.addEventListener('click', (e) => {
+                if (e.target === this.modal) this.close();
+            });
+
+            if (this.prevBtn) this.prevBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.navigate(-1);
+            });
+
+            if (this.nextBtn) this.nextBtn.addEventListener('click', (e) => {
+                e.stopPropagation();
+                this.navigate(1);
+            });
+
+            // Keyboard Nav
+            document.addEventListener('keydown', (e) => {
+                if (!this.modal || !this.modal.classList.contains('is-active')) return;
+                if (e.key === 'ArrowLeft') this.navigate(-1);
+                if (e.key === 'ArrowRight') this.navigate(1);
+                if (e.key === 'Escape') this.close();
+            });
+        },
+
+        open(gallery, index) {
+            this.activeGallery = gallery;
+            this.currentIndex = index;
+            this.updateImage();
+            this.modal.classList.add('is-active');
+            document.body.style.overflow = 'hidden';
+            if (gallery.pause) gallery.pause();
+        },
+
+        close() {
+            if (this.activeGallery && this.activeGallery.resume) this.activeGallery.resume();
+            this.modal.classList.remove('is-active');
+            document.body.style.overflow = '';
+            this.activeGallery = null;
+        },
+
+        navigate(direction) {
+            if (!this.activeGallery) return;
+            const count = this.activeGallery.images.length;
+            this.currentIndex = (this.currentIndex + direction + count) % count;
+            this.updateImage();
+        },
+
+        updateImage() {
+            const src = this.activeGallery.images[this.currentIndex];
+            if (this.img) this.img.src = src;
+        }
+    };
+    lightboxManager.init();
+
+
+    // 2. Class: AutoScrollGallery
+    class AutoScrollGallery {
+        constructor(trackId, options = {}) {
+            this.track = document.getElementById(trackId);
+            if (!this.track) return;
+
+            this.wrapper = this.track.parentElement;
+            this.speed = options.speed || 0.5;
+            this.mode = options.mode || 'continuous'; // 'continuous' | 'swipe'
+            this.images = [];
+            this.isPaused = false;
+            this.isDragging = false;
+            this.animationId = null;
+            this.intervalId = null;
+
+            // Initialize
+            if (options.images && options.images.length > 0) {
+                // Mode A: Inject Data
+                this.images = options.images;
+                this.renderFromData();
+            } else {
+                // Mode B: Read from HTML
+                this.readFromDOM();
+                this.duplicateForSmoothLoop();
+            }
+
+            this.setupEvents();
+
+            if (this.mode === 'swipe') {
+                this.startSwipeAnimation();
+            } else {
+                this.startContinuousAnimation();
+            }
+        }
+
+        renderFromData() {
+            // Duplicate x4 for smooth loop
+            const renderList = [...this.images, ...this.images, ...this.images, ...this.images];
+            this.track.innerHTML = renderList.map(src =>
+                `<img src="${src}" class="gallery-item bento-img" loading="lazy" draggable="false">`
+            ).join('');
+        }
+
+        readFromDOM() {
+            const imgs = this.track.querySelectorAll('img');
+            if (imgs.length === 0) return;
+
+            // Capture sources
+            this.images = Array.from(imgs).map(img => img.getAttribute('src'));
+        }
+
+        duplicateForSmoothLoop() {
+            // Clone existing HTML content 3 more times (Total 4x)
+            const originalContent = this.track.innerHTML;
+            this.track.innerHTML = originalContent.repeat(4);
+        }
+
+        setupEvents() {
+            // Click to Open Lightbox
+            this.track.addEventListener('click', (e) => {
+                const img = e.target.closest('img');
+                if (img) {
+                    // Determine index in the UNIQUE image set
+                    const src = img.getAttribute('src');
+                    // We assume uniqueness or first match is fine for now
+                    let index = this.images.indexOf(src);
+
+                    // Fallback for relative vs absolute mismatch
+                    if (index === -1) {
+                        index = this.images.findIndex(s => img.src.includes(s));
+                    }
+                    if (index === -1) index = 0;
+
+                    lightboxManager.open(this, index);
+                }
+            });
+
+            // Touch Interaction
+            let startX, scrollLeft;
+
+            this.wrapper.addEventListener('touchstart', (e) => {
+                this.isDragging = true;
+                this.isPaused = true;
+                startX = e.touches[0].pageX - this.wrapper.offsetLeft;
+                scrollLeft = this.wrapper.scrollLeft;
+            });
+
+            this.wrapper.addEventListener('touchend', () => {
+                this.isDragging = false;
+                this.isPaused = false;
+            });
+
+            this.wrapper.addEventListener('touchmove', (e) => {
+                if (!this.isDragging) return;
+                // Native scroll allowed
+            });
+
+            // Mouse Drag
+            this.wrapper.addEventListener('mousedown', (e) => {
+                this.isDragging = true;
+                this.isPaused = true;
+                this.wrapper.style.cursor = 'grabbing';
+                startX = e.pageX - this.wrapper.offsetLeft;
+                scrollLeft = this.wrapper.scrollLeft;
+                e.preventDefault();
+            });
+
+            this.wrapper.addEventListener('mouseup', () => {
+                this.isDragging = false;
+                this.isPaused = false;
+                this.wrapper.style.cursor = 'grab';
+            });
+
+            this.wrapper.addEventListener('mouseleave', () => {
+                if (this.isDragging) {
+                    this.isDragging = false;
+                    this.isPaused = false;
+                    this.wrapper.style.cursor = 'grab';
+                }
+            });
+
+            this.wrapper.addEventListener('mousemove', (e) => {
+                if (!this.isDragging) return;
+                e.preventDefault();
+                const x = e.pageX - this.wrapper.offsetLeft;
+                const walk = (x - startX) * 2;
+                this.wrapper.scrollLeft = scrollLeft - walk;
+            });
+        }
+
+        startContinuousAnimation() {
+            const animate = () => {
+                if (!this.isPaused && !this.isDragging) {
+                    this.wrapper.scrollLeft += this.speed;
+
+                    // Infinite Loop Logic: Reset when reaching end of "first clone set"
+                    const maxScroll = this.wrapper.scrollWidth - this.wrapper.clientWidth;
+                    if (this.wrapper.scrollLeft >= maxScroll - 2) {
+                        this.wrapper.scrollLeft = 0;
+                    }
+                }
+                this.animationId = requestAnimationFrame(animate);
+            };
+            this.animationId = requestAnimationFrame(animate);
+        }
+
+        startSwipeAnimation() {
+            // Swipe/Warp every 3 seconds
+            // Random start delay to desync
+            setTimeout(() => {
+                this.intervalId = setInterval(() => {
+                    if (!this.isPaused && !this.isDragging) {
+                        const itemWidth = this.wrapper.clientWidth; // Scroll by full width of container
+
+                        // Smooth scroll using behavior
+                        this.wrapper.scrollBy({ left: itemWidth, behavior: 'smooth' });
+
+                        // Check reset after scroll finishes (rough timeout sync)
+                        // We reset silently if we are too far
+                        setTimeout(() => {
+                            const maxScroll = this.wrapper.scrollWidth - this.wrapper.clientWidth;
+                            if (this.wrapper.scrollLeft >= maxScroll - 20) {
+                                this.wrapper.scrollTo({ left: 0, behavior: 'auto' });
+                            }
+                        }, 600);
+                    }
+                }, 2500);
+            }, Math.random() * 2000);
+        }
+
+        pause() { this.isPaused = true; }
+        resume() { this.isPaused = false; }
+    }
+
+    // 3. Initialize Galleries
+
+    // A. Gift Gallery (From HTML)
+    const galleryTrack = document.getElementById('galleryTrack');
+    if (galleryTrack) {
+        new AutoScrollGallery('galleryTrack', { speed: 0.5 });
+    }
+
+    // B. Pre-Wedding Gallery (Swipe)
+    const galleryTrackPre = document.getElementById('galleryTrackPre');
+    if (galleryTrackPre) {
+        new AutoScrollGallery('galleryTrackPre', { speed: 0.5, mode: 'swipe' });
+    }
+
+    // C. Pre-Wedding Thumbnail Gallery (Continuous)
+    const galleryTrackPre2 = document.getElementById('galleryTrackPre2');
+    if (galleryTrackPre2) {
+        new AutoScrollGallery('galleryTrackPre2', { speed: 0.8, mode: 'continuous' });
+    }
+
+    // ============================================
     // Copy Bank Account Number
     // ============================================
     const copyBtn = document.getElementById('copyBtn');
