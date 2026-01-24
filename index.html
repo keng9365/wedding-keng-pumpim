@@ -47,11 +47,12 @@
             </div>
             <ul class="navbar__menu" id="navMenu">
                 <li><a href="#hero" class="navbar__link">หน้าแรก</a></li>
+                <li style="display: none;"><a href="#gallery" class="navbar__link">แกลอรี่</a></li>
                 <li><a href="#schedule" class="navbar__link">กำหนดการ</a></li>
                 <li><a href="#details" class="navbar__link">สถานที่จัดงาน</a></li>
                 <li><a href="#rsvp" class="navbar__link">ยืนยันการเข้าร่วมงาน</a></li>
                 <li><a href="#theme" class="navbar__link">การแต่งกาย</a></li>
-                <li><a href="#gift" class="navbar__link">ร่วมแสดงความยินดี</a></li>
+                <li style="display: none;"><a href="#gift" class="navbar__link">ร่วมแสดงความยินดี</a></li>
                 <li><a href="#contact" class="navbar__link">การติดต่อ</a></li>
             </ul>
         </div>
@@ -113,7 +114,7 @@
     <!-- ========================================
          Pre-Wedding / Gallery SECTION
          ======================================== -->
-    <section class="card-section" id="pre-wedding">
+    <section class="card-section" id="gallery" style="display: none;">
         <div class="card-section__card">
             <div class="container">
                 <h2 class="pad50"></h2>
@@ -253,7 +254,7 @@
                     <h2 class="section-title section-title--light">ยืนยันการเข้าร่วมงาน</h2>
                     <p class="rsvp__subtitle">Will You Join Us?</p>
                     <p class="rsvp__text">
-                        กรุณายืนยันการเข้าร่วมงานภายใน<br>วันที่ 20 มิถุนายน 2569<br>
+                        กรุณายืนยันการเข้าร่วมงาน<br>
                         การมาของท่านมีความหมายอย่างยิ่งสำหรับเรา
                     </p>
 
@@ -347,7 +348,7 @@
     <!-- ========================================
          GIFT SECTION
          ======================================== -->
-    <section class="card-section" id="gift">
+    <section class="card-section" id="gift" style="display: none;">
         <div class="card-section__card">
             <div class="container gift__content">
                 <h2 class="section-title" data-animate>ร่วมแสดงความยินดี</h2>
@@ -378,10 +379,12 @@
                     <p class="bank-card__holder">Ratanapol Songthum</p>
                 </div>
 
-                <a href="https://forms.gle/NzTPGYsiUcc2JmW7A" target="_blank" rel="noopener"
-                    class="btn btn--primary btn--small btn--glow btn--white" style="margin-bottom: 40px;" data-animate>
-                    Click To QR Code
-                </a>
+                <div style="margin-bottom: 40px;">
+                    <a href="https://forms.gle/NzTPGYsiUcc2JmW7A" target="_blank" rel="noopener"
+                        class="btn btn--primary btn--small btn--glow btn--white" data-animate>
+                        Click To QR Code
+                    </a>
+                </div>
 
                 <div class="gallery-wrapper" id="galleryWrapper" data-animate>
                     <div class="gallery-track" id="galleryTrack">
