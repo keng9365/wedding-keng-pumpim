@@ -19,9 +19,7 @@
 </head>
 
 <body>
-    <!-- ========================================
-         NAVIGATION BAR
-         ======================================== -->
+    <!-- NAVIGATION BAR -->
     <nav class="navbar" id="navbar">
         <div class="navbar__container">
             <a href="#hero" class="navbar__logo">
@@ -33,7 +31,6 @@
                 </div>
             </a>
 
-            <!-- Right Actions: RSVP Button + Toggle -->
             <div class="navbar__actions">
                 <a href="https://forms.gle/9TRQoZ3XQSCAvQBe8" target="_blank" rel="noopener"
                     class="btn btn--outline btn--primary btn--small btn--glow btn--white navbar__rsvp-btn">
@@ -52,110 +49,59 @@
                 <li><a href="#details" class="navbar__link">สถานที่จัดงาน</a></li>
                 <li><a href="#rsvp" class="navbar__link">ยืนยันการเข้าร่วมงาน</a></li>
                 <li><a href="#theme" class="navbar__link">การแต่งกาย</a></li>
-                <!-- <li><a href="#gift" class="navbar__link">ร่วมแสดงความยินดี</a></li> -->
                 <li><a href="#contact" class="navbar__link">ขอบคุณ</a></li>
             </ul>
         </div>
     </nav>
 
-    <!-- Scroll Progress Indicator -->
-    <!-- <div class="scroll-progress" id="scrollProgress"></div> -->
-
-    <!-- ========================================
-         HERO SECTION
-         ======================================== -->
+    <!-- HERO SECTION -->
     <header class="section hero" id="hero">
-        <!-- Subtle Background Glow -->
-        <div class="hero__glow"></div>
         <div class="hero__particles" id="heroParticles"></div>
 
         <div class="container hero__content" data-animate>
-            <!-- Monogram -->
-            <!-- <div class="hero__monogram">
-                <img class="hero__monogram-img" src="./assets/logo.png" alt="Logo">
-            </div> -->
-
             <h1 class="hero__names">
                 <span class="hero__name hero__name--english">CHANITTHA</span>
                 <span class="hero__ampersand">and</span>
                 <span class="hero__name hero__name--english">RATANAPOL</span>
             </h1>
-
-            <!-- <p class="hero__invitation-text">Joyfully invite you to our wedding</p> -->
-
-            <p class="hero__invitation-text" style="font-size: 1rem;">27 JUNE 2026</span>
-
-                <!-- Countdown Timer -->
-            <!-- <div class="countdown" id="countdown">
-                <div class="countdown__item">
-                    <span class="countdown__number" id="days">00</span>
-                    <span class="countdown__label">Days</span>
-                </div>
-                <div class="countdown__separator">:</div>
-                <div class="countdown__item">
-                    <span class="countdown__number" id="hours">00</span>
-                    <span class="countdown__label">Hours</span>
-                </div>
-                <div class="countdown__separator">:</div>
-                <div class="countdown__item">
-                    <span class="countdown__number" id="minutes">00</span>
-                    <span class="countdown__label">Mins</span>
-                </div>
-                <div class="countdown__separator">:</div>
-                <div class="countdown__item">
-                    <span class="countdown__number" id="seconds">00</span>
-                    <span class="countdown__label">Secs</span>
-                </div>
-            </div> -->
+            <p class="hero__invitation-text">27 JUNE 2026</p>
         </div>
-        <!-- <p class="footer__tagline" style="font-size: 1.5rem; color: #d6be4a; padding-top: 10px;">Pumpim & Keng</p> -->
     </header>
 
-    <!-- ========================================
-         Pre-Wedding / Gallery SECTION
-         ======================================== -->
+    <!-- GALLERY SECTION -->
     <section class="card-section" id="gallery">
         <div class="card-section__card">
             <div class="container">
-                <h2 class="pad50"></h2>
                 <h2 class="section-title" data-animate>Pre-Wedding Gallery</h2>
                 <p class="section-subtitle" data-animate>Photo Session</p>
 
-                <!-- Main Swipe Gallery — populated by JS from PRE_WEDDING_IMAGES -->
                 <div class="gallery-featured-wrapper" data-animate>
                     <div class="gallery-wrapper gallery-wrapper--featured" id="galleryWrapperPre">
                         <div class="gallery-track gallery-track--slider" id="galleryTrackPre"></div>
                     </div>
-                    <!-- Slide Indicators — populated by JS -->
                     <div class="gallery-dots" id="galleryDots"></div>
                 </div>
 
-                <!-- View More Button -->
                 <div class="gallery-more" data-animate>
                     <button class="btn btn--primary btn--small btn--glow" id="openPhotoGallery">
                         รูปภาพเพิ่มเติม
                     </button>
                 </div>
-
             </div>
         </div>
     </section>
 
-    <!-- ========================================
-         SCHEDULE / TIMELINE SECTION
-         ======================================== -->
+    <!-- SCHEDULE SECTION -->
     <section class="card-section" id="schedule">
         <div class="card-section__card">
             <div class="container">
-                <h2 class="pad50"></h2>
                 <h2 class="section-title" data-animate>กำหนดการ</h2>
                 <p class="section-subtitle" data-animate>Schedule of Ceremonies</p>
 
                 <div class="schedule__list" data-animate>
                     <div class="schedule__row">
                         <div class="schedule__left">
-                            <img src="assets/cere_1.png" alt="" style="width: 60px; padding-top: 5px;" loading="lazy"
-                                decoding="async">
+                            <img src="assets/cere_1.png" alt="" class="schedule__icon" loading="lazy" decoding="async">
                             <span class="schedule__time">07:19 น.</span>
                         </div>
                         <div class="schedule__right">
@@ -166,8 +112,7 @@
 
                     <div class="schedule__row">
                         <div class="schedule__left">
-                            <img src="assets/cere_2.jpeg" alt="" style="width: 53px; padding-top: 5px;" loading="lazy"
-                                decoding="async">
+                            <img src="assets/cere_2.jpeg" alt="" class="schedule__icon" loading="lazy" decoding="async">
                             <span class="schedule__time">08:09 น.</span>
                         </div>
                         <div class="schedule__right">
@@ -178,8 +123,7 @@
 
                     <div class="schedule__row">
                         <div class="schedule__left">
-                            <img src="assets/cere_3.jpeg" alt="" style="width: 55px; padding-top: 5px;" loading="lazy"
-                                decoding="async">
+                            <img src="assets/cere_3.jpeg" alt="" class="schedule__icon" loading="lazy" decoding="async">
                             <span class="schedule__time">09:19 น.</span>
                         </div>
                         <div class="schedule__right">
@@ -190,8 +134,7 @@
 
                     <div class="schedule__row">
                         <div class="schedule__left">
-                            <img src="assets/cere_4.jpeg" alt="" style="width: 60px; padding-top: 5px;" loading="lazy"
-                                decoding="async">
+                            <img src="assets/cere_4.jpeg" alt="" class="schedule__icon" loading="lazy" decoding="async">
                             <span class="schedule__time">11:00 น.</span>
                         </div>
                         <div class="schedule__right">
@@ -204,9 +147,7 @@
         </div>
     </section>
 
-    <!-- ========================================
-         EVENT DETAILS / VENUE SECTION
-         ======================================== -->
+    <!-- VENUE SECTION -->
     <section class="card-section" id="details">
         <div class="card-section__card">
             <div class="container">
@@ -239,21 +180,17 @@
         </div>
     </section>
 
-    <!-- ========================================
-         RSVP SECTION
-         ======================================== -->
+    <!-- RSVP SECTION -->
     <section class="card-section card-section--accent" id="rsvp">
         <div class="card-section__card card-section__card--gold">
             <div class="container">
                 <div class="rsvp__content" data-animate>
                     <h2 class="section-title section-title--light">ยืนยันการเข้าร่วมงาน</h2>
-                    <!-- <p class="rsvp__subtitle">Will You Join Us?</p> -->
                     <p class="rsvp__text">
                         กรุณายืนยันการเข้าร่วมงาน<br>
                         การมาของท่านมีความหมายอย่างยิ่งสำหรับเรา
                     </p>
 
-                    <!-- Countdown Timer -->
                     <div class="countdown countdown--rsvp" id="rsvp-countdown">
                         <div class="countdown__item">
                             <span class="countdown__number" id="rsvp-days">00</span>
@@ -277,7 +214,7 @@
                     </div>
 
                     <a href="https://forms.gle/9TRQoZ3XQSCAvQBe8" target="_blank" rel="noopener"
-                        class="btn btn--outline btn--primary btn--large btn--glow btn--white" style="margin-top: 20px;">
+                        class="btn btn--outline btn--primary btn--large btn--glow btn--white rsvp__cta-btn">
                         RSVP ตอบรับ
                     </a>
                 </div>
@@ -285,9 +222,7 @@
         </div>
     </section>
 
-    <!-- ========================================
-         THEME COLORS SECTION
-         ======================================== -->
+    <!-- DRESS CODE SECTION -->
     <section class="card-section" id="theme">
         <div class="card-section__card">
             <div class="container">
@@ -296,37 +231,28 @@
 
                 <div class="theme-colors__card" data-animate>
                     <div class="theme-color__list" data-animate>
-                        <!-- White -->
                         <div class="theme-color__row" style="background-color: #FFFFFF; border: 1px solid #e0e0e0;">
-                            <div class="theme-color__right" style="justify-content: center;">
+                            <div class="theme-color__right">
                                 <span class="theme-color__name">White : ขาว</span>
                             </div>
                         </div>
-
-                        <!-- Cream -->
                         <div class="theme-color__row" style="background-color: #F5F0E8; border: 1px solid #e0e0e0;">
-                            <div class="theme-color__right" style="justify-content: center;">
+                            <div class="theme-color__right">
                                 <span class="theme-color__name">Cream : ครีม</span>
                             </div>
                         </div>
-
-                        <!-- Dusty Rose -->
                         <div class="theme-color__row" style="background-color: #E8B4B4; border: 1px solid #e0e0e0;">
-                            <div class="theme-color__right" style="justify-content: center;">
+                            <div class="theme-color__right">
                                 <span class="theme-color__name">Dusty Rose : ชมพู</span>
                             </div>
                         </div>
-
-                        <!-- Brown -->
                         <div class="theme-color__row" style="background-color: #8B6F5C; border: 1px solid #e0e0e0;">
-                            <div class="theme-color__right" style="justify-content: center;">
+                            <div class="theme-color__right">
                                 <span class="theme-color__name">Brown : น้ำตาล</span>
                             </div>
                         </div>
-
-                        <!-- Sage -->
                         <div class="theme-color__row" style="background-color: #9CAF88; border: 1px solid #e0e0e0;">
-                            <div class="theme-color__right" style="justify-content: center;">
+                            <div class="theme-color__right">
                                 <span class="theme-color__name">Sage : เขียว</span>
                             </div>
                         </div>
@@ -340,85 +266,10 @@
         </div>
     </section>
 
-    <!-- ========================================
-         GIFT SECTION
-         ======================================== -->
-    <section class="card-section" id="gift" style="display: none;">
-        <div class="card-section__card">
-            <div class="container gift__content">
-                <h2 class="section-title" data-animate>ร่วมแสดงความยินดี</h2>
-                <p class="section-subtitle" data-animate>Monetary Gift</p>
-                <p class="gift__message" data-animate>
-                    ทุกคำอวยพรมีความหมายเสมอ<br>สำหรับท่านที่ประสงค์ร่วมแสดงความยินดี<br>สามารถกดที่ด้านล่างนี้ได้เลย
-                </p>
-
-                <div class="bank-card" data-animate hidden>
-                    <div class="bank-card__image">
-                        <img src="payment_img.png" alt="Payment QR Code">
-                    </div>
-                    <div class="bank-card__header">
-                        <span class="bank-card__icon">🏦</span>
-                        <span class="bank-card__name">Kasikorn Bank</span>
-                    </div>
-                    <div class="bank-card__number-row">
-                        <p class="bank-card__number" id="accountNumber">130-8-42268-9</p>
-                        <button class="btn-icon" id="copyBtn" aria-label="Copy account number">
-                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor"
-                                stroke-width="2">
-                                <rect x="9" y="9" width="13" height="13" rx="2" />
-                                <path d="M5 15H4a2 2 0 0 1-2-2V4a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1" />
-                            </svg>
-                        </button>
-                        <span class="copy-feedback" id="copyFeedback">Copied!</span>
-                    </div>
-                    <p class="bank-card__holder">Ratanapol Songthum</p>
-                </div>
-
-                <div style="margin-bottom: 40px;">
-                    <a href="https://forms.gle/NzTPGYsiUcc2JmW7A" target="_blank" rel="noopener"
-                        class="btn btn--primary btn--small btn--glow btn--white" data-animate>
-                        Click To QR Code
-                    </a>
-                </div>
-
-                <div class="gallery-wrapper" id="galleryWrapper" data-animate>
-                    <div class="gallery-track" id="galleryTrack">
-                        <img class="gallery-item" src="assets/mock/mock_01.png" alt="Gallery Image 1" loading="lazy"
-                            decoding="async">
-                        <img class="gallery-item" src="assets/mock/mock_01.png" alt="Gallery Image 2" loading="lazy"
-                            decoding="async">
-                        <img class="gallery-item" src="assets/mock/mock_01.png" alt="Gallery Image 3" loading="lazy"
-                            decoding="async">
-                    </div>
-                </div>
-
-            </div>
-        </div>
-    </section>
-
-    <!-- Gallery Modal -->
-    <div class="lightbox" id="galleryModal">
-        <div class="lightbox__content">
-            <button class="lightbox__close" id="galleryModalClose">✕</button>
-            <img src="" alt="Preview" class="lightbox__image" id="galleryModalImage"
-                style="max-height: 70vh; max-width: 100%; border-radius: 8px;">
-            <div class="lightbox__actions">
-                <button class="lightbox__nav lightbox__nav--prev" id="galleryPrevBtn">❮</button>
-                <button class="lightbox__nav lightbox__nav--next" id="galleryNextBtn">❯</button>
-            </div>
-        </div>
-    </div>
-
-    <!-- ========================================
-         FOOTER
-         ======================================== -->
+    <!-- FOOTER -->
     <footer class="card-section card-section--footer" id="contact">
         <div class="card-section__card card-section__card--brown">
             <div class="container footer__content">
-                <!-- <div class="footer__monogram">
-                    <img class="footer__logo-img" src="./assets/logo.png" alt="C&R Logo">
-                </div> -->
-
                 <h2 class="section-title section-title--light thankyou" data-animate>Thank You</h2>
                 <p class="footer__subtitle" data-animate>For celebrating with us</p>
 
@@ -426,7 +277,7 @@
 
                 <p class="section-title section-title--light pay" data-animate>ร่วมแสดงความยินดีเพิ่มเติม</p>
 
-                <div style="margin-bottom: 40px;">
+                <div class="footer__cta">
                     <a href="https://forms.gle/NzTPGYsiUcc2JmW7A" target="_blank" rel="noopener"
                         class="btn btn--primary btn--small btn--glow btn--white" data-animate>
                         Click To QR Code
@@ -440,15 +291,19 @@
         </div>
     </footer>
 
-    <!-- Lightbox Popup for Gallery -->
-    <div class="lightbox" id="lightbox">
+    <!-- Gallery Modal (lightbox with nav) -->
+    <div class="lightbox" id="galleryModal">
         <div class="lightbox__content">
-            <img class="lightbox__image" id="lightboxImage" src="" alt="Gallery Image">
-            <button class="lightbox__close" id="lightboxClose">ปิด ✕</button>
+            <button class="lightbox__close" id="galleryModalClose">✕</button>
+            <img src="" alt="Preview" class="lightbox__image" id="galleryModalImage">
+            <div class="lightbox__actions">
+                <button class="lightbox__nav lightbox__nav--prev" id="galleryPrevBtn">❮</button>
+                <button class="lightbox__nav lightbox__nav--next" id="galleryNextBtn">❯</button>
+            </div>
         </div>
     </div>
 
-    <!-- Color Comparison Lightbox -->
+    <!-- Color Preview Lightbox -->
     <div class="lightbox" id="colorLightbox">
         <div class="lightbox__content lightbox__content--color">
             <div class="lightbox__color-swatch" id="colorMsgSwatch"></div>
@@ -456,7 +311,7 @@
         </div>
     </div>
 
-    <!-- Landscape Warning Overlay -->
+    <!-- Landscape Warning -->
     <div class="landscape-warning">
         <div class="landscape-warning__content">
             <div class="landscape-warning__icon">📱</div>
@@ -468,7 +323,7 @@
         </div>
     </div>
 
-    <!-- Photo Gallery Grid Modal (bottom sheet) -->
+    <!-- Photo Gallery Grid Modal -->
     <div class="photo-gallery-modal" id="photoGalleryModal" aria-hidden="true">
         <div class="photo-gallery-modal__backdrop" id="photoGalleryBackdrop"></div>
         <div class="photo-gallery-modal__sheet">

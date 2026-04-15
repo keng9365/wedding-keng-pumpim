@@ -1,26 +1,18 @@
-// Declared globally so FeaturedSlider + initGalleryStrip can access it
+// Declared globally so FeaturedSlider can access it
 let lightboxManager;
 
 // ============================================
 // Gallery Config — เพิ่ม/ลบรูปที่นี่ที่เดียว
 // ============================================
 const PRE_WEDDING_IMAGES = [
-    // 'assets/Pre-Wedding/NO (13).jpg',
-    // 'assets/Pre-Wedding/NO (94).jpg',
-    // 'assets/Pre-Wedding/NO (40).jpg',
-    // 'assets/Pre-Wedding/NO (61).jpg',
-    // 'assets/Pre-Wedding/NO (109).jpg',
-    // 'assets/Pre-Wedding/NO (182).jpg',
-    'assets/Pre-Wedding-Edit/1.JPG',
-    'assets/Pre-Wedding-Edit/2.JPG',
-    'assets/Pre-Wedding-Edit/3.JPG',
-    'assets/Pre-Wedding-Edit/4.JPG',
-    'assets/Pre-Wedding-Edit/5.JPG',
-    'assets/Pre-Wedding-Edit/6.JPG',
-    'assets/Pre-Wedding-Edit/7.JPG',
-    'assets/Pre-Wedding-Edit/T1.JPG',
-    // 'assets/Pre-Wedding-Edit/T2.JPG',
-    // 'assets/Pre-Wedding-Edit/R1.JPG',
+    'assets/Pre-Wedding-Edit/1.jpeg',
+    'assets/Pre-Wedding-Edit/2.jpeg',
+    'assets/Pre-Wedding-Edit/3.jpeg',
+    'assets/Pre-Wedding-Edit/4.jpeg',
+    'assets/Pre-Wedding-Edit/5.jpeg',
+    'assets/Pre-Wedding-Edit/6.jpeg',
+    'assets/Pre-Wedding-Edit/7.jpeg',
+    'assets/Pre-Wedding-Edit/T1.jpeg',
 ];
 
 // ============================================
@@ -51,7 +43,7 @@ class FeaturedSlider {
         this.track.innerHTML = slides.map((src, i) => `
             <div class="gallery-slide">
                 <img class="gallery-item-pre" src="${src}"
-                     alt="Pre-Wedding Photo ${(i % this.count) + 1}"
+                     alt="Pre-Wedding-PumKeng ${(i % this.count) + 1}"
                      loading="${i === 0 ? 'eager' : 'lazy'}"
                      decoding="async">
             </div>`).join('');
@@ -118,7 +110,7 @@ class FeaturedSlider {
             }
         });
 
-        // Touch swipe — distinguish tap vs swipe to avoid opening lightbox on slide
+        // Touch swipe
         wrapper.addEventListener('touchstart', (e) => {
             this.touchStartX = e.touches[0].clientX;
             hasSwiped = false;
@@ -149,129 +141,49 @@ class FeaturedSlider {
 }
 
 // ============================================
-// initGalleryStrip — RAF auto-scroll + drag, seamless loop
+// Hero Particles
 // ============================================
-function initGalleryStrip(trackId, images) {
-    const track = document.getElementById(trackId);
-    if (!track || !images.length) return;
-    const wrapper = track.parentElement;
-    if (!wrapper) return;
+function initHeroParticles() {
+    const container = document.getElementById('heroParticles');
+    if (!container) return;
 
-    // Double images for seamless loop: when scrollLeft hits halfway, reset to 0
-    const items = [...images, ...images];
-    track.innerHTML = items.map((src, i) =>
-        `<img class="gallery-item-pre2" src="${src}" alt="Photo ${(i % images.length) + 1}" loading="lazy" decoding="async">`
-    ).join('');
+    for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        particle.classList.add('particle');
 
-    const SPEED = 0.8;
-    let halfWidth = 0;
-    let isDragging = false;
-    let hasDragged = false;
+        const size = Math.random() * 10 + 8;
+        particle.style.width = `${size}px`;
+        particle.style.height = `${size}px`;
+        particle.style.left = `${Math.random() * 100}%`;
 
-    // ── Auto-scroll loop ──
-    function autoScroll() {
-        // Lazy-measure half width after images lay out
-        if (!halfWidth && track.scrollWidth > wrapper.clientWidth + 10) {
-            halfWidth = Math.round(track.scrollWidth / 2);
-        }
+        const duration = Math.random() * 10 + 15;
+        const delay = Math.random() * -20;
+        const opacity = Math.random() * 0.5 + 0.3;
+        const translateX = Math.random() * 100 - 50;
 
-        if (!isDragging && halfWidth) {
-            wrapper.scrollLeft += SPEED;
-            if (wrapper.scrollLeft >= halfWidth) {
-                wrapper.scrollLeft -= halfWidth; // seamless wrap
-            }
-        }
-        requestAnimationFrame(autoScroll);
+        particle.style.setProperty('--opacity', opacity);
+        particle.style.setProperty('--translateX', `${translateX}px`);
+        particle.style.animation = `float-up ${duration}s linear ${delay}s infinite`;
+
+        container.appendChild(particle);
     }
-    requestAnimationFrame(autoScroll);
-
-    // ── Touch drag ──
-    let touchStartX = 0;
-    let touchScrollLeft = 0;
-
-    wrapper.addEventListener('touchstart', (e) => {
-        isDragging = true;
-        hasDragged = false;
-        touchStartX = e.touches[0].pageX;
-        touchScrollLeft = wrapper.scrollLeft;
-    }, { passive: true });
-
-    wrapper.addEventListener('touchmove', (e) => {
-        hasDragged = true;
-        const delta = touchStartX - e.touches[0].pageX;
-        let next = touchScrollLeft + delta;
-        if (halfWidth) {
-            if (next >= halfWidth) next -= halfWidth;
-            else if (next < 0) next += halfWidth;
-        }
-        wrapper.scrollLeft = next;
-    }, { passive: true });
-
-    wrapper.addEventListener('touchend', () => { isDragging = false; });
-
-    // ── Mouse drag ──
-    let mouseStartX = 0;
-    let mouseScrollLeft = 0;
-
-    wrapper.addEventListener('mousedown', (e) => {
-        isDragging = true;
-        hasDragged = false;
-        mouseStartX = e.pageX;
-        mouseScrollLeft = wrapper.scrollLeft;
-        wrapper.style.cursor = 'grabbing';
-        e.preventDefault();
-    });
-
-    window.addEventListener('mousemove', (e) => {
-        if (!isDragging) return;
-        hasDragged = true;
-        const delta = mouseStartX - e.pageX;
-        let next = mouseScrollLeft + delta;
-        if (halfWidth) {
-            if (next >= halfWidth) next -= halfWidth;
-            else if (next < 0) next += halfWidth;
-        }
-        wrapper.scrollLeft = next;
-    });
-
-    window.addEventListener('mouseup', () => {
-        if (!isDragging) return;
-        isDragging = false;
-        wrapper.style.cursor = 'grab';
-    });
-
-    // ── Tap (not drag) → open lightbox ──
-    track.addEventListener('click', (e) => {
-        const img = e.target.closest('img');
-        if (!img || hasDragged || !lightboxManager) return;
-        const allImgs = track.querySelectorAll('img');
-        const idx = Array.from(allImgs).indexOf(img) % images.length;
-        lightboxManager.open({ images, pause: () => {}, resume: () => {} }, idx);
-    });
 }
 
+// ============================================
+// Main Init
+// ============================================
 document.addEventListener('DOMContentLoaded', () => {
 
-    // ============================================
-    // Navigation Bar - Show on Scroll
-    // ============================================
+    // --- Navbar: show on scroll past hero ---
     const navbar = document.getElementById('navbar');
     const navToggle = document.getElementById('navToggle');
     const navMenu = document.getElementById('navMenu');
     const navLinks = document.querySelectorAll('.navbar__link');
-    let lastScrollY = window.scrollY;
     let ticking = false;
 
-    // Show navbar after scrolling past hero
     function updateNavbar() {
         const heroHeight = document.getElementById('hero')?.offsetHeight || 500;
-
-        if (window.scrollY > heroHeight * 0.5) {
-            navbar.classList.add('is-visible');
-        } else {
-            navbar.classList.remove('is-visible');
-        }
-
+        navbar.classList.toggle('is-visible', window.scrollY > heroHeight * 0.5);
         ticking = false;
     }
 
@@ -290,7 +202,6 @@ document.addEventListener('DOMContentLoaded', () => {
             document.body.style.overflow = navMenu.classList.contains('is-open') ? 'hidden' : '';
         });
 
-        // Close menu when clicking a link
         navLinks.forEach(link => {
             link.addEventListener('click', () => {
                 navToggle.classList.remove('is-active');
@@ -305,7 +216,6 @@ document.addEventListener('DOMContentLoaded', () => {
 
     function highlightActiveLink() {
         const scrollY = window.scrollY + 100;
-
         sections.forEach(section => {
             const sectionTop = section.offsetTop;
             const sectionHeight = section.offsetHeight;
@@ -313,10 +223,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
             if (scrollY >= sectionTop && scrollY < sectionTop + sectionHeight) {
                 navLinks.forEach(link => {
-                    link.classList.remove('is-active');
-                    if (link.getAttribute('href') === `#${sectionId}`) {
-                        link.classList.add('is-active');
-                    }
+                    link.classList.toggle('is-active', link.getAttribute('href') === `#${sectionId}`);
                 });
             }
         });
@@ -324,160 +231,63 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', highlightActiveLink);
 
-    // ============================================
-    // Scroll Progress Indicator
-    // ============================================
-    const scrollProgress = document.getElementById('scrollProgress');
-
-    function updateScrollProgress() {
-        const scrollTop = window.scrollY;
-        const docHeight = document.documentElement.scrollHeight - window.innerHeight;
-        const scrollPercent = (scrollTop / docHeight) * 100;
-
-        if (scrollProgress) {
-            scrollProgress.style.width = `${scrollPercent}%`;
-        }
-    }
-
-    window.addEventListener('scroll', updateScrollProgress);
-
-    // ============================================
-    // Countdown Timer - Wedding Date: June 27, 2026
-    // ============================================
-    const weddingDate = new Date('2026-06-27T07:00:00').getTime();
+    // --- RSVP Countdown Timer (June 20, 2026) ---
     const rsvpDate = new Date('2026-06-20T07:00:00').getTime();
 
-    function updateCountdown() {
-        const now = new Date().getTime();
-        const distance = weddingDate - now;
-
-        if (distance > 0) {
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-            const daysEl = document.getElementById('days');
-            const hoursEl = document.getElementById('hours');
-            const minutesEl = document.getElementById('minutes');
-            const secondsEl = document.getElementById('seconds');
-
-            if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
-            if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
-            if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
-            if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
-        } else {
-            const countdownEl = document.getElementById('countdown');
-            if (countdownEl) {
-                countdownEl.innerHTML = '<p style="font-size: 1.2rem; color: var(--color-gold);">🎉 Wedding Day!</p>';
-            }
-        }
-    }
-
-    // RSVP Countdown - June 20, 2026
     function updateRsvpCountdown() {
-        const now = new Date().getTime();
-        const distance = rsvpDate - now;
+        const distance = rsvpDate - Date.now();
 
         if (distance > 0) {
-            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const days    = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours   = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            const daysEl = document.getElementById('rsvp-days');
-            const hoursEl = document.getElementById('rsvp-hours');
-            const minutesEl = document.getElementById('rsvp-minutes');
-            const secondsEl = document.getElementById('rsvp-seconds');
-
-            if (daysEl) daysEl.textContent = String(days).padStart(2, '0');
-            if (hoursEl) hoursEl.textContent = String(hours).padStart(2, '0');
-            if (minutesEl) minutesEl.textContent = String(minutes).padStart(2, '0');
-            if (secondsEl) secondsEl.textContent = String(seconds).padStart(2, '0');
+            document.getElementById('rsvp-days').textContent    = String(days).padStart(2, '0');
+            document.getElementById('rsvp-hours').textContent   = String(hours).padStart(2, '0');
+            document.getElementById('rsvp-minutes').textContent = String(minutes).padStart(2, '0');
+            document.getElementById('rsvp-seconds').textContent = String(seconds).padStart(2, '0');
         } else {
-            // Optional: Message when RSVP closes
-            const countdownEl = document.getElementById('rsvp-countdown');
-            if (countdownEl) {
-                countdownEl.innerHTML = '<p style="font-size: 1.2rem; color: var(--color-gold);">RSVP Closed</p>';
-            }
+            const el = document.getElementById('rsvp-countdown');
+            if (el) el.innerHTML = '<p style="font-size: 1.2rem; color: var(--color-gold);">RSVP Closed</p>';
         }
     }
 
-    updateCountdown();
     updateRsvpCountdown();
-    setInterval(() => {
-        updateCountdown();
-        updateRsvpCountdown();
-    }, 1000);
+    setInterval(updateRsvpCountdown, 1000);
 
-    // ============================================
-    // Scroll Animation with Intersection Observer
-    // ============================================
-    const animatedElements = document.querySelectorAll('[data-animate]');
-
-    const observerOptions = {
-        root: null,
-        rootMargin: '0px',
-        threshold: 0.1
-    };
-
-    const observerCallback = (entries, observer) => {
+    // --- Scroll Animation (Intersection Observer) ---
+    const observer = new IntersectionObserver((entries, obs) => {
         entries.forEach(entry => {
             if (entry.isIntersecting) {
                 entry.target.classList.add('is-visible');
-                observer.unobserve(entry.target);
+                obs.unobserve(entry.target);
             }
         });
-    };
+    }, { threshold: 0.1 });
 
-    const observer = new IntersectionObserver(observerCallback, observerOptions);
+    document.querySelectorAll('[data-animate]').forEach(el => observer.observe(el));
 
-    animatedElements.forEach(el => {
-        observer.observe(el);
-    });
-
-    // ============================================
-    // Card Section Slide-Up Animation
-    // ============================================
-    const cardSections = document.querySelectorAll('.card-section__card');
-
-    const cardObserverOptions = {
-        root: null,
-        rootMargin: '0px 0px -10% 0px',
-        threshold: 0.05
-    };
-
-    const cardObserverCallback = (entries, observer) => {
-        entries.forEach((entry, index) => {
+    // Card section slide-up animation
+    const cardObserver = new IntersectionObserver((entries, obs) => {
+        entries.forEach(entry => {
             if (entry.isIntersecting) {
-                // Add staggered delay based on scroll position
-                setTimeout(() => {
-                    entry.target.classList.add('is-visible');
-                }, 100);
-                observer.unobserve(entry.target);
+                setTimeout(() => entry.target.classList.add('is-visible'), 100);
+                obs.unobserve(entry.target);
             }
         });
-    };
+    }, { rootMargin: '0px 0px -10% 0px', threshold: 0.05 });
 
-    const cardObserver = new IntersectionObserver(cardObserverCallback, cardObserverOptions);
+    document.querySelectorAll('.card-section__card').forEach(card => cardObserver.observe(card));
 
-    cardSections.forEach(card => {
-        cardObserver.observe(card);
-    });
-
-    // ============================================
-    // Universal Infinite Gallery Logic & Lightbox
-    // ============================================
-
-    // 1. Global Lightbox Manager (variable declared globally above)
+    // --- Gallery Lightbox Manager ---
     lightboxManager = {
-        modal: document.getElementById('galleryModal'),
-        img: document.getElementById('galleryModalImage'),
+        modal:    document.getElementById('galleryModal'),
+        img:      document.getElementById('galleryModalImage'),
         closeBtn: document.getElementById('galleryModalClose'),
-        prevBtn: document.getElementById('galleryPrevBtn'),
-        nextBtn: document.getElementById('galleryNextBtn'),
-
-        activeGallery: null, // Instance of AutoScrollGallery
+        prevBtn:  document.getElementById('galleryPrevBtn'),
+        nextBtn:  document.getElementById('galleryNextBtn'),
+        activeGallery: null,
         currentIndex: 0,
 
         init() {
@@ -485,23 +295,19 @@ document.addEventListener('DOMContentLoaded', () => {
             if (this.modal) this.modal.addEventListener('click', (e) => {
                 if (e.target === this.modal) this.close();
             });
-
             if (this.prevBtn) this.prevBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 this.navigate(-1);
             });
-
             if (this.nextBtn) this.nextBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 this.navigate(1);
             });
-
-            // Keyboard Nav
             document.addEventListener('keydown', (e) => {
-                if (!this.modal || !this.modal.classList.contains('is-active')) return;
-                if (e.key === 'ArrowLeft') this.navigate(-1);
+                if (!this.modal?.classList.contains('is-active')) return;
+                if (e.key === 'ArrowLeft')  this.navigate(-1);
                 if (e.key === 'ArrowRight') this.navigate(1);
-                if (e.key === 'Escape') this.close();
+                if (e.key === 'Escape')     this.close();
             });
         },
 
@@ -511,18 +317,14 @@ document.addEventListener('DOMContentLoaded', () => {
             this.updateImage();
             this.modal.classList.add('is-active');
             document.body.style.overflow = 'hidden';
-            if (gallery.pause) gallery.pause();
+            gallery.pause?.();
         },
 
         close() {
-            if (this.activeGallery && this.activeGallery.resume) this.activeGallery.resume();
+            this.activeGallery?.resume?.();
             this.modal.classList.remove('is-active');
-            // Keep scroll locked if the photo gallery popup is still open
             if (!document.getElementById('photoGalleryModal')?.classList.contains('is-active')) {
                 document.body.style.overflow = '';
-                document.body.style.position = '';
-                document.body.style.top = '';
-                document.body.style.width = '';
             }
             this.activeGallery = null;
         },
@@ -535,222 +337,29 @@ document.addEventListener('DOMContentLoaded', () => {
         },
 
         updateImage() {
-            const src = this.activeGallery.images[this.currentIndex];
-            if (this.img) this.img.src = src;
+            if (this.img) this.img.src = this.activeGallery.images[this.currentIndex];
         }
     };
     lightboxManager.init();
 
-
-    // 2. Class: AutoScrollGallery
-    class AutoScrollGallery {
-        constructor(trackId, options = {}) {
-            this.track = document.getElementById(trackId);
-            if (!this.track) return;
-
-            this.wrapper = this.track.parentElement;
-            this.speed = options.speed || 0.5;
-            this.mode = options.mode || 'continuous'; // 'continuous' | 'swipe'
-            this.images = [];
-            this.isPaused = false;
-            this.isDragging = false;
-            this.animationId = null;
-            this.intervalId = null;
-
-            // Initialize
-            if (options.images && options.images.length > 0) {
-                // Mode A: Inject Data
-                this.images = options.images;
-                this.renderFromData();
-            } else {
-                // Mode B: Read from HTML
-                this.readFromDOM();
-                this.duplicateForSmoothLoop();
-            }
-
-            this.setupEvents();
-
-            if (this.mode === 'swipe') {
-                this.startSwipeAnimation();
-            } else {
-                this.startContinuousAnimation();
-            }
-        }
-
-        renderFromData() {
-            // Duplicate x4 for smooth loop
-            const renderList = [...this.images, ...this.images, ...this.images, ...this.images];
-            this.track.innerHTML = renderList.map(src =>
-                `<img src="${src}" class="gallery-item bento-img" loading="lazy" draggable="false">`
-            ).join('');
-        }
-
-        readFromDOM() {
-            // Support both bare imgs and .gallery-slide > img structure
-            const slides = this.track.querySelectorAll('.gallery-slide');
-            if (slides.length > 0) {
-                this.images = Array.from(slides).map(slide => {
-                    const img = slide.querySelector('img');
-                    return img ? img.getAttribute('src') : null;
-                }).filter(Boolean);
-                return;
-            }
-            const imgs = this.track.querySelectorAll('img');
-            if (imgs.length === 0) return;
-            this.images = Array.from(imgs).map(img => img.getAttribute('src'));
-        }
-
-        duplicateForSmoothLoop() {
-            // Clone existing HTML content 3 more times (Total 4x)
-            const originalContent = this.track.innerHTML;
-            this.track.innerHTML = originalContent.repeat(4);
-        }
-
-        setupEvents() {
-            // Click to Open Lightbox
-            this.track.addEventListener('click', (e) => {
-                const img = e.target.closest('img');
-                if (img) {
-                    // Determine index in the UNIQUE image set
-                    const src = img.getAttribute('src');
-                    // We assume uniqueness or first match is fine for now
-                    let index = this.images.indexOf(src);
-
-                    // Fallback for relative vs absolute mismatch
-                    if (index === -1) {
-                        index = this.images.findIndex(s => img.src.includes(s));
-                    }
-                    if (index === -1) index = 0;
-
-                    lightboxManager.open(this, index);
-                }
-            });
-
-            // Touch Interaction
-            let startX, scrollLeft;
-
-            this.wrapper.addEventListener('touchstart', (e) => {
-                this.isDragging = true;
-                this.isPaused = true;
-                startX = e.touches[0].pageX - this.wrapper.offsetLeft;
-                scrollLeft = this.wrapper.scrollLeft;
-            });
-
-            this.wrapper.addEventListener('touchend', () => {
-                this.isDragging = false;
-                this.isPaused = false;
-            });
-
-            this.wrapper.addEventListener('touchmove', (e) => {
-                if (!this.isDragging) return;
-                // Native scroll allowed
-            });
-
-            // Mouse Drag
-            this.wrapper.addEventListener('mousedown', (e) => {
-                this.isDragging = true;
-                this.isPaused = true;
-                this.wrapper.style.cursor = 'grabbing';
-                startX = e.pageX - this.wrapper.offsetLeft;
-                scrollLeft = this.wrapper.scrollLeft;
-                e.preventDefault();
-            });
-
-            this.wrapper.addEventListener('mouseup', () => {
-                this.isDragging = false;
-                this.isPaused = false;
-                this.wrapper.style.cursor = 'grab';
-            });
-
-            this.wrapper.addEventListener('mouseleave', () => {
-                if (this.isDragging) {
-                    this.isDragging = false;
-                    this.isPaused = false;
-                    this.wrapper.style.cursor = 'grab';
-                }
-            });
-
-            this.wrapper.addEventListener('mousemove', (e) => {
-                if (!this.isDragging) return;
-                e.preventDefault();
-                const x = e.pageX - this.wrapper.offsetLeft;
-                const walk = (x - startX) * 2;
-                this.wrapper.scrollLeft = scrollLeft - walk;
-            });
-        }
-
-        startContinuousAnimation() {
-            const animate = () => {
-                if (!this.isPaused && !this.isDragging) {
-                    this.wrapper.scrollLeft += this.speed;
-
-                    // Infinite Loop Logic: Reset when reaching end of "first clone set"
-                    const maxScroll = this.wrapper.scrollWidth - this.wrapper.clientWidth;
-                    if (this.wrapper.scrollLeft >= maxScroll - 2) {
-                        this.wrapper.scrollLeft = 0;
-                    }
-                }
-                this.animationId = requestAnimationFrame(animate);
-            };
-            this.animationId = requestAnimationFrame(animate);
-        }
-
-        startSwipeAnimation() {
-            // Swipe/Warp every 3 seconds
-            // Random start delay to desync
-            setTimeout(() => {
-                this.intervalId = setInterval(() => {
-                    if (!this.isPaused && !this.isDragging) {
-                        const itemWidth = this.wrapper.clientWidth; // Scroll by full width of container
-
-                        // Smooth scroll using behavior
-                        this.wrapper.scrollBy({ left: itemWidth, behavior: 'smooth' });
-
-                        // Check reset after scroll finishes (rough timeout sync)
-                        // We reset silently if we are too far
-                        setTimeout(() => {
-                            const maxScroll = this.wrapper.scrollWidth - this.wrapper.clientWidth;
-                            if (this.wrapper.scrollLeft >= maxScroll - 20) {
-                                this.wrapper.scrollTo({ left: 0, behavior: 'auto' });
-                            }
-                        }, 600);
-                    }
-                }, 2500);
-            }, Math.random() * 2000);
-        }
-
-        pause() { this.isPaused = true; }
-        resume() { this.isPaused = false; }
-    }
-
-    // 3. Initialize Galleries
-
-    // A. Gift Gallery (From HTML)
-    const galleryTrack = document.getElementById('galleryTrack');
-    if (galleryTrack) {
-        new AutoScrollGallery('galleryTrack', { speed: 0.5 });
-    }
-
-    // B. Pre-Wedding Featured Slider (transform-based, smooth)
+    // --- Pre-Wedding Featured Slider ---
     new FeaturedSlider('galleryTrackPre', 'galleryDots', PRE_WEDDING_IMAGES);
 
-    // C. Photo Gallery Grid Modal
+    // --- Photo Gallery Grid Modal ---
     const pgModal    = document.getElementById('photoGalleryModal');
     const pgGrid     = document.getElementById('photoGalleryGrid');
     const pgOpenBtn  = document.getElementById('openPhotoGallery');
     const pgCloseBtn = document.getElementById('photoGalleryClose');
     const pgBackdrop = document.getElementById('photoGalleryBackdrop');
-
     let pgSavedScrollY = 0;
 
     function openPhotoGallery() {
         if (!pgModal) return;
-        // iOS-compatible scroll lock: fix body position so background can't scroll
         pgSavedScrollY = window.scrollY;
-        document.body.style.overflow = 'hidden';
-        document.body.style.position = 'fixed';
-        document.body.style.top = `-${pgSavedScrollY}px`;
-        document.body.style.width = '100%';
+        document.body.style.overflow  = 'hidden';
+        document.body.style.position  = 'fixed';
+        document.body.style.top       = `-${pgSavedScrollY}px`;
+        document.body.style.width     = '100%';
         pgModal.classList.add('is-active');
         pgModal.setAttribute('aria-hidden', 'false');
     }
@@ -759,19 +368,18 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!pgModal) return;
         pgModal.classList.remove('is-active');
         pgModal.setAttribute('aria-hidden', 'true');
-        // Restore scroll position
-        document.body.style.overflow = '';
-        document.body.style.position = '';
-        document.body.style.top = '';
-        document.body.style.width = '';
+        document.body.style.overflow  = '';
+        document.body.style.position  = '';
+        document.body.style.top       = '';
+        document.body.style.width     = '';
         window.scrollTo(0, pgSavedScrollY);
     }
 
-    // Populate grid — split into left (even) / right (odd) columns for vertical masonry
+    // Build 2-column masonry grid
     if (pgGrid) {
         const renderCol = (images, offset) => images.map((src, i) => `
             <div class="photo-gallery-modal__item" data-index="${offset + i * 2}">
-                <img src="${src}" alt="Pre-Wedding Photo ${offset + i * 2 + 1}" loading="lazy" decoding="async">
+                <img src="${src}" alt="Pre-Wedding-PumKeng ${offset + i * 2 + 1}" loading="lazy" decoding="async">
             </div>`).join('');
 
         const leftImgs  = PRE_WEDDING_IMAGES.filter((_, i) => i % 2 === 0);
@@ -781,14 +389,12 @@ document.addEventListener('DOMContentLoaded', () => {
             <div class="photo-gallery-modal__col">${renderCol(leftImgs, 0)}</div>
             <div class="photo-gallery-modal__col">${renderCol(rightImgs, 1)}</div>`;
 
-        // Tap photo → open lightbox at that index
         pgGrid.addEventListener('click', (e) => {
             const item = e.target.closest('.photo-gallery-modal__item');
             if (!item) return;
-            const idx = parseInt(item.dataset.index);
             lightboxManager.open(
                 { images: PRE_WEDDING_IMAGES, pause: () => {}, resume: () => {} },
-                idx
+                parseInt(item.dataset.index)
             );
         });
     }
@@ -797,44 +403,7 @@ document.addEventListener('DOMContentLoaded', () => {
     if (pgCloseBtn) pgCloseBtn.addEventListener('click', closePhotoGallery);
     if (pgBackdrop) pgBackdrop.addEventListener('click', closePhotoGallery);
 
-    // ============================================
-    // Copy Bank Account Number
-    // ============================================
-    const copyBtn = document.getElementById('copyBtn');
-    const accountNumber = document.getElementById('accountNumber');
-    const copyFeedback = document.getElementById('copyFeedback');
-
-    if (copyBtn && accountNumber && copyFeedback) {
-        copyBtn.addEventListener('click', () => {
-            const text = accountNumber.innerText.replace(/-/g, '').trim();
-
-            navigator.clipboard.writeText(text).then(() => {
-                copyFeedback.classList.add('is-visible');
-
-                setTimeout(() => {
-                    copyFeedback.classList.remove('is-visible');
-                }, 2000);
-            }).catch(err => {
-                console.error('Copy failed:', err);
-                // Fallback for older browsers
-                const textArea = document.createElement('textarea');
-                textArea.value = text;
-                document.body.appendChild(textArea);
-                textArea.select();
-                document.execCommand('copy');
-                document.body.removeChild(textArea);
-
-                copyFeedback.classList.add('is-visible');
-                setTimeout(() => {
-                    copyFeedback.classList.remove('is-visible');
-                }, 2000);
-            });
-        });
-    }
-
-    // ============================================
-    // Smooth Scroll for Internal Links
-    // ============================================
+    // --- Smooth Scroll for Internal Links ---
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
             const targetId = this.getAttribute('href');
@@ -842,11 +411,8 @@ document.addEventListener('DOMContentLoaded', () => {
                 const target = document.querySelector(targetId);
                 if (target) {
                     e.preventDefault();
-                    const navbarHeight = navbar?.offsetHeight || 60;
-                    const targetPosition = target.offsetTop - navbarHeight;
-
                     window.scrollTo({
-                        top: targetPosition,
+                        top: target.offsetTop - (navbar?.offsetHeight || 60),
                         behavior: 'smooth'
                     });
                 }
@@ -854,259 +420,34 @@ document.addEventListener('DOMContentLoaded', () => {
         });
     });
 
-    // ============================================
-    // Floating Particles Effect (Hero Section)
-    // ============================================
-    const particlesContainer = document.getElementById('particles');
-
-    if (particlesContainer) {
-        const particleCount = 20;
-
-        for (let i = 0; i < particleCount; i++) {
-            createParticle();
-        }
-    }
-
-    function createParticle() {
-        const particle = document.createElement('div');
-        particle.className = 'particle';
-
-        // Random positioning
-        const x = Math.random() * 100;
-        const y = Math.random() * 100;
-        const size = Math.random() * 6 + 2;
-        const delay = Math.random() * 10;
-        const duration = Math.random() * 10 + 10;
-
-        particle.style.cssText = `
-            position: absolute;
-            left: ${x}%;
-            top: ${y}%;
-            width: ${size}px;
-            height: ${size}px;
-            background: radial-gradient(circle, rgba(196, 163, 90, 0.6) 0%, transparent 70%);
-            border-radius: 50%;
-            pointer-events: none;
-            animation: floatParticle ${duration}s ease-in-out ${delay}s infinite;
-        `;
-
-        particlesContainer.appendChild(particle);
-    }
-
-    // Add particle animation keyframes
-    const styleSheet = document.createElement('style');
-    styleSheet.textContent = `
-        @keyframes floatParticle {
-            0%, 100% {
-                transform: translateY(0) translateX(0) scale(1);
-                opacity: 0.3;
-            }
-            25% {
-                transform: translateY(-30px) translateX(10px) scale(1.1);
-                opacity: 0.6;
-            }
-            50% {
-                transform: translateY(-50px) translateX(-5px) scale(0.9);
-                opacity: 0.4;
-            }
-            75% {
-                transform: translateY(-20px) translateX(15px) scale(1.05);
-                opacity: 0.5;
-            }
-        }
-    `;
-    document.head.appendChild(styleSheet);
-
-    // ============================================
-    // Parallax Effect on Hero
-    // ============================================
-    const heroGlow = document.querySelector('.hero__glow');
-
-    window.addEventListener('scroll', () => {
-        const scrolled = window.scrollY;
-
-        if (heroGlow && scrolled < window.innerHeight) {
-            heroGlow.style.transform = `translate(-50%, calc(-50% + ${scrolled * 0.2}px))`;
-        }
-    });
-
-    // ============================================
-    // Gallery Lightbox Popup
-    // ============================================
-    const lightbox = document.getElementById('lightbox');
-    const lightboxImage = document.getElementById('lightboxImage');
-    const lightboxClose = document.getElementById('lightboxClose');
-    const galleryItems = document.querySelectorAll('.gallery-item img');
-
-    // Open lightbox when clicking gallery image
-    galleryItems.forEach(img => {
-        img.addEventListener('click', () => {
-            const highResSrc = img.src.replace('w=200&h=200', 'w=800&h=800');
-            lightboxImage.src = highResSrc;
-            lightbox.classList.add('is-active');
-            document.body.style.overflow = 'hidden';
-        });
-    });
-
-    // Close lightbox with close button
-    if (lightboxClose) {
-        lightboxClose.addEventListener('click', closeLightbox);
-    }
-
-    // Close lightbox when clicking outside the image
-    if (lightbox) {
-        lightbox.addEventListener('click', (e) => {
-            if (e.target === lightbox) {
-                closeLightbox();
-            }
-        });
-    }
-
-    // Close with Escape key
-    document.addEventListener('keydown', (e) => {
-        if (e.key === 'Escape' && lightbox?.classList.contains('is-active')) {
-            closeLightbox();
-        }
-    });
-
-    function closeLightbox() {
-        lightbox.classList.remove('is-active');
-        document.body.style.overflow = '';
-        lightboxImage.src = '';
-    }
-
-    // ============================================
-    // Theme Color Swatch Hover Effect
-    // ============================================
-    const swatches = document.querySelectorAll('.theme-colors__swatch');
-
-    swatches.forEach(swatch => {
-        swatch.addEventListener('mouseenter', () => {
-            swatches.forEach(s => {
-                if (s !== swatch) {
-                    s.style.opacity = '0.5';
-                    s.style.transform = 'scale(0.9)';
-                }
-            });
-        });
-
-        swatch.addEventListener('mouseleave', () => {
-            swatches.forEach(s => {
-                s.style.opacity = '1';
-                s.style.transform = 'scale(1)';
-            });
-        });
-    });
-
-    // ============================================
-    // Schedule Item Hover Animation
-    // ============================================
-    const scheduleItems = document.querySelectorAll('.schedule__item');
-
-    scheduleItems.forEach((item, index) => {
-        item.style.transitionDelay = `${index * 0.05}s`;
-    });
-
-    // ============================================
-    // Initial Page Load Animation
-    // ============================================
-    document.body.classList.add('is-loaded');
-
-    // Trigger hero content animation
+    // --- Hero Content Entrance Animation ---
     const heroContent = document.querySelector('.hero__content');
     if (heroContent) {
-        setTimeout(() => {
-            heroContent.classList.add('is-visible');
-        }, 300);
+        setTimeout(() => heroContent.classList.add('is-visible'), 300);
     }
 
-    // ============================================
-    // Color Comparison Lightbox
-    // ============================================
+    // --- Color Preview Lightbox ---
     const colorLightbox = document.getElementById('colorLightbox');
     const colorMsgSwatch = document.getElementById('colorMsgSwatch');
-    const colorMsgName = document.getElementById('colorMsgName');
-    const colorLightboxClose = document.getElementById('colorLightboxClose');
-    const colorRows = document.querySelectorAll('.theme-color__row');
 
-    // Open color lightbox
-    colorRows.forEach(row => {
+    document.querySelectorAll('.theme-color__row').forEach(row => {
         row.addEventListener('click', () => {
-            const color = row.style.backgroundColor;
-            // const name = row.querySelector('.theme-color__name').textContent;
-
-            colorMsgSwatch.style.backgroundColor = color;
-            // colorMsgName.textContent = name;
-
+            colorMsgSwatch.style.backgroundColor = row.style.backgroundColor;
             colorLightbox.classList.add('is-active');
             document.body.style.overflow = 'hidden';
         });
     });
 
-    // Close color lightbox
-    if (colorLightboxClose) {
-        colorLightboxClose.addEventListener('click', closeColorLightbox);
-    }
-
     if (colorLightbox) {
-        colorLightbox.addEventListener('click', (e) => {
-            if (e.target === colorLightbox || e.target.closest('.lightbox__content--color')) {
-                closeColorLightbox();
-            }
+        colorLightbox.addEventListener('click', () => {
+            colorLightbox.classList.remove('is-active');
+            document.body.style.overflow = '';
         });
     }
 
-    function closeColorLightbox() {
-        colorLightbox.classList.remove('is-active');
-        document.body.style.overflow = '';
-    }
-
-});
-
-/* ============================================
-   HERO PARTICLES SYSTEM
-   ============================================ */
-function initHeroParticles() {
-    const container = document.getElementById('heroParticles');
-    if (!container) return;
-
-    const particleCount = 30; // Number of particles
-
-    for (let i = 0; i < particleCount; i++) {
-        createParticle(container);
-    }
-}
-
-function createParticle(container) {
-    const particle = document.createElement('div');
-    particle.classList.add('particle');
-
-    // Randomize size
-    const size = Math.random() * 10 + 8; // 8px to 23px for hearts
-    particle.style.width = `${size}px`;
-    particle.style.height = `${size}px`;
-
-    // Randomize Position
-    const startLeft = Math.random() * 100;
-    particle.style.left = `${startLeft}%`;
-
-    // Randomize Animation Params
-    const duration = Math.random() * 10 + 15; // 15s - 25s duration (slow float)
-    const delay = Math.random() * -20; // Start at random times (negative delay to pre-warm)
-    const opacity = Math.random() * 0.5 + 0.3; // 0.3 to 0.8 opacity
-    const translateX = Math.random() * 100 - 50; // Sway -50px to +50px
-
-    // Set Custom Properties for CSS animation
-    particle.style.setProperty('--opacity', opacity);
-    particle.style.setProperty('--translateX', `${translateX}px`);
-
-    particle.style.animation = `float-up ${duration}s linear ${delay}s infinite`;
-
-    container.appendChild(particle);
-}
-
-// Initialize on load
-document.addEventListener('DOMContentLoaded', () => {
-    // ... existing init ...
+    // --- Hero Particles ---
     initHeroParticles();
+
+    // Mark page as loaded
+    document.body.classList.add('is-loaded');
 });
