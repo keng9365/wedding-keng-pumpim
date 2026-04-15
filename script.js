@@ -1,3 +1,255 @@
+// Declared globally so FeaturedSlider + initGalleryStrip can access it
+let lightboxManager;
+
+// ============================================
+// Gallery Config — เพิ่ม/ลบรูปที่นี่ที่เดียว
+// ============================================
+const PRE_WEDDING_IMAGES = [
+    // 'assets/Pre-Wedding/NO (13).jpg',
+    // 'assets/Pre-Wedding/NO (94).jpg',
+    // 'assets/Pre-Wedding/NO (40).jpg',
+    // 'assets/Pre-Wedding/NO (61).jpg',
+    // 'assets/Pre-Wedding/NO (109).jpg',
+    // 'assets/Pre-Wedding/NO (182).jpg',
+    'assets/Pre-Wedding-Edit/1.JPG',
+    'assets/Pre-Wedding-Edit/2.JPG',
+    'assets/Pre-Wedding-Edit/3.JPG',
+    'assets/Pre-Wedding-Edit/4.JPG',
+    'assets/Pre-Wedding-Edit/5.JPG',
+    'assets/Pre-Wedding-Edit/6.JPG',
+    'assets/Pre-Wedding-Edit/7.JPG',
+    'assets/Pre-Wedding-Edit/T1.JPG',
+    // 'assets/Pre-Wedding-Edit/T2.JPG',
+    // 'assets/Pre-Wedding-Edit/R1.JPG',
+];
+
+// ============================================
+// FeaturedSlider — transform-based, no scroll jitter
+// ============================================
+class FeaturedSlider {
+    constructor(trackId, dotsId, images) {
+        this.track = document.getElementById(trackId);
+        this.dotsEl = document.getElementById(dotsId);
+        if (!this.track || !images.length) return;
+
+        this.images = images;
+        this.count = images.length;
+        this.currentIndex = 0;
+        this.isTransitioning = false;
+        this.autoPlayId = null;
+        this.touchStartX = 0;
+
+        this._render();
+        this._renderDots();
+        this._setupEvents();
+        this.startAutoPlay();
+    }
+
+    _render() {
+        // Append clone of first slide to enable seamless forward loop
+        const slides = [...this.images, this.images[0]];
+        this.track.innerHTML = slides.map((src, i) => `
+            <div class="gallery-slide">
+                <img class="gallery-item-pre" src="${src}"
+                     alt="Pre-Wedding Photo ${(i % this.count) + 1}"
+                     loading="${i === 0 ? 'eager' : 'lazy'}"
+                     decoding="async">
+            </div>`).join('');
+    }
+
+    _renderDots() {
+        if (!this.dotsEl) return;
+        this.dotsEl.innerHTML = this.images.map((_, i) =>
+            `<span class="gallery-dot ${i === 0 ? 'gallery-dot--active' : ''}" data-index="${i}"></span>`
+        ).join('');
+        this.dotsEl.querySelectorAll('.gallery-dot').forEach(dot => {
+            dot.addEventListener('click', () => {
+                this.slideTo(parseInt(dot.dataset.index));
+                this.resetAutoPlay();
+            });
+        });
+    }
+
+    _updateDots() {
+        if (!this.dotsEl) return;
+        const real = this.currentIndex % this.count;
+        this.dotsEl.querySelectorAll('.gallery-dot').forEach((dot, i) => {
+            dot.classList.toggle('gallery-dot--active', i === real);
+        });
+    }
+
+    slideTo(index, animate = true) {
+        if (this.isTransitioning && animate) return;
+        this.currentIndex = index;
+        this.track.style.transition = animate ? '' : 'none';
+        this.track.style.transform = `translateX(-${index * 100}%)`;
+        if (animate) this.isTransitioning = true;
+        this._updateDots();
+    }
+
+    next() {
+        if (this.isTransitioning) return;
+        this.slideTo(this.currentIndex + 1);
+    }
+
+    prev() {
+        if (this.isTransitioning || this.currentIndex === 0) return;
+        this.slideTo(this.currentIndex - 1);
+    }
+
+    startAutoPlay() {
+        this.autoPlayId = setInterval(() => this.next(), 3500);
+    }
+
+    stopAutoPlay() { clearInterval(this.autoPlayId); }
+
+    resetAutoPlay() { this.stopAutoPlay(); this.startAutoPlay(); }
+
+    _setupEvents() {
+        const wrapper = this.track.parentElement;
+        let hasSwiped = false;
+
+        // Seamless infinite loop: after sliding to the clone, snap back to real index 0
+        this.track.addEventListener('transitionend', () => {
+            this.isTransitioning = false;
+            if (this.currentIndex === this.count) {
+                this.slideTo(0, false);
+                void this.track.offsetWidth; // force reflow before re-enabling transition
+            }
+        });
+
+        // Touch swipe — distinguish tap vs swipe to avoid opening lightbox on slide
+        wrapper.addEventListener('touchstart', (e) => {
+            this.touchStartX = e.touches[0].clientX;
+            hasSwiped = false;
+            this.stopAutoPlay();
+        }, { passive: true });
+
+        wrapper.addEventListener('touchmove', (e) => {
+            if (Math.abs(e.touches[0].clientX - this.touchStartX) > 10) hasSwiped = true;
+        }, { passive: true });
+
+        wrapper.addEventListener('touchend', (e) => {
+            const diff = this.touchStartX - e.changedTouches[0].clientX;
+            if (Math.abs(diff) > 40) {
+                diff > 0 ? this.next() : this.prev();
+            }
+            this.startAutoPlay();
+        }, { passive: true });
+
+        // Tap (not swipe) → open lightbox
+        this.track.addEventListener('click', (e) => {
+            if (hasSwiped || !e.target.closest('img')) return;
+            if (lightboxManager) lightboxManager.open(this, this.currentIndex % this.count);
+        });
+    }
+
+    pause() { this.stopAutoPlay(); }
+    resume() { this.startAutoPlay(); }
+}
+
+// ============================================
+// initGalleryStrip — RAF auto-scroll + drag, seamless loop
+// ============================================
+function initGalleryStrip(trackId, images) {
+    const track = document.getElementById(trackId);
+    if (!track || !images.length) return;
+    const wrapper = track.parentElement;
+    if (!wrapper) return;
+
+    // Double images for seamless loop: when scrollLeft hits halfway, reset to 0
+    const items = [...images, ...images];
+    track.innerHTML = items.map((src, i) =>
+        `<img class="gallery-item-pre2" src="${src}" alt="Photo ${(i % images.length) + 1}" loading="lazy" decoding="async">`
+    ).join('');
+
+    const SPEED = 0.8;
+    let halfWidth = 0;
+    let isDragging = false;
+    let hasDragged = false;
+
+    // ── Auto-scroll loop ──
+    function autoScroll() {
+        // Lazy-measure half width after images lay out
+        if (!halfWidth && track.scrollWidth > wrapper.clientWidth + 10) {
+            halfWidth = Math.round(track.scrollWidth / 2);
+        }
+
+        if (!isDragging && halfWidth) {
+            wrapper.scrollLeft += SPEED;
+            if (wrapper.scrollLeft >= halfWidth) {
+                wrapper.scrollLeft -= halfWidth; // seamless wrap
+            }
+        }
+        requestAnimationFrame(autoScroll);
+    }
+    requestAnimationFrame(autoScroll);
+
+    // ── Touch drag ──
+    let touchStartX = 0;
+    let touchScrollLeft = 0;
+
+    wrapper.addEventListener('touchstart', (e) => {
+        isDragging = true;
+        hasDragged = false;
+        touchStartX = e.touches[0].pageX;
+        touchScrollLeft = wrapper.scrollLeft;
+    }, { passive: true });
+
+    wrapper.addEventListener('touchmove', (e) => {
+        hasDragged = true;
+        const delta = touchStartX - e.touches[0].pageX;
+        let next = touchScrollLeft + delta;
+        if (halfWidth) {
+            if (next >= halfWidth) next -= halfWidth;
+            else if (next < 0) next += halfWidth;
+        }
+        wrapper.scrollLeft = next;
+    }, { passive: true });
+
+    wrapper.addEventListener('touchend', () => { isDragging = false; });
+
+    // ── Mouse drag ──
+    let mouseStartX = 0;
+    let mouseScrollLeft = 0;
+
+    wrapper.addEventListener('mousedown', (e) => {
+        isDragging = true;
+        hasDragged = false;
+        mouseStartX = e.pageX;
+        mouseScrollLeft = wrapper.scrollLeft;
+        wrapper.style.cursor = 'grabbing';
+        e.preventDefault();
+    });
+
+    window.addEventListener('mousemove', (e) => {
+        if (!isDragging) return;
+        hasDragged = true;
+        const delta = mouseStartX - e.pageX;
+        let next = mouseScrollLeft + delta;
+        if (halfWidth) {
+            if (next >= halfWidth) next -= halfWidth;
+            else if (next < 0) next += halfWidth;
+        }
+        wrapper.scrollLeft = next;
+    });
+
+    window.addEventListener('mouseup', () => {
+        if (!isDragging) return;
+        isDragging = false;
+        wrapper.style.cursor = 'grab';
+    });
+
+    // ── Tap (not drag) → open lightbox ──
+    track.addEventListener('click', (e) => {
+        const img = e.target.closest('img');
+        if (!img || hasDragged || !lightboxManager) return;
+        const allImgs = track.querySelectorAll('img');
+        const idx = Array.from(allImgs).indexOf(img) % images.length;
+        lightboxManager.open({ images, pause: () => {}, resume: () => {} }, idx);
+    });
+}
+
 document.addEventListener('DOMContentLoaded', () => {
 
     // ============================================
@@ -217,8 +469,8 @@ document.addEventListener('DOMContentLoaded', () => {
     // Universal Infinite Gallery Logic & Lightbox
     // ============================================
 
-    // 1. Global Lightbox Manager
-    const lightboxManager = {
+    // 1. Global Lightbox Manager (variable declared globally above)
+    lightboxManager = {
         modal: document.getElementById('galleryModal'),
         img: document.getElementById('galleryModalImage'),
         closeBtn: document.getElementById('galleryModalClose'),
@@ -265,7 +517,13 @@ document.addEventListener('DOMContentLoaded', () => {
         close() {
             if (this.activeGallery && this.activeGallery.resume) this.activeGallery.resume();
             this.modal.classList.remove('is-active');
-            document.body.style.overflow = '';
+            // Keep scroll locked if the photo gallery popup is still open
+            if (!document.getElementById('photoGalleryModal')?.classList.contains('is-active')) {
+                document.body.style.overflow = '';
+                document.body.style.position = '';
+                document.body.style.top = '';
+                document.body.style.width = '';
+            }
             this.activeGallery = null;
         },
 
@@ -473,17 +731,71 @@ document.addEventListener('DOMContentLoaded', () => {
         new AutoScrollGallery('galleryTrack', { speed: 0.5 });
     }
 
-    // B. Pre-Wedding Gallery (Swipe)
-    const galleryTrackPre = document.getElementById('galleryTrackPre');
-    if (galleryTrackPre) {
-        new AutoScrollGallery('galleryTrackPre', { speed: 0.5, mode: 'swipe' });
+    // B. Pre-Wedding Featured Slider (transform-based, smooth)
+    new FeaturedSlider('galleryTrackPre', 'galleryDots', PRE_WEDDING_IMAGES);
+
+    // C. Photo Gallery Grid Modal
+    const pgModal    = document.getElementById('photoGalleryModal');
+    const pgGrid     = document.getElementById('photoGalleryGrid');
+    const pgOpenBtn  = document.getElementById('openPhotoGallery');
+    const pgCloseBtn = document.getElementById('photoGalleryClose');
+    const pgBackdrop = document.getElementById('photoGalleryBackdrop');
+
+    let pgSavedScrollY = 0;
+
+    function openPhotoGallery() {
+        if (!pgModal) return;
+        // iOS-compatible scroll lock: fix body position so background can't scroll
+        pgSavedScrollY = window.scrollY;
+        document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.top = `-${pgSavedScrollY}px`;
+        document.body.style.width = '100%';
+        pgModal.classList.add('is-active');
+        pgModal.setAttribute('aria-hidden', 'false');
     }
 
-    // C. Pre-Wedding Thumbnail Gallery (Continuous)
-    const galleryTrackPre2 = document.getElementById('galleryTrackPre2');
-    if (galleryTrackPre2) {
-        new AutoScrollGallery('galleryTrackPre2', { speed: 0.8, mode: 'continuous' });
+    function closePhotoGallery() {
+        if (!pgModal) return;
+        pgModal.classList.remove('is-active');
+        pgModal.setAttribute('aria-hidden', 'true');
+        // Restore scroll position
+        document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.top = '';
+        document.body.style.width = '';
+        window.scrollTo(0, pgSavedScrollY);
     }
+
+    // Populate grid — split into left (even) / right (odd) columns for vertical masonry
+    if (pgGrid) {
+        const renderCol = (images, offset) => images.map((src, i) => `
+            <div class="photo-gallery-modal__item" data-index="${offset + i * 2}">
+                <img src="${src}" alt="Pre-Wedding Photo ${offset + i * 2 + 1}" loading="lazy" decoding="async">
+            </div>`).join('');
+
+        const leftImgs  = PRE_WEDDING_IMAGES.filter((_, i) => i % 2 === 0);
+        const rightImgs = PRE_WEDDING_IMAGES.filter((_, i) => i % 2 !== 0);
+
+        pgGrid.innerHTML = `
+            <div class="photo-gallery-modal__col">${renderCol(leftImgs, 0)}</div>
+            <div class="photo-gallery-modal__col">${renderCol(rightImgs, 1)}</div>`;
+
+        // Tap photo → open lightbox at that index
+        pgGrid.addEventListener('click', (e) => {
+            const item = e.target.closest('.photo-gallery-modal__item');
+            if (!item) return;
+            const idx = parseInt(item.dataset.index);
+            lightboxManager.open(
+                { images: PRE_WEDDING_IMAGES, pause: () => {}, resume: () => {} },
+                idx
+            );
+        });
+    }
+
+    if (pgOpenBtn)  pgOpenBtn.addEventListener('click', openPhotoGallery);
+    if (pgCloseBtn) pgCloseBtn.addEventListener('click', closePhotoGallery);
+    if (pgBackdrop) pgBackdrop.addEventListener('click', closePhotoGallery);
 
     // ============================================
     // Copy Bank Account Number

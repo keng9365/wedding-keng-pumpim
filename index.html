@@ -47,7 +47,7 @@
             </div>
             <ul class="navbar__menu" id="navMenu">
                 <li><a href="#hero" class="navbar__link">หน้าแรก</a></li>
-                <li style="display: none;"><a href="#gallery" class="navbar__link">แกลอรี่</a></li>
+                <li><a href="#gallery" class="navbar__link">แกลอรี่</a></li>
                 <li><a href="#schedule" class="navbar__link">กำหนดการ</a></li>
                 <li><a href="#details" class="navbar__link">สถานที่จัดงาน</a></li>
                 <li><a href="#rsvp" class="navbar__link">ยืนยันการเข้าร่วมงาน</a></li>
@@ -71,9 +71,9 @@
 
         <div class="container hero__content" data-animate>
             <!-- Monogram -->
-            <div class="hero__monogram">
+            <!-- <div class="hero__monogram">
                 <img class="hero__monogram-img" src="./assets/logo.png" alt="Logo">
-            </div>
+            </div> -->
 
             <h1 class="hero__names">
                 <span class="hero__name hero__name--english">CHANITTHA</span>
@@ -81,12 +81,12 @@
                 <span class="hero__name hero__name--english">RATANAPOL</span>
             </h1>
 
-            <p class="hero__invitation-text">Joyfully invite you to our wedding</p>
+            <!-- <p class="hero__invitation-text">Joyfully invite you to our wedding</p> -->
 
             <p class="hero__invitation-text" style="font-size: 1rem;">27 JUNE 2026</span>
 
                 <!-- Countdown Timer -->
-            <div class="countdown" id="countdown">
+            <!-- <div class="countdown" id="countdown">
                 <div class="countdown__item">
                     <span class="countdown__number" id="days">00</span>
                     <span class="countdown__label">Days</span>
@@ -106,9 +106,9 @@
                     <span class="countdown__number" id="seconds">00</span>
                     <span class="countdown__label">Secs</span>
                 </div>
-            </div>
+            </div> -->
         </div>
-        <p class="footer__tagline" style="font-size: 1.5rem; color: #d6be4a; padding-top: 10px;">Pumpim & Keng</p>
+        <!-- <p class="footer__tagline" style="font-size: 1.5rem; color: #d6be4a; padding-top: 10px;">Pumpim & Keng</p> -->
     </header>
 
     <!-- ========================================
@@ -121,63 +121,20 @@
                 <h2 class="section-title" data-animate>Pre-Wedding Gallery</h2>
                 <p class="section-subtitle" data-animate>Photo Session</p>
 
-                <!-- Main Swipe Gallery -->
+                <!-- Main Swipe Gallery — populated by JS from PRE_WEDDING_IMAGES -->
                 <div class="gallery-featured-wrapper" data-animate>
                     <div class="gallery-wrapper gallery-wrapper--featured" id="galleryWrapperPre">
-                        <div class="gallery-track" id="galleryTrackPre">
-                            <div class="gallery-slide">
-                                <img class="gallery-item-pre" src="assets/Pre-Wedding/NO (13).jpg"
-                                    alt="Pre-Wedding Photo 1" loading="lazy" decoding="async">
-                            </div>
-                            <div class="gallery-slide">
-                                <img class="gallery-item-pre" src="assets/Pre-Wedding/NO (94).jpg"
-                                    alt="Pre-Wedding Photo 2" loading="lazy" decoding="async">
-                            </div>
-                            <div class="gallery-slide">
-                                <img class="gallery-item-pre" src="assets/Pre-Wedding/NO (40).jpg"
-                                    alt="Pre-Wedding Photo 3" loading="lazy" decoding="async">
-                            </div>
-                            <div class="gallery-slide">
-                                <img class="gallery-item-pre" src="assets/Pre-Wedding/NO (61).jpg"
-                                    alt="Pre-Wedding Photo 4" loading="lazy" decoding="async">
-                            </div>
-                            <div class="gallery-slide">
-                                <img class="gallery-item-pre" src="assets/Pre-Wedding/NO (109).jpg"
-                                    alt="Pre-Wedding Photo 5" loading="lazy" decoding="async">
-                            </div>
-                            <div class="gallery-slide">
-                                <img class="gallery-item-pre" src="assets/Pre-Wedding/NO (182).jpg"
-                                    alt="Pre-Wedding Photo 6" loading="lazy" decoding="async">
-                            </div>
-                        </div>
+                        <div class="gallery-track gallery-track--slider" id="galleryTrackPre"></div>
                     </div>
-                    <!-- Slide Indicators -->
-                    <div class="gallery-dots" id="galleryDots">
-                        <span class="gallery-dot gallery-dot--active" data-index="0"></span>
-                        <span class="gallery-dot" data-index="1"></span>
-                        <span class="gallery-dot" data-index="2"></span>
-                        <span class="gallery-dot" data-index="3"></span>
-                        <span class="gallery-dot" data-index="4"></span>
-                        <span class="gallery-dot" data-index="5"></span>
-                    </div>
+                    <!-- Slide Indicators — populated by JS -->
+                    <div class="gallery-dots" id="galleryDots"></div>
                 </div>
 
-                <!-- Thumbnail Continuous Strip -->
-                <div class="gallery-wrapper gallery-wrapper--strip" id="galleryWrapperPre2" data-animate>
-                    <div class="gallery-track" id="galleryTrackPre2">
-                        <img class="gallery-item-pre2" src="assets/Pre-Wedding/NO (13).jpg" alt="Thumbnail 1"
-                            loading="lazy" decoding="async">
-                        <img class="gallery-item-pre2" src="assets/Pre-Wedding/NO (94).jpg" alt="Thumbnail 2"
-                            loading="lazy" decoding="async">
-                        <img class="gallery-item-pre2" src="assets/Pre-Wedding/NO (40).jpg" alt="Thumbnail 3"
-                            loading="lazy" decoding="async">
-                        <img class="gallery-item-pre2" src="assets/Pre-Wedding/NO (61).jpg" alt="Thumbnail 4"
-                            loading="lazy" decoding="async">
-                        <img class="gallery-item-pre2" src="assets/Pre-Wedding/NO (109).jpg" alt="Thumbnail 5"
-                            loading="lazy" decoding="async">
-                        <img class="gallery-item-pre2" src="assets/Pre-Wedding/NO (182).jpg" alt="Thumbnail 6"
-                            loading="lazy" decoding="async">
-                    </div>
+                <!-- View More Button -->
+                <div class="gallery-more" data-animate>
+                    <button class="btn btn--primary btn--small btn--glow" id="openPhotoGallery">
+                        รูปภาพเพิ่มเติม
+                    </button>
                 </div>
 
             </div>
@@ -497,6 +454,21 @@
                 เว็บไซต์นี้ออกแบบมาสำหรับแนวตั้ง<br>
                 กรุณาหมุนโทรศัพท์ของท่านเพื่อการแสดงผลที่ดีที่สุด
             </p>
+        </div>
+    </div>
+
+    <!-- Photo Gallery Grid Modal (bottom sheet) -->
+    <div class="photo-gallery-modal" id="photoGalleryModal" aria-hidden="true">
+        <div class="photo-gallery-modal__backdrop" id="photoGalleryBackdrop"></div>
+        <div class="photo-gallery-modal__sheet">
+            <div class="photo-gallery-modal__handle"></div>
+            <div class="photo-gallery-modal__header">
+                <h3 class="photo-gallery-modal__title">Pre-Wedding Gallery</h3>
+                <button class="photo-gallery-modal__close" id="photoGalleryClose" aria-label="Close">✕</button>
+            </div>
+            <div class="photo-gallery-modal__grid" id="photoGalleryGrid">
+                <!-- Populated by JS from PRE_WEDDING_IMAGES -->
+            </div>
         </div>
     </div>
 
