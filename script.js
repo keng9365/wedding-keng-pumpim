@@ -328,10 +328,17 @@ document.addEventListener('DOMContentLoaded', () => {
         }
 
         readFromDOM() {
+            // Support both bare imgs and .gallery-slide > img structure
+            const slides = this.track.querySelectorAll('.gallery-slide');
+            if (slides.length > 0) {
+                this.images = Array.from(slides).map(slide => {
+                    const img = slide.querySelector('img');
+                    return img ? img.getAttribute('src') : null;
+                }).filter(Boolean);
+                return;
+            }
             const imgs = this.track.querySelectorAll('img');
             if (imgs.length === 0) return;
-
-            // Capture sources
             this.images = Array.from(imgs).map(img => img.getAttribute('src'));
         }
 

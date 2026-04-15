@@ -696,7 +696,7 @@ h3 {
 }
 
 .card-section__card--brown {
-    background: linear-gradient(180deg, var(--color-brown) 0%, var(--color-brown-light) 100%);
+    background: rgb(106, 87, 56);
     color: var(--color-white);
 }
 
@@ -1149,7 +1149,7 @@ h3 {
 .footer__divider {
     width: 140px;
     height: 1px;
-    background: rgba(255, 255, 255, 0.3);
+    background: rgba(165, 94, 94, 0.3);
     margin: var(--space-md) 0;
 }
 
@@ -1694,99 +1694,199 @@ h3 {
 }
 
 /* ============================================
-   Infinite Gallery
+   Gallery Divider
+   ============================================ */
+.gallery-divider {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
+    margin: 0 auto 14px;
+    width: 100%;
+    max-width: 300px;
+}
+
+.gallery-divider__line {
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--color-gold-light), transparent);
+}
+
+.gallery-divider__icon {
+    color: var(--color-gold);
+    font-size: 0.8rem;
+    opacity: 0.8;
+}
+
+/* ============================================
+   Gallery Featured Wrapper
+   ============================================ */
+.gallery-featured-wrapper {
+    width: 100%;
+    position: relative;
+}
+
+/* ============================================
+   Infinite Gallery - Base Styles
    ============================================ */
 .gallery-wrapper {
     width: 100%;
     overflow-x: auto;
     overflow-y: hidden;
-    white-space: nowrap;
     -webkit-overflow-scrolling: touch;
-    padding: 0px 0;
-    padding-top: 0px;
-    /* Reduced padding */
+    padding: 0;
     cursor: grab;
-
-    /* Hide Scrollbar */
     -ms-overflow-style: none;
     scrollbar-width: none;
-
-    /* Layout Safety */
-    min-height: 400px;
     display: flex;
-    align-items: center;
-
-    /* Scroll Snap Logic for Swipe Effect */
-    scroll-snap-type: x mandatory;
+    align-items: stretch;
 }
 
 .gallery-wrapper::-webkit-scrollbar {
     display: none;
 }
 
+.gallery-wrapper:active {
+    cursor: grabbing;
+}
+
+/* Featured Swipe Gallery */
+.gallery-wrapper--featured {
+    height: calc(100vw * 1.25);
+    max-height: 420px;
+    min-height: 260px;
+    border-radius: 20px;
+    overflow: hidden;
+    scroll-snap-type: x mandatory;
+    box-shadow: 0 8px 32px rgba(196, 163, 90, 0.15), 0 2px 8px rgba(0,0,0,0.08);
+    border: 2px solid rgba(196, 163, 90, 0.2);
+}
+
+/* Thumbnail Continuous Strip */
+.gallery-wrapper--strip {
+    height: 80px;
+    min-height: 80px;
+    margin-top: 8px;
+    border-radius: 12px;
+    overflow: hidden;
+    gap: 0;
+}
+
+/* ============================================
+   Gallery Track
+   ============================================ */
 .gallery-track {
     display: flex;
-    /* Changed from inline-flex for better control */
-    gap: 0px;
-    padding-top: 10px;
+    gap: 0;
     width: 100%;
+    height: 100%;
+    align-items: stretch;
 }
 
-.gallery-item-pre {
-    height: 90vh;
-    /* Relative height to fit screen */
-    max-height: 400px;
-    min-height: 150px;
-
-    /* Full Width for Single Item View */
-    width: 100%;
-    min-width: 100%;
-
-    border-radius: 0px;
-    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
-    transition: transform 0.3s ease;
-    object-fit: cover;
+/* ============================================
+   Gallery Slides (for featured wrapper)
+   ============================================ */
+.gallery-slide {
     flex-shrink: 0;
-    background-color: #ffffff;
-
-    /* Snap Logic */
+    width: 100%;
+    height: 100%;
     scroll-snap-align: center;
     scroll-snap-stop: always;
+    overflow: hidden;
+    background-color: #f2ece4;
+    position: relative;
 }
 
-/* Pre-Wedding Thumbnail Row (Continuous) */
-.gallery-item-pre2 {
-    height: 180px;
-    width: auto;
-    border-radius: 0px;
+.gallery-slide::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+        to bottom,
+        transparent 60%,
+        rgba(139, 111, 92, 0.12) 100%
+    );
+    pointer-events: none;
+}
+
+/* Featured Image */
+.gallery-item-pre {
+    width: 100%;
+    height: 100%;
     object-fit: cover;
+    object-position: center top;
     flex-shrink: 0;
-    background-color: #ffffff;
-    margin: 0 0px;
+    display: block;
+    transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    will-change: transform;
 }
 
+.gallery-slide:active .gallery-item-pre {
+    transform: scale(1.02);
+}
+
+/* ============================================
+   Dot Indicators
+   ============================================ */
+.gallery-dots {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;
+    margin-top: 10px;
+    padding: 4px 0;
+}
+
+.gallery-dot {
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: rgba(196, 163, 90, 0.3);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+    flex-shrink: 0;
+}
+
+.gallery-dot--active {
+    width: 20px;
+    border-radius: 3px;
+    background: var(--color-gold);
+    box-shadow: 0 0 6px rgba(196, 163, 90, 0.5);
+}
+
+/* ============================================
+   Thumbnail Strip
+   ============================================ */
+.gallery-item-pre2 {
+    height: 80px;
+    width: auto;
+    min-width: 60px;
+    object-fit: cover;
+    object-position: center top;
+    flex-shrink: 0;
+    background-color: #f2ece4;
+    transition: opacity 0.3s ease;
+    display: block;
+}
+
+.gallery-item-pre2:hover {
+    opacity: 0.8;
+}
+
+/* ============================================
+   Gift Section Gallery
+   ============================================ */
 .gallery-item {
     height: 90vh;
-    /* Relative height to fit screen */
     max-height: 400px;
     min-height: 150px;
     max-width: 250px;
     width: auto;
-    border-radius: 0px;
-    /* box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1); */
+    border-radius: 0;
     transition: transform 0.3s ease;
     object-fit: cover;
     flex-shrink: 0;
     background-color: #ffffff;
-    /* Placeholder color if image fails */
-}
-
-.gallery-item:hover {
-    /* transform: scale(1.02); */
-}
-
-.gallery-wrapper:active {
-    cursor: grabbing;
 }
 
 /* Ensure Gift Content Fits */
@@ -1796,7 +1896,6 @@ h3 {
     justify-content: start;
     height: 100%;
     overflow: hidden;
-    /* Prevent spillover */
 }
 
 /* Adjust Section Title Spacing in Gift */

@@ -114,30 +114,68 @@
     <!-- ========================================
          Pre-Wedding / Gallery SECTION
          ======================================== -->
-    <section class="card-section" id="gallery" style="display: none;">
+    <section class="card-section" id="gallery">
         <div class="card-section__card">
             <div class="container">
                 <h2 class="pad50"></h2>
                 <h2 class="section-title" data-animate>Pre-Wedding Gallery</h2>
                 <p class="section-subtitle" data-animate>Photo Session</p>
 
-                <div class="gallery-wrapper" id="galleryWrapperPre" data-animate>
-                    <div class="gallery-track" id="galleryTrackPre">
-                        <img class="gallery-item-pre" src="assets/mock/mock_01.png" alt="Gallery Image 1" loading="lazy"
-                            decoding="async">
-                        <img class="gallery-item-pre" src="assets/mock/mock_02.png" alt="Gallery Image 2" loading="lazy"
-                            decoding="async">
+                <!-- Main Swipe Gallery -->
+                <div class="gallery-featured-wrapper" data-animate>
+                    <div class="gallery-wrapper gallery-wrapper--featured" id="galleryWrapperPre">
+                        <div class="gallery-track" id="galleryTrackPre">
+                            <div class="gallery-slide">
+                                <img class="gallery-item-pre" src="assets/Pre-Wedding/NO (13).jpg"
+                                    alt="Pre-Wedding Photo 1" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-slide">
+                                <img class="gallery-item-pre" src="assets/Pre-Wedding/NO (94).jpg"
+                                    alt="Pre-Wedding Photo 2" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-slide">
+                                <img class="gallery-item-pre" src="assets/Pre-Wedding/NO (40).jpg"
+                                    alt="Pre-Wedding Photo 3" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-slide">
+                                <img class="gallery-item-pre" src="assets/Pre-Wedding/NO (61).jpg"
+                                    alt="Pre-Wedding Photo 4" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-slide">
+                                <img class="gallery-item-pre" src="assets/Pre-Wedding/NO (109).jpg"
+                                    alt="Pre-Wedding Photo 5" loading="lazy" decoding="async">
+                            </div>
+                            <div class="gallery-slide">
+                                <img class="gallery-item-pre" src="assets/Pre-Wedding/NO (182).jpg"
+                                    alt="Pre-Wedding Photo 6" loading="lazy" decoding="async">
+                            </div>
+                        </div>
+                    </div>
+                    <!-- Slide Indicators -->
+                    <div class="gallery-dots" id="galleryDots">
+                        <span class="gallery-dot gallery-dot--active" data-index="0"></span>
+                        <span class="gallery-dot" data-index="1"></span>
+                        <span class="gallery-dot" data-index="2"></span>
+                        <span class="gallery-dot" data-index="3"></span>
+                        <span class="gallery-dot" data-index="4"></span>
+                        <span class="gallery-dot" data-index="5"></span>
                     </div>
                 </div>
 
-                <div class="gallery-wrapper" id="galleryWrapperPre2"
-                    style="padding-top: 0px; align-items: start; height: 140px; min-height: 140px;" data-animate>
+                <!-- Thumbnail Continuous Strip -->
+                <div class="gallery-wrapper gallery-wrapper--strip" id="galleryWrapperPre2" data-animate>
                     <div class="gallery-track" id="galleryTrackPre2">
-                        <img class="gallery-item-pre2" src="assets/mock/mock_02.png" alt="Gallery Image 7"
+                        <img class="gallery-item-pre2" src="assets/Pre-Wedding/NO (13).jpg" alt="Thumbnail 1"
                             loading="lazy" decoding="async">
-                        <img class="gallery-item-pre2" src="assets/mock/mock_02.png" alt="Gallery Image 8"
+                        <img class="gallery-item-pre2" src="assets/Pre-Wedding/NO (94).jpg" alt="Thumbnail 2"
                             loading="lazy" decoding="async">
-                        <img class="gallery-item-pre2" src="assets/mock/mock_02.png" alt="Gallery Image 9"
+                        <img class="gallery-item-pre2" src="assets/Pre-Wedding/NO (40).jpg" alt="Thumbnail 3"
+                            loading="lazy" decoding="async">
+                        <img class="gallery-item-pre2" src="assets/Pre-Wedding/NO (61).jpg" alt="Thumbnail 4"
+                            loading="lazy" decoding="async">
+                        <img class="gallery-item-pre2" src="assets/Pre-Wedding/NO (109).jpg" alt="Thumbnail 5"
+                            loading="lazy" decoding="async">
+                        <img class="gallery-item-pre2" src="assets/Pre-Wedding/NO (182).jpg" alt="Thumbnail 6"
                             loading="lazy" decoding="async">
                     </div>
                 </div>
@@ -429,24 +467,7 @@
 
                 <div class="footer__divider" data-animate></div>
 
-                <div class="footer__contact" data-animate>
-                    <p class="footer__contact-label">ติดต่อสอบถาม (Contact)</p>
-                    <div class="footer__buttons">
-                        <a href="tel:+66885605050"
-                            class="btn btn--primary btn--small btn--glow btn--white btn--outline">
-                            <span class="btn__icon">📞</span>
-                            <span>Keng</span>
-                        </a>
-                        <a href="tel:+66926623455"
-                            class="btn btn--primary btn--small btn--glow btn--white btn--outline">
-                            <span class="btn__icon">📞</span>
-                            <span>Pumpim</span>
-                        </a>
-                    </div>
-                </div>
-
-                <p class="footer__tagline">#KengPumpimWedding</p>
-                <p class="footer__copyright">© 2026 Chanittha & Ratanapol</p>
+                <p class="footer__copyright">#PumKengAlwaysInLove</p>
             </div>
         </div>
     </footer>
