@@ -691,12 +691,14 @@ h3 {
 
 /* Card variants */
 .card-section__card--gold {
-    background: linear-gradient(180deg, var(--color-gold) 0%, var(--color-gold-dark) 100%);
+    /* background: linear-gradient(180deg, var(--color-gold) 0%, var(--color-gold-dark) 100%); */
+    background: url('assets/Pre-Wedding/NO (63) E.jpeg') no-repeat center 10% / cover;
     color: var(--color-white);
 }
 
 .card-section__card--brown {
-    background: rgb(106, 87, 56);
+    /* background: rgb(106, 87, 56); */
+    background: url('assets/Pre-Wedding/NO (109) E.jpeg') no-repeat center 10% / cover;
     color: var(--color-white);
 }
 
@@ -1161,7 +1163,7 @@ h3 {
     width: 140px;
     height: 1px;
     background: rgba(165, 94, 94, 0.3);
-    margin: var(--space-md) 0;
+    margin: var(--space-xs) 0;
 }
 
 .footer__contact-label {
@@ -1457,8 +1459,9 @@ h3 {
 }
 
 .rsvp {
-    background: var(--color-cream);
+    /* background: var(--color-cream); */
     padding: var(--space-xl) 0;
+    background: url('assets/Pre-Wedding/NO (63) E.jpeg') no-repeat center 10% / cover;
 }
 
 .rsvp__card {
@@ -1641,9 +1644,11 @@ h3 {
 
 .footer__subtitle {
     font-family: var(--font-script);
-    font-size: 1.2rem;
+    font-size: 2rem;
     color: rgba(255, 255, 255, 0.7);
+    opacity: 1;
     margin-bottom: 0;
+    padding-bottom: 15px;
 }
 
 .footer__text {
@@ -1696,12 +1701,24 @@ h3 {
 }
 
 .footer__copyright {
-    font-size: 0.75rem;
-    opacity: 0.5;
+    font-size: 1.2rem;
+    opacity: 1;
+    padding-top: 80px;
 }
 
 .thankyou {
-    padding-top: 0px;
+    font-size: 3rem;
+    padding-top: 200px;
+}
+
+.pay{
+    font-size: 1rem;
+}
+
+.pay1{
+    font-size: 1rem;
+    padding-top: 5px;
+    padding-bottom: 15px;
 }
 
 /* ============================================
