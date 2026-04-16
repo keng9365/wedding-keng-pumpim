@@ -512,9 +512,10 @@ document.addEventListener('DOMContentLoaded', () => {
             this.modal.classList.add('is-active');
             document.body.style.overflow = 'hidden';
             gallery.pause?.();
+            history.pushState({ modal: 'lightbox' }, '');
         },
 
-        close() {
+        _doClose() {
             this.activeGallery?.resume?.();
             this.modal.classList.remove('is-active');
             this.scale = 1; this.tx = 0; this.ty = 0;
@@ -522,6 +523,14 @@ document.addEventListener('DOMContentLoaded', () => {
             if (!document.getElementById('photoGalleryModal')?.classList.contains('is-active'))
                 document.body.style.overflow = '';
             this.activeGallery = null;
+        },
+
+        close() {
+            if (history.state?.modal === 'lightbox') {
+                history.back(); // popstate handler will call _doClose
+            } else {
+                this._doClose();
+            }
         },
 
         navigate(direction) {
@@ -557,15 +566,33 @@ document.addEventListener('DOMContentLoaded', () => {
         document.documentElement.style.overflow = 'hidden';
         pgModal.classList.add('is-active');
         pgModal.setAttribute('aria-hidden', 'false');
+        history.pushState({ modal: 'photoGallery' }, '');
     }
 
-    function closePhotoGallery() {
+    function _doClosePhotoGallery() {
         if (!pgModal) return;
         pgModal.classList.remove('is-active');
         pgModal.setAttribute('aria-hidden', 'true');
         document.documentElement.style.overflow = '';
         document.body.style.overflow = '';
     }
+
+    function closePhotoGallery() {
+        if (history.state?.modal === 'photoGallery') {
+            history.back(); // popstate handler will call _doClosePhotoGallery
+        } else {
+            _doClosePhotoGallery();
+        }
+    }
+
+    // Back button closes modals instead of navigating away
+    window.addEventListener('popstate', () => {
+        if (lightboxManager?.modal?.classList.contains('is-active')) {
+            lightboxManager._doClose();
+        } else if (pgModal?.classList.contains('is-active')) {
+            _doClosePhotoGallery();
+        }
+    });
 
     // Build 2-column masonry grid
     if (pgGrid) {
