@@ -212,7 +212,7 @@ document.addEventListener('DOMContentLoaded', () => {
     }
 
     // Active link highlighting
-    const sections = document.querySelectorAll('section[id]');
+    const sections = document.querySelectorAll('section[id], footer[id]');
 
     function highlightActiveLink() {
         const scrollY = window.scrollY + 100;
@@ -592,6 +592,18 @@ document.addEventListener('DOMContentLoaded', () => {
     if (pgCloseBtn) pgCloseBtn.addEventListener('click', closePhotoGallery);
     if (pgBackdrop) pgBackdrop.addEventListener('click', closePhotoGallery);
 
+    // --- Invitation Card Preview ---
+    const invitationCardImg = document.querySelector('.invitation-card__img');
+    if (invitationCardImg) {
+        invitationCardImg.style.cursor = 'zoom-in';
+        invitationCardImg.addEventListener('click', () => {
+            lightboxManager.open(
+                { images: [invitationCardImg.src], pause: () => {}, resume: () => {} },
+                0
+            );
+        });
+    }
+
     // --- Smooth Scroll for Internal Links ---
     document.querySelectorAll('a[href^="#"]').forEach(anchor => {
         anchor.addEventListener('click', function (e) {
@@ -619,9 +631,10 @@ document.addEventListener('DOMContentLoaded', () => {
     const colorLightbox = document.getElementById('colorLightbox');
     const colorMsgSwatch = document.getElementById('colorMsgSwatch');
 
-    document.querySelectorAll('.theme-color__row').forEach(row => {
-        row.addEventListener('click', () => {
-            colorMsgSwatch.style.backgroundColor = row.style.backgroundColor;
+    document.querySelectorAll('.theme-palette__item').forEach(item => {
+        item.addEventListener('click', () => {
+            const dot = item.querySelector('.theme-palette__dot');
+            colorMsgSwatch.style.backgroundColor = dot.style.backgroundColor;
             colorLightbox.classList.add('is-active');
             document.body.style.overflow = 'hidden';
         });

@@ -45,7 +45,8 @@
             <ul class="navbar__menu" id="navMenu">
                 <li><a href="#hero" class="navbar__link">หน้าแรก</a></li>
                 <li><a href="#gallery" class="navbar__link">แกลอรี่</a></li>
-                <li><a href="#schedule" class="navbar__link">กำหนดการ</a></li>
+                <li><a href="#invitation-card" class="navbar__link">บัตรเชิญ</a></li>
+                <!-- <li><a href="#schedule" class="navbar__link">กำหนดการ</a></li> -->
                 <li><a href="#details" class="navbar__link">สถานที่จัดงาน</a></li>
                 <li><a href="#rsvp" class="navbar__link">ยืนยันการเข้าร่วมงาน</a></li>
                 <li><a href="#theme" class="navbar__link">การแต่งกาย</a></li>
@@ -70,28 +71,41 @@
 
     <!-- GALLERY SECTION -->
     <section class="card-section" id="gallery">
-        <div class="card-section__card">
+        <div class="card-section__card card-section__card--gallery">
             <div class="container">
                 <h2 class="section-title" data-animate>Pre-Wedding Gallery</h2>
                 <p class="section-subtitle" data-animate>Photo Session</p>
+            </div>
 
-                <div class="gallery-featured-wrapper" data-animate>
-                    <div class="gallery-wrapper gallery-wrapper--featured" id="galleryWrapperPre">
-                        <div class="gallery-track gallery-track--slider" id="galleryTrackPre"></div>
-                    </div>
-                    <div class="gallery-dots" id="galleryDots"></div>
+            <div class="gallery-featured-wrapper gallery-featured-wrapper--full" data-animate>
+                <div class="gallery-wrapper gallery-wrapper--featured" id="galleryWrapperPre">
+                    <div class="gallery-track gallery-track--slider" id="galleryTrackPre"></div>
                 </div>
+                <div class="gallery-dots" id="galleryDots"></div>
+            </div>
 
-                <div class="gallery-more" data-animate>
-                    <button class="btn btn--primary btn--small btn--glow" id="openPhotoGallery">
-                        รูปทั้งหมด
-                    </button>
+            <div class="gallery-more" data-animate>
+                <button class="btn btn--primary btn--small btn--glow" id="openPhotoGallery">
+                    รูปทั้งหมด
+                </button>
+            </div>
+        </div>
+    </section>
+
+    <!-- INVITATION CARD SECTION -->
+    <section class="card-section" id="invitation-card">
+        <div class="card-section__card">
+            <div class="container">
+                <h2 class="section-title" data-animate>บัตรเชิญ</h2>
+                <p class="section-subtitle" data-animate>Wedding Invitation</p>
+                <div class="invitation-card__wrapper" data-animate>
+                    <img src="assets/wd-card-2.jpeg" alt="Wedding Invitation Card" class="invitation-card__img" loading="lazy" decoding="async">
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- SCHEDULE SECTION -->
+    <!-- SCHEDULE SECTION
     <section class="card-section" id="schedule">
         <div class="card-section__card">
             <div class="container">
@@ -145,7 +159,7 @@
                 </div>
             </div>
         </div>
-    </section>
+    </section> -->
 
     <!-- VENUE SECTION -->
     <section class="card-section" id="details">
@@ -229,38 +243,35 @@
                 <h2 class="section-title" data-animate>การแต่งกาย</h2>
                 <p class="section-subtitle" data-animate>Dress Code Suggestions</p>
 
-                <div class="theme-colors__card" data-animate>
-                    <div class="theme-color__list" data-animate>
-                        <div class="theme-color__row" style="background-color: #FFFFFF; border: 1px solid #e0e0e0;">
-                            <div class="theme-color__right">
-                                <span class="theme-color__name">White : ขาว</span>
-                            </div>
+                <div class="theme-palette" data-animate>
+                    <div class="theme-palette__swatches">
+                        <div class="theme-palette__item">
+                            <div class="theme-palette__dot" style="background-color:#FFFFFF;"></div>
+                            <span class="theme-palette__name">White</span>
+                            <span class="theme-palette__name-th">ขาว</span>
                         </div>
-                        <div class="theme-color__row" style="background-color: #F5F0E8; border: 1px solid #e0e0e0;">
-                            <div class="theme-color__right">
-                                <span class="theme-color__name">Cream : ครีม</span>
-                            </div>
+                        <div class="theme-palette__item">
+                            <div class="theme-palette__dot" style="background-color:#F5F0E8;"></div>
+                            <span class="theme-palette__name">Cream</span>
+                            <span class="theme-palette__name-th">ครีม</span>
                         </div>
-                        <div class="theme-color__row" style="background-color: #E8B4B4; border: 1px solid #e0e0e0;">
-                            <div class="theme-color__right">
-                                <span class="theme-color__name">Dusty Rose : ชมพู</span>
-                            </div>
+                        <div class="theme-palette__item">
+                            <div class="theme-palette__dot" style="background-color:#E8B4B4;"></div>
+                            <span class="theme-palette__name">Dusty Rose</span>
+                            <span class="theme-palette__name-th">ชมพู</span>
                         </div>
-                        <div class="theme-color__row" style="background-color: #8B6F5C; border: 1px solid #e0e0e0;">
-                            <div class="theme-color__right">
-                                <span class="theme-color__name">Brown : น้ำตาล</span>
-                            </div>
+                        <div class="theme-palette__item">
+                            <div class="theme-palette__dot" style="background-color:#8B6F5C;"></div>
+                            <span class="theme-palette__name">Brown</span>
+                            <span class="theme-palette__name-th">น้ำตาล</span>
                         </div>
-                        <div class="theme-color__row" style="background-color: #9CAF88; border: 1px solid #e0e0e0;">
-                            <div class="theme-color__right">
-                                <span class="theme-color__name">Sage : เขียว</span>
-                            </div>
+                        <div class="theme-palette__item">
+                            <div class="theme-palette__dot" style="background-color:#9CAF88;"></div>
+                            <span class="theme-palette__name">Sage</span>
+                            <span class="theme-palette__name-th">เขียวเสจ</span>
                         </div>
                     </div>
-
-                    <p class="theme-colors__note">
-                        ✨ เลือกสีเสื้อผ้าตามธีมงานได้ตามใจชอบ ✨
-                    </p>
+                    <p class="theme-palette__note">เลือกสีเสื้อผ้าตามธีมงานได้ตามใจชอบ</p>
                 </div>
             </div>
         </div>
