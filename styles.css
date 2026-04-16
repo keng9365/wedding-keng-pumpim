@@ -1202,6 +1202,10 @@ h3 {
 }
 
 /* Gallery Modal overrides */
+#galleryModal {
+    touch-action: none; /* hand all gestures to JS (pinch, swipe) */
+}
+
 #galleryModal .lightbox__content {
     background: transparent;
     padding: 0;
