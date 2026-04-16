@@ -5,13 +5,16 @@ let lightboxManager;
 // Gallery Config — เพิ่ม/ลบรูปที่นี่ที่เดียว
 // ============================================
 const PRE_WEDDING_IMAGES = [
-    'assets/Pre-Wedding-Edit/1.jpeg',
-    'assets/Pre-Wedding-Edit/2.jpeg',
-    'assets/Pre-Wedding-Edit/3.jpeg',
-    'assets/Pre-Wedding-Edit/4.jpeg',
-    // 'assets/Pre-Wedding-Edit/5.jpeg',
-    'assets/Pre-Wedding-Edit/6.jpeg',
-    'assets/Pre-Wedding-Edit/7.jpeg',
+    // Black
+    'assets/Pre-Wedding-Edit/B1.jpeg',
+    'assets/Pre-Wedding-Edit/B2.jpeg',
+    'assets/Pre-Wedding-Edit/B3.jpeg',
+    'assets/Pre-Wedding-Edit/B4.jpeg',
+    // White
+    'assets/Pre-Wedding-Edit/W1.jpeg',
+    'assets/Pre-Wedding-Edit/W2.jpeg',
+    'assets/Pre-Wedding-Edit/W3.jpeg',
+    // Thai
     'assets/Pre-Wedding-Edit/T1.jpeg',
 ];
 
