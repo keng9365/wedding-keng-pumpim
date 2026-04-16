@@ -739,9 +739,15 @@ h3 {
 .theme-palette__swatches {
     display: flex;
     justify-content: center;
-    gap: var(--space-lg);
+    column-gap: var(--space-lg);
+    row-gap: 0;
     flex-wrap: wrap;
     padding-top: 25px;
+}
+
+.theme-palette__swatches-break {
+    flex-basis: 100%;
+    height: var(--space-md);
 }
 
 .theme-palette__item {

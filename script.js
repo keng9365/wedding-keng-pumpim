@@ -591,6 +591,8 @@ document.addEventListener('DOMContentLoaded', () => {
             lightboxManager._doClose();
         } else if (pgModal?.classList.contains('is-active')) {
             _doClosePhotoGallery();
+        } else if (colorLightbox?.classList.contains('is-active')) {
+            _doCloseColorLightbox();
         }
     });
 
@@ -661,19 +663,28 @@ document.addEventListener('DOMContentLoaded', () => {
     const colorLightbox = document.getElementById('colorLightbox');
     const colorMsgSwatch = document.getElementById('colorMsgSwatch');
 
+    function _doCloseColorLightbox() {
+        colorLightbox.classList.remove('is-active');
+        document.body.style.overflow = '';
+    }
+
     document.querySelectorAll('.theme-palette__item').forEach(item => {
         item.addEventListener('click', () => {
             const dot = item.querySelector('.theme-palette__dot');
             colorMsgSwatch.style.backgroundColor = dot.style.backgroundColor;
             colorLightbox.classList.add('is-active');
             document.body.style.overflow = 'hidden';
+            history.pushState({ modal: 'colorLightbox' }, '');
         });
     });
 
     if (colorLightbox) {
         colorLightbox.addEventListener('click', () => {
-            colorLightbox.classList.remove('is-active');
-            document.body.style.overflow = '';
+            if (history.state?.modal === 'colorLightbox') {
+                history.back();
+            } else {
+                _doCloseColorLightbox();
+            }
         });
     }
 
