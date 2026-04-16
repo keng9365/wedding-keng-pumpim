@@ -284,6 +284,7 @@ document.addEventListener('DOMContentLoaded', () => {
     lightboxManager = {
         modal:    document.getElementById('galleryModal'),
         img:      document.getElementById('galleryModalImage'),
+        counter:  document.getElementById('galleryCounter'),
         closeBtn: document.getElementById('galleryModalClose'),
         prevBtn:  document.getElementById('galleryPrevBtn'),
         nextBtn:  document.getElementById('galleryNextBtn'),
@@ -292,9 +293,68 @@ document.addEventListener('DOMContentLoaded', () => {
 
         init() {
             if (this.closeBtn) this.closeBtn.addEventListener('click', () => this.close());
-            if (this.modal) this.modal.addEventListener('click', (e) => {
-                if (e.target === this.modal) this.close();
-            });
+
+            // --- Swipe / drag state ---
+            let dragStartX  = 0;
+            let isMouseDown = false;
+            let hasDragged  = false;
+
+            const onDragStart = (x) => {
+                dragStartX = x;
+                hasDragged = false;
+            };
+            const onDragMove = (x) => {
+                const delta = x - dragStartX;
+                if (Math.abs(delta) > 5) hasDragged = true;
+                if (this.img) this.img.style.transform = `translateX(${delta * 0.25}px)`;
+            };
+            const onDragEnd = (x) => {
+                const delta = x - dragStartX;
+                if (this.img) {
+                    this.img.style.transition = 'transform 0.25s ease';
+                    this.img.style.transform  = '';
+                    this.img.addEventListener('transitionend', () => {
+                        if (this.img) this.img.style.transition = '';
+                    }, { once: true });
+                }
+                if (Math.abs(delta) >= 50) this.navigate(delta < 0 ? 1 : -1);
+            };
+
+            if (this.modal) {
+                // Close on backdrop click (only when not dragging)
+                this.modal.addEventListener('click', (e) => {
+                    if (hasDragged) return;
+                    if (e.target === this.modal) this.close();
+                });
+
+                // Touch
+                this.modal.addEventListener('touchstart', (e) => {
+                    onDragStart(e.touches[0].clientX);
+                }, { passive: true });
+                this.modal.addEventListener('touchmove', (e) => {
+                    onDragMove(e.touches[0].clientX);
+                }, { passive: true });
+                this.modal.addEventListener('touchend', (e) => {
+                    onDragEnd(e.changedTouches[0].clientX);
+                }, { passive: true });
+
+                // Mouse drag
+                this.modal.addEventListener('mousedown', (e) => {
+                    if (e.button !== 0) return;
+                    isMouseDown = true;
+                    onDragStart(e.clientX);
+                });
+                window.addEventListener('mousemove', (e) => {
+                    if (!isMouseDown) return;
+                    onDragMove(e.clientX);
+                });
+                window.addEventListener('mouseup', (e) => {
+                    if (!isMouseDown) return;
+                    isMouseDown = false;
+                    onDragEnd(e.clientX);
+                });
+            }
+
             if (this.prevBtn) this.prevBtn.addEventListener('click', (e) => {
                 e.stopPropagation();
                 this.navigate(-1);
@@ -337,7 +397,12 @@ document.addEventListener('DOMContentLoaded', () => {
         },
 
         updateImage() {
-            if (this.img) this.img.src = this.activeGallery.images[this.currentIndex];
+            if (this.img) {
+                this.img.style.transform  = '';
+                this.img.style.transition = '';
+                this.img.src = this.activeGallery.images[this.currentIndex];
+            }
+            if (this.counter) this.counter.textContent = `${this.currentIndex + 1} / ${this.activeGallery.images.length}`;
         }
     };
     lightboxManager.init();
@@ -351,15 +416,9 @@ document.addEventListener('DOMContentLoaded', () => {
     const pgOpenBtn  = document.getElementById('openPhotoGallery');
     const pgCloseBtn = document.getElementById('photoGalleryClose');
     const pgBackdrop = document.getElementById('photoGalleryBackdrop');
-    let pgSavedScrollY = 0;
-
     function openPhotoGallery() {
         if (!pgModal) return;
-        pgSavedScrollY = window.scrollY;
-        document.body.style.overflow  = 'hidden';
-        document.body.style.position  = 'fixed';
-        document.body.style.top       = `-${pgSavedScrollY}px`;
-        document.body.style.width     = '100%';
+        document.documentElement.style.overflow = 'hidden';
         pgModal.classList.add('is-active');
         pgModal.setAttribute('aria-hidden', 'false');
     }
@@ -368,11 +427,8 @@ document.addEventListener('DOMContentLoaded', () => {
         if (!pgModal) return;
         pgModal.classList.remove('is-active');
         pgModal.setAttribute('aria-hidden', 'true');
-        document.body.style.overflow  = '';
-        document.body.style.position  = '';
-        document.body.style.top       = '';
-        document.body.style.width     = '';
-        window.scrollTo(0, pgSavedScrollY);
+        document.documentElement.style.overflow = '';
+        document.body.style.overflow = '';
     }
 
     // Build 2-column masonry grid
