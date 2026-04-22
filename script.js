@@ -234,20 +234,20 @@ document.addEventListener('DOMContentLoaded', () => {
 
     window.addEventListener('scroll', highlightActiveLink);
 
-    // --- RSVP Countdown Timer (June 20, 2026) ---
-    const rsvpDate = new Date('2026-06-20T07:00:00').getTime();
+    // --- RSVP Countdown Timer (June 15, 2026) ---
+    const rsvpDate = new Date('2026-06-15T23:59:59').getTime();
 
     function updateRsvpCountdown() {
         const distance = rsvpDate - Date.now();
 
         if (distance > 0) {
-            const days    = Math.floor(distance / (1000 * 60 * 60 * 24));
-            const hours   = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
             const seconds = Math.floor((distance % (1000 * 60)) / 1000);
 
-            document.getElementById('rsvp-days').textContent    = String(days).padStart(2, '0');
-            document.getElementById('rsvp-hours').textContent   = String(hours).padStart(2, '0');
+            document.getElementById('rsvp-days').textContent = String(days).padStart(2, '0');
+            document.getElementById('rsvp-hours').textContent = String(hours).padStart(2, '0');
             document.getElementById('rsvp-minutes').textContent = String(minutes).padStart(2, '0');
             document.getElementById('rsvp-seconds').textContent = String(seconds).padStart(2, '0');
         } else {
@@ -285,14 +285,14 @@ document.addEventListener('DOMContentLoaded', () => {
 
     // --- Gallery Lightbox Manager ---
     lightboxManager = {
-        modal:    document.getElementById('galleryModal'),
-        img:      document.getElementById('galleryModalImage'),
-        counter:  document.getElementById('galleryCounter'),
+        modal: document.getElementById('galleryModal'),
+        img: document.getElementById('galleryModalImage'),
+        counter: document.getElementById('galleryCounter'),
         closeBtn: document.getElementById('galleryModalClose'),
-        prevBtn:  document.getElementById('galleryPrevBtn'),
-        nextBtn:  document.getElementById('galleryNextBtn'),
+        prevBtn: document.getElementById('galleryPrevBtn'),
+        nextBtn: document.getElementById('galleryNextBtn'),
         activeGallery: null,
-        currentIndex:  0,
+        currentIndex: 0,
         scale: 1, tx: 0, ty: 0,
 
         init() {
@@ -308,8 +308,10 @@ document.addEventListener('DOMContentLoaded', () => {
             // Natural center of image element in viewport (works at any zoom level)
             const naturalCenter = () => {
                 const r = this.img.getBoundingClientRect();
-                return { cx: r.left + r.width / 2 - this.tx,
-                         cy: r.top  + r.height / 2 - this.ty };
+                return {
+                    cx: r.left + r.width / 2 - this.tx,
+                    cy: r.top + r.height / 2 - this.ty
+                };
             };
 
             // Zoom keeping screen point (px, py) fixed
@@ -346,16 +348,16 @@ document.addEventListener('DOMContentLoaded', () => {
 
             // ── state ──
             let dragStartX = 0, dragStartY = 0;
-            let lastTx = 0,     lastTy = 0;
-            let hasDragged   = false;
-            let wasPinching  = false;
-            let lastTapTime  = 0;
-            let isMouseDown  = false;
+            let lastTx = 0, lastTy = 0;
+            let hasDragged = false;
+            let wasPinching = false;
+            let lastTapTime = 0;
+            let isMouseDown = false;
 
-            let pinchStartDist  = 0, pinchStartScale = 1;
-            let pinchMidX = 0,       pinchMidY = 0;
-            let pinchStartTx = 0,    pinchStartTy = 0;
-            let pinchCx = 0,         pinchCy = 0;
+            let pinchStartDist = 0, pinchStartScale = 1;
+            let pinchMidX = 0, pinchMidY = 0;
+            let pinchStartTx = 0, pinchStartTy = 0;
+            let pinchCx = 0, pinchCy = 0;
 
             if (!this.modal) return;
 
@@ -384,9 +386,9 @@ document.addEventListener('DOMContentLoaded', () => {
                         wasPinching = false;
                     }
                 } else if (e.touches.length === 2) {
-                    wasPinching     = true;
-                    hasDragged      = true;
-                    pinchStartDist  = getTouchDist(e.touches);
+                    wasPinching = true;
+                    hasDragged = true;
+                    pinchStartDist = getTouchDist(e.touches);
                     pinchStartScale = this.scale;
                     pinchMidX = (e.touches[0].clientX + e.touches[1].clientX) / 2;
                     pinchMidY = (e.touches[0].clientY + e.touches[1].clientY) / 2;
@@ -429,7 +431,7 @@ document.addEventListener('DOMContentLoaded', () => {
                         const dy = e.changedTouches[0].clientY - dragStartY;
                         if (this.img) {
                             this.img.style.transition = 'transform 0.25s ease';
-                            this.img.style.transform  = '';
+                            this.img.style.transform = '';
                             this.img.addEventListener('transitionend', () => {
                                 if (this.img) this.img.style.transition = '';
                             }, { once: true });
@@ -451,7 +453,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 if (e.button !== 0) return;
                 isMouseDown = true;
                 dragStartX = e.clientX; dragStartY = e.clientY;
-                lastTx = this.tx;       lastTy = this.ty;
+                lastTx = this.tx; lastTy = this.ty;
                 hasDragged = false;
             });
             window.addEventListener('mousemove', (e) => {
@@ -474,7 +476,7 @@ document.addEventListener('DOMContentLoaded', () => {
                     const dy = e.clientY - dragStartY;
                     if (this.img) {
                         this.img.style.transition = 'transform 0.25s ease';
-                        this.img.style.transform  = '';
+                        this.img.style.transform = '';
                         this.img.addEventListener('transitionend', () => {
                             if (this.img) this.img.style.transition = '';
                         }, { once: true });
@@ -499,15 +501,15 @@ document.addEventListener('DOMContentLoaded', () => {
             });
             document.addEventListener('keydown', (e) => {
                 if (!this.modal?.classList.contains('is-active')) return;
-                if (e.key === 'ArrowLeft')  this.navigate(-1);
+                if (e.key === 'ArrowLeft') this.navigate(-1);
                 if (e.key === 'ArrowRight') this.navigate(1);
-                if (e.key === 'Escape')     this.close();
+                if (e.key === 'Escape') this.close();
             });
         },
 
         open(gallery, index) {
             this.activeGallery = gallery;
-            this.currentIndex  = index;
+            this.currentIndex = index;
             this.updateImage();
             this.modal.classList.add('is-active');
             document.body.style.overflow = 'hidden';
@@ -543,7 +545,7 @@ document.addEventListener('DOMContentLoaded', () => {
         updateImage() {
             if (this.img) {
                 this.scale = 1; this.tx = 0; this.ty = 0;
-                this.img.style.transform  = '';
+                this.img.style.transform = '';
                 this.img.style.transition = '';
                 this.img.src = this.activeGallery.images[this.currentIndex];
             }
@@ -556,9 +558,9 @@ document.addEventListener('DOMContentLoaded', () => {
     new FeaturedSlider('galleryTrackPre', 'galleryDots', PRE_WEDDING_IMAGES);
 
     // --- Photo Gallery Grid Modal ---
-    const pgModal    = document.getElementById('photoGalleryModal');
-    const pgGrid     = document.getElementById('photoGalleryGrid');
-    const pgOpenBtn  = document.getElementById('openPhotoGallery');
+    const pgModal = document.getElementById('photoGalleryModal');
+    const pgGrid = document.getElementById('photoGalleryGrid');
+    const pgOpenBtn = document.getElementById('openPhotoGallery');
     const pgCloseBtn = document.getElementById('photoGalleryClose');
     const pgBackdrop = document.getElementById('photoGalleryBackdrop');
     function openPhotoGallery() {
@@ -603,7 +605,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 <img src="${src}" alt="Pre-Wedding-PumKeng ${offset + i * 2 + 1}" loading="lazy" decoding="async">
             </div>`).join('');
 
-        const leftImgs  = PRE_WEDDING_IMAGES.filter((_, i) => i % 2 === 0);
+        const leftImgs = PRE_WEDDING_IMAGES.filter((_, i) => i % 2 === 0);
         const rightImgs = PRE_WEDDING_IMAGES.filter((_, i) => i % 2 !== 0);
 
         pgGrid.innerHTML = `
@@ -614,13 +616,13 @@ document.addEventListener('DOMContentLoaded', () => {
             const item = e.target.closest('.photo-gallery-modal__item');
             if (!item) return;
             lightboxManager.open(
-                { images: PRE_WEDDING_IMAGES, pause: () => {}, resume: () => {} },
+                { images: PRE_WEDDING_IMAGES, pause: () => { }, resume: () => { } },
                 parseInt(item.dataset.index)
             );
         });
     }
 
-    if (pgOpenBtn)  pgOpenBtn.addEventListener('click', openPhotoGallery);
+    if (pgOpenBtn) pgOpenBtn.addEventListener('click', openPhotoGallery);
     if (pgCloseBtn) pgCloseBtn.addEventListener('click', closePhotoGallery);
     if (pgBackdrop) pgBackdrop.addEventListener('click', closePhotoGallery);
 
@@ -630,7 +632,7 @@ document.addEventListener('DOMContentLoaded', () => {
         invitationCardImg.style.cursor = 'zoom-in';
         invitationCardImg.addEventListener('click', () => {
             lightboxManager.open(
-                { images: [invitationCardImg.src], pause: () => {}, resume: () => {} },
+                { images: [invitationCardImg.src], pause: () => { }, resume: () => { } },
                 0
             );
         });
