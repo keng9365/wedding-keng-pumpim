@@ -4,8 +4,6 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta http-equiv="Content-Security-Policy"
-        content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data: https:; frame-src 'self' https://www.google.com;">
     <title>Chanittha & Ratanapol | Wedding Celebration</title>
     <meta name="description"
         content="ขอเรียนเชิญร่วมเป็นเกียรติในงานมงคลสมรส ชนิษฐา และ รตนพล วันเสาร์ที่ 27 มิถุนายน 2569">
@@ -47,6 +45,7 @@
             <ul class="navbar__menu" id="navMenu">
                 <li><a href="#hero" class="navbar__link">หน้าแรก</a></li>
                 <li><a href="#gallery" class="navbar__link">แกลอรี่</a></li>
+                <!-- <li><a href="#invitation-card" class="navbar__link">บัตรเชิญ</a></li> -->
                 <li><a href="#schedule" class="navbar__link">กำหนดการ</a></li>
                 <li><a href="#details" class="navbar__link">สถานที่จัดงาน</a></li>
                 <li><a href="#rsvp" class="navbar__link">ยืนยันการเข้าร่วมงาน</a></li>
@@ -93,6 +92,19 @@
         </div>
     </section>
 
+    <!-- INVITATION CARD SECTION -->
+    <!-- <section class="card-section" id="invitation-card">
+        <div class="card-section__card">
+            <div class="container">
+                <h2 class="section-title" data-animate>บัตรเชิญ</h2>
+                <p class="section-subtitle" data-animate>Wedding Invitation</p>
+                <div class="invitation-card__wrapper" data-animate>
+                    <img src="assets/wd-card-2.jpeg" alt="Wedding Invitation Card" class="invitation-card__img" loading="lazy" decoding="async">
+                </div>
+            </div>
+        </div>
+    </section> -->
+
     <!-- SCHEDULE SECTION -->
     <section class="card-section" id="schedule">
         <div class="card-section__card">
@@ -103,8 +115,7 @@
                 <div class="schedule__list" data-animate>
                     <div class="schedule__row">
                         <div class="schedule__left">
-                            <img src="assets/cere_1.png" alt="schedule photo 1" class="schedule__icon" loading="lazy"
-                                decoding="async">
+                            <img src="assets/cere_1.png" alt="schedule photo 1" class="schedule__icon" loading="lazy" decoding="async">
                             <span class="schedule__time">07:19 น.</span>
                         </div>
                         <div class="schedule__right">
@@ -115,8 +126,7 @@
 
                     <div class="schedule__row">
                         <div class="schedule__left">
-                            <img src="assets/cere_2.jpeg" alt="schedule photo 2" class="schedule__icon" loading="lazy"
-                                decoding="async">
+                            <img src="assets/cere_2.jpeg" alt="schedule photo 2" class="schedule__icon" loading="lazy" decoding="async">
                             <span class="schedule__time">08:09 น.</span>
                         </div>
                         <div class="schedule__right">
@@ -127,8 +137,7 @@
 
                     <div class="schedule__row">
                         <div class="schedule__left">
-                            <img src="assets/cere_3.jpeg" alt="schedule photo 3" class="schedule__icon" loading="lazy"
-                                decoding="async">
+                            <img src="assets/cere_3.jpeg" alt="schedule photo 3" class="schedule__icon" loading="lazy" decoding="async">
                             <span class="schedule__time">09:19 น.</span>
                         </div>
                         <div class="schedule__right">
@@ -139,8 +148,7 @@
 
                     <div class="schedule__row">
                         <div class="schedule__left">
-                            <img src="assets/cere_4.jpeg" alt="schedule photo 4" class="schedule__icon" loading="lazy"
-                                decoding="async">
+                            <img src="assets/cere_4.jpeg" alt="schedule photo 4" class="schedule__icon" loading="lazy" decoding="async">
                             <span class="schedule__time">11:00 น.</span>
                         </div>
                         <div class="schedule__right">
@@ -173,13 +181,12 @@
                     <div class="event-banner__map">
                         <iframe
                             src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3875.3977814234727!2d101.34797951076007!3d13.75486908658158!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x311ce30d3cb972cf%3A0xa71c67788ebdc39c!2zU0Mg4Lij4Li14Liq4Lit4Lij4LmM4LiX!5e0!3m2!1sen!2sth!4v1767809795637!5m2!1sen!2sth"
-                            width="100%" height="200" class="iframe--map" allowfullscreen="" loading="lazy"
-                            referrerpolicy="no-referrer-when-downgrade"
-                            sandbox="allow-scripts allow-same-origin allow-popups"></iframe>
+                            width="100%" height="200" style="border:0; border-radius: 12px;" allowfullscreen=""
+                            loading="lazy" referrerpolicy="no-referrer-when-downgrade"></iframe>
                     </div>
                     <a href="https://www.google.com/maps/dir/?api=1&destination=SC+Resort+Phanomsarakham"
-                        target="_blank" rel="noopener noreferrer"
-                        class="btn btn--primary btn--small btn--glow btn--white" data-animate>
+                        target="_blank" rel="noopener" class="btn btn--primary btn--small btn--glow btn--white"
+                        data-animate>
                         นำทาง / Get Directions
                     </a>
                 </div>
@@ -195,7 +202,7 @@
                     <h2 class="section-title section-title--light">ยืนยันการเข้าร่วมงาน</h2>
                     <p class="rsvp__text">
                         กรุณายืนยันการเข้าร่วมงาน<br>
-                        ภายในวันที่ 15 มิถุนายน 2569<br>
+                        การมาของท่านมีความหมายอย่างยิ่งสำหรับเรา
                     </p>
 
                     <div class="countdown countdown--rsvp" id="rsvp-countdown">
@@ -220,7 +227,7 @@
                         </div>
                     </div>
 
-                    <a href="https://forms.gle/9TRQoZ3XQSCAvQBe8" target="_blank" rel="noopener noreferrer"
+                    <a href="https://forms.gle/9TRQoZ3XQSCAvQBe8" target="_blank" rel="noopener"
                         class="btn btn--outline btn--primary btn--large btn--glow btn--white rsvp__cta-btn">
                         RSVP ตอบรับ
                     </a>
@@ -238,34 +245,35 @@
 
                 <div class="theme-palette" data-animate>
                     <div class="theme-palette__swatches">
-                        <div class="theme-palette__item" data-color="#ffffff">
-                            <div class="theme-palette__dot palette-dot--white"></div>
+                        <div style="display: none;"></div>
+                        <div class="theme-palette__item">
+                            <div class="theme-palette__dot" style="background-color:#ffffff;"></div>
                             <span class="theme-palette__name">White</span>
                             <span class="theme-palette__name-th">ขาว</span>
                         </div>
-                        <div class="theme-palette__item" data-color="#F5F0E8">
-                            <div class="theme-palette__dot palette-dot--cream"></div>
+                        <div class="theme-palette__item">
+                            <div class="theme-palette__dot" style="background-color:#F5F0E8;"></div>
                             <span class="theme-palette__name">Cream</span>
                             <span class="theme-palette__name-th">ครีม</span>
                         </div>
-                        <div class="theme-palette__item" data-color="#E8B4B4">
-                            <div class="theme-palette__dot palette-dot--rose"></div>
+                        <div class="theme-palette__item">
+                            <div class="theme-palette__dot" style="background-color:#E8B4B4;"></div>
                             <span class="theme-palette__name">Dusty Rose</span>
                             <span class="theme-palette__name-th">ชมพู</span>
                         </div>
                         <div class="theme-palette__swatches-break"></div>
-                        <div class="theme-palette__item" data-color="#8B6F5C">
-                            <div class="theme-palette__dot palette-dot--brown"></div>
+                        <div class="theme-palette__item">
+                            <div class="theme-palette__dot" style="background-color:#8B6F5C;"></div>
                             <span class="theme-palette__name">Brown</span>
                             <span class="theme-palette__name-th">น้ำตาล</span>
                         </div>
-                        <div class="theme-palette__item" data-color="#9CAF88">
-                            <div class="theme-palette__dot palette-dot--sage"></div>
+                        <div class="theme-palette__item">
+                            <div class="theme-palette__dot" style="background-color:#9CAF88;"></div>
                             <span class="theme-palette__name">Sage</span>
                             <span class="theme-palette__name-th">เขียวเสจ</span>
                         </div>
                     </div>
-                    <p class="theme-palette__note">*ท่านสามารถเลือกสีที่นอกเหนือจากนี้ได้ตามความสะดวก*</p>
+                    <p class="theme-palette__note">เลือกสีเสื้อผ้าตามธีมงานได้ตามใจชอบ</p>
                 </div>
             </div>
         </div>
@@ -283,7 +291,7 @@
                 <p class="section-title section-title--light pay" data-animate>ร่วมแสดงความยินดีเพิ่มเติม</p>
 
                 <div class="footer__cta">
-                    <a href="https://forms.gle/NzTPGYsiUcc2JmW7A" target="_blank" rel="noopener noreferrer"
+                    <a href="https://forms.gle/NzTPGYsiUcc2JmW7A" target="_blank" rel="noopener"
                         class="btn btn--primary btn--small btn--glow btn--white" data-animate>
                         Click To QR Code
                     </a>
