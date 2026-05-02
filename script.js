@@ -693,6 +693,64 @@ document.addEventListener('DOMContentLoaded', () => {
     // --- Hero Particles ---
     initHeroParticles();
 
+    // --- RSVP Reminder Popup ---
+    const rsvpPopup = document.getElementById('rsvpPopup');
+    const rsvpPopupClose = document.getElementById('rsvpPopupClose');
+    const rsvpPopupMute = document.getElementById('rsvpPopupMute');
+    const rsvpPopupBackdrop = document.getElementById('rsvpPopupBackdrop');
+    let rsvpPopupShown = false;
+
+    function isMutedToday() {
+        // sessionStorage, localStorage
+        const muted = sessionStorage.getItem('rsvpPopupMutedDate');
+        const today = new Date().toLocaleDateString('th-TH');
+        return muted === today;
+    }
+
+    function openRsvpPopup() {
+        if (!rsvpPopup || rsvpPopupShown) return;
+        if (isMutedToday()) return;
+        rsvpPopupShown = true;
+        rsvpPopup.classList.add('is-active');
+        rsvpPopup.setAttribute('aria-hidden', 'false');
+        document.body.style.overflow = 'hidden';
+    }
+
+    function _doCloseRsvpPopup() {
+        if (!rsvpPopup) return;
+        rsvpPopup.classList.remove('is-active');
+        rsvpPopup.setAttribute('aria-hidden', 'true');
+        document.body.style.overflow = '';
+    }
+
+    // "เข้าใจแล้ว" — ปิด แต่แสดงอีกเมื่อเปิดหน้าใหม่
+    if (rsvpPopupClose) rsvpPopupClose.addEventListener('click', _doCloseRsvpPopup);
+
+    // "ไม่แสดงอีกภายในวันนี้" — บันทึกวันนี้ใน localStorage
+    if (rsvpPopupMute) rsvpPopupMute.addEventListener('click', () => {
+        const today = new Date().toLocaleDateString('th-TH');
+        sessionStorage.setItem('rsvpPopupMutedDate', today);
+        _doCloseRsvpPopup();
+    });
+
+    // ปิดเมื่อแตะ backdrop
+    if (rsvpPopupBackdrop) rsvpPopupBackdrop.addEventListener('click', _doCloseRsvpPopup);
+
+    // Show popup when scrolled past hero
+    function checkRsvpPopupTrigger() {
+        if (rsvpPopupShown) return;
+        const heroHeight = document.getElementById('hero')?.offsetHeight || 500;
+        if (window.scrollY > heroHeight * 0.85) {
+            openRsvpPopup();
+        }
+    }
+
+    window.addEventListener('scroll', () => {
+        if (!rsvpPopupShown) {
+            requestAnimationFrame(checkRsvpPopupTrigger);
+        }
+    });
+
     // Mark page as loaded
     document.body.classList.add('is-loaded');
 });

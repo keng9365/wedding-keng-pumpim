@@ -115,13 +115,13 @@
                 <div class="schedule__list" data-animate>
                     <div class="schedule__row">
                         <div class="schedule__left">
-                            <img src="assets/cere_1.png" alt="schedule photo 1" class="schedule__icon" loading="lazy"
-                                decoding="async">
+                            <img src="assets/cere_5.png" alt="schedule photo 1" class="schedule__icon" loading="lazy"
+                                decoding="async" style="height: 65px;width: auto;">
                             <span class="schedule__time">07:19 น.</span>
                         </div>
                         <div class="schedule__right">
-                            <h3 class="schedule__event">พิธีสงฆ์</h3>
-                            <p class="schedule__desc">Buddhist Ceremony</p>
+                            <h3 class="schedule__event">พิธีแห่ขันหมาก</h3>
+                            <p class="schedule__desc">Khan Maak Procession</p>
                         </div>
                     </div>
 
@@ -274,7 +274,7 @@
                         <div class="theme-palette__item">
                             <div class="theme-palette__dot" style="background-color:#9CAF88;"></div>
                             <span class="theme-palette__name">Sage</span>
-                            <span class="theme-palette__name-th">เขียวเสจ</span>
+                            <span class="theme-palette__name-th">เขียว</span>
                         </div>
                     </div>
                     <p class="theme-palette__note" style="color: #ff6b35;">*
@@ -355,6 +355,26 @@
             <div class="photo-gallery-modal__grid" id="photoGalleryGrid">
                 <!-- Populated by JS from PRE_WEDDING_IMAGES -->
             </div>
+        </div>
+    </div>
+
+    <!-- RSVP Reminder Popup -->
+    <div class="rsvp-popup" id="rsvpPopup" aria-hidden="true">
+        <div class="rsvp-popup__backdrop" id="rsvpPopupBackdrop"></div>
+        <div class="rsvp-popup__card">
+            <div class="rsvp-popup__icon">💌</div>
+            <h3 class="rsvp-popup__title">ยืนยันการเข้าร่วมงาน</h3>
+            <p class="rsvp-popup__text">
+                หากท่านยังไม่ได้ยืนยันการเข้าร่วมงาน<br>
+                กรุณากรอกแบบฟอร์มตอบรับ<br>
+                ภายในวันที่ 15 มิถุนายน 2569
+            </p>
+            <a href="https://forms.gle/9TRQoZ3XQSCAvQBe8" target="_blank" rel="noopener" class="rsvp-popup__link"
+                style="margin-bottom: 0px;">
+                ✨ กรอกแบบฟอร์มตอบรับ ✨
+            </a>
+            <button class="rsvp-popup__btn" id="rsvpPopupClose">เข้าใจแล้ว</button>
+            <button class="rsvp-popup__btn rsvp-popup__btn--mute" id="rsvpPopupMute">ไม่แสดงอีกภายในวันนี้</button>
         </div>
     </div>
 
