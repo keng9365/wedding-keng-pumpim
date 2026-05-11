@@ -798,11 +798,6 @@ h3 {
     outline-offset: 3px;
 }
 
-/* White swatch needs a subtle ring to be visible */
-.theme-palette__item:first-child .theme-palette__dot {
-    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08), inset 0 0 0 1px rgba(0, 0, 0, 0.08);
-}
-
 .theme-palette__item:hover .theme-palette__dot,
 .theme-palette__item:focus .theme-palette__dot {
     transform: translateY(-4px) scale(1.08);
@@ -840,6 +835,8 @@ h3 {
     text-align: center;
     margin-top: var(--space-md);
     letter-spacing: 0.04em;
+    color: #ff6b35;
+    /* ย้ายจาก inline style มาที่นี่ */
 }
 
 /* ============================================
